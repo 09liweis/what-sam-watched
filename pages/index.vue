@@ -2,7 +2,9 @@
   <main>
     <h1>What Sam Watched in Nuxt.js</h1>
     <article v-for="v in visuals" :key="v.id">
-      <h3>{{ v.title }}</h3>
+      <h3>
+        <NuxtLink :to="{ name: 'detail-id', params: { id: v.id }}">{{ v.title }}</NuxtLink>
+      </h3>
     </article>
   </main>
 </template>
