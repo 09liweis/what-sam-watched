@@ -1,5 +1,9 @@
 <template>
-  <h1>Detail {{ id }}</h1>
+  <div v-if="$fetchState.pending">Fetching post #{{$route.params.id}}...</div>
+  <div v-else>
+    <h1>{{ visual.title }}</h1>
+    <pre>{{ visual.summary }}</pre>
+  </div>
 </template>
 
 <script lang='ts'>
@@ -9,11 +13,16 @@ export default Vue.extend({
   name: 'DetailPage',
   data() {
     return {
-      id: ''
+      id: '',
+      visual: {}
     }
   },
+  async fetch() {
+    const API = `https://what-i-watched.herokuapp.com/api/visual/${this.$route.params.id}`;
+    const response = await fetch(API).then(res => res.json());
+    this.visual = response.result;
+  },
   mounted () {
-    this.id = this.$route.params.id;
   }
 })
 </script>
