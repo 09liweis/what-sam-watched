@@ -31,6 +31,12 @@ const schema = new mongoose.Schema({
   },
   episodes:{
     type:Number
+  },
+  date_watched:{
+    type: Date
+  },
+  date_updated:{
+    type: Date
   }
 });
 

@@ -1,6 +1,8 @@
-export default defineEventHandler((event)=>{
-  console.log(event.req.statusCode);
+import { visualModel } from "../dbModels";
+
+export default defineEventHandler(async(event)=>{
+  const visuals = await visualModel.find();
   return {
-    api: 'visuals'
+    visuals
   }
 });
