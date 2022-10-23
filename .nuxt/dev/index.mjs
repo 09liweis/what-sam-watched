@@ -6,6 +6,7 @@ import { mkdirSync } from 'fs';
 import { parentPort, threadId } from 'worker_threads';
 import { provider, isWindows } from 'file:///Users/samli/Documents/Employers/what-sam-watched/node_modules/std-env/dist/index.mjs';
 import { eventHandler, setHeaders, sendRedirect, defineEventHandler, handleCacheHeaders, createEvent, getRequestHeader, createApp, createRouter as createRouter$1, lazyEventHandler, toNodeListener, getQuery, writeEarlyHints } from 'file:///Users/samli/Documents/Employers/what-sam-watched/node_modules/h3/dist/index.mjs';
+import mongoose from 'file:///Users/samli/Documents/Employers/what-sam-watched/node_modules/mongoose/index.js';
 import { renderResourceHeaders, createRenderer } from 'file:///Users/samli/Documents/Employers/what-sam-watched/node_modules/vue-bundle-renderer/dist/runtime.mjs';
 import devalue from 'file:///Users/samli/Documents/Employers/what-sam-watched/node_modules/@nuxt/devalue/dist/devalue.mjs';
 import { renderToString } from 'file:///Users/samli/Documents/Employers/what-sam-watched/node_modules/vue/server-renderer/index.mjs';
@@ -21,7 +22,7 @@ import unstorage_47drivers_47fs from 'file:///Users/samli/Documents/Employers/wh
 import defu from 'file:///Users/samli/Documents/Employers/what-sam-watched/node_modules/defu/dist/defu.mjs';
 import { toRouteMatcher, createRouter } from 'file:///Users/samli/Documents/Employers/what-sam-watched/node_modules/radix3/dist/index.mjs';
 
-const _runtimeConfig = {"app":{"baseURL":"/","buildAssetsDir":"/_nuxt/","cdnURL":""},"nitro":{"routeRules":{"/__nuxt_error":{"cache":false}},"envPrefix":"NUXT_"},"public":{}};
+const _runtimeConfig = {"app":{"baseURL":"/","buildAssetsDir":"/_nuxt/","cdnURL":""},"nitro":{"routeRules":{"/__nuxt_error":{"cache":false}},"envPrefix":"NUXT_"},"public":{},"mongoUrl":"mongodb+srv://samliweisen:`Qq363404661@samliweisen.3amrq.mongodb.net/heroku_6njptcbp?retryWrites=true&w=majority"};
 const ENV_PREFIX = "NITRO_";
 const ENV_PREFIX_ALT = _runtimeConfig.nitro.envPrefix ?? process.env.NITRO_ENV_PREFIX ?? "_";
 const getEnv = (key) => {
@@ -46,8 +47,8 @@ function overrideConfig(obj, parentKey = "") {
   }
 }
 overrideConfig(_runtimeConfig);
-const config$1 = deepFreeze(_runtimeConfig);
-const useRuntimeConfig = () => config$1;
+const config$2 = deepFreeze(_runtimeConfig);
+const useRuntimeConfig = () => config$2;
 function deepFreeze(object) {
   const propNames = Object.getOwnPropertyNames(object);
   for (const name of propNames) {
@@ -129,8 +130,8 @@ function defineRenderHandler(handler) {
   });
 }
 
-const config = useRuntimeConfig();
-const _routeRulesMatcher = toRouteMatcher(createRouter({ routes: config.nitro.routeRules }));
+const config$1 = useRuntimeConfig();
+const _routeRulesMatcher = toRouteMatcher(createRouter({ routes: config$1.nitro.routeRules }));
 function createRouteRulesHandler() {
   return eventHandler((event) => {
     const routeRules = getRouteRules(event);
@@ -368,8 +369,18 @@ function cloneWithProxy(obj, overrides) {
 }
 const cachedEventHandler = defineCachedEventHandler;
 
+const config = useRuntimeConfig();
+const _MZQVbXqQ4y = async () => {
+  try {
+    await mongoose.connect(config.mongoUrl);
+    console.log("DB connection works");
+  } catch (err) {
+    console.error("DB connection fail", err);
+  }
+};
+
 const plugins = [
-  
+  _MZQVbXqQ4y
 ];
 
 function hasReqHeader(event, name, includes) {
@@ -523,10 +534,53 @@ server.listen(listenAddress, () => {
   process.on("uncaughtException", (err) => console.error("[nitro] [dev] [uncaughtException]", err));
 }
 
-const visuals = defineEventHandler((event) => {
-  console.log(event.req.statusCode);
+const schema = new mongoose.Schema({
+  douban_id: {
+    type: String,
+    unique: true
+  },
+  douban_rating: {
+    type: Number
+  },
+  title: {
+    type: String
+  },
+  imdb_id: {
+    type: String
+  },
+  imdb_rating: {
+    type: Number
+  },
+  release_date: {
+    type: String
+  },
+  visual_type: {
+    type: String
+  },
+  poster: {
+    type: String
+  },
+  current_episode: {
+    type: Number
+  },
+  episodes: {
+    type: Number
+  },
+  date_watched: {
+    type: Date
+  },
+  date_updated: {
+    type: Date
+  }
+});
+const visualModel = mongoose.model("Visual", schema, "visual");
+
+const visuals = defineEventHandler(async (event) => {
+  const query = {};
+  const opts = { limit: 20 };
+  const visuals = await visualModel.find(query, "", opts).sort("-date_updated");
   return {
-    api: "visuals"
+    visuals
   };
 });
 
