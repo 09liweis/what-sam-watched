@@ -1,4 +1,4 @@
-import { visualModel } from "../dbModels";
+import visualModel from '../dbModels/visual';
 
 export default defineEventHandler(async(event)=>{
   const query = {};

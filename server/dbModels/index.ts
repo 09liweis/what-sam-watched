@@ -1,1 +1,1 @@
-export { default as visualModel } from "./visual";
+export { default as visualModel } from './visual';
