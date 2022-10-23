@@ -1,4 +1,5 @@
-import visualModel from '../dbModels/visual';
+console.log('test visuals api');
+import {visualModel} from '../model/index';
 
 export default defineEventHandler(async(event)=>{
   const query = {};
