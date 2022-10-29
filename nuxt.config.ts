@@ -6,6 +6,9 @@ export default defineNuxtConfig({
   nitro: {
     plugins: ["~/server/index.ts"],
   },
+  image: {
+    domains: ['https://img9.doubanio.com']
+  },
   app: {
     head: {
       charset: 'utf-16',
