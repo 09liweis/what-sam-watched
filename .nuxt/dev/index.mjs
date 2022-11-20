@@ -453,10 +453,14 @@ const errorHandler = (async function errorhandler(error, event) {
 });
 
 const _lazy_gdT6qz = () => Promise.resolve().then(function () { return visuals$1; });
+const _lazy_gqmg1f = () => Promise.resolve().then(function () { return visual$1; });
+const _lazy_zsB0co = () => Promise.resolve().then(function () { return update$1; });
 const _lazy_Gd6gQt = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
   { route: '/api/visuals', handler: _lazy_gdT6qz, lazy: true, middleware: false, method: undefined },
+  { route: '/api/visual', handler: _lazy_gqmg1f, lazy: true, middleware: false, method: undefined },
+  { route: '/api/update', handler: _lazy_zsB0co, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_error', handler: _lazy_Gd6gQt, lazy: true, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_Gd6gQt, lazy: true, middleware: false, method: undefined }
 ];
@@ -573,7 +577,7 @@ const schema = new mongoose.Schema({
     type: Date
   }
 });
-const visualModel = mongoose.model("Visual", schema, "visual");
+const visualModel = mongoose.model("Visual", schema, "visuals");
 
 const visuals = defineEventHandler(async (event) => {
   const query = {};
@@ -587,6 +591,30 @@ const visuals = defineEventHandler(async (event) => {
 const visuals$1 = /*#__PURE__*/Object.freeze({
   __proto__: null,
   'default': visuals
+});
+
+const visual = defineEventHandler(async (event) => {
+  const query = getQuery(event);
+  const visual = await visualModel.findOne({ _id: query.id });
+  return {
+    visual
+  };
+});
+
+const visual$1 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  'default': visual
+});
+
+const update = defineEventHandler(async (event) => {
+  const query = getQuery(event);
+  await visualModel.updateOne({ _id: query.id }, { $inc: { current_episode: 1 } });
+  return {};
+});
+
+const update$1 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  'default': update
 });
 
 function buildAssetsURL(...path) {

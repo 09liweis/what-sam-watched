@@ -1,10 +1,14 @@
 <script setup>
 import { ref, computed } from "vue";
 const {data} = await useFetch('https://samliweisen.cyclic.app/api/visuals');
-const {visuals} = data.value;
+let {visuals} = data.value;
 
 async function updateEpisode(v) {
   await useFetch(`/api/update?id=${v._id}`);
+}
+
+async function updateVisual(v) {
+  console.log(v);
 }
 
 let input = ref('');
@@ -19,7 +23,7 @@ async function searchAndUpsert() {
     method: 'POST',
     body
   });
-  const {douban_rating,poster,imdb_id,imdb_rating,visual_type,title} = visualSummary;
+  const {douban_rating,poster,imdb_id,imdb_rating,visual_type,title,episodes} = visualSummary;
   const upsertBody = {
     douban_id,
     douban_rating,
@@ -27,13 +31,15 @@ async function searchAndUpsert() {
     imdb_id,
     imdb_rating,
     poster,
+    episodes,
     visual_type
   }
   const upsertResult = await $fetch('https://samliweisen.cyclic.app/api/visuals',{
     method:'POST',
-    body
+    body:upsertBody
   });
-  console.log(upsertResult);
+  const responseData = await $fetch('https://samliweisen.cyclic.app/api/visuals');
+  visuals = responseData.visuals;
 }
 </script>
 <template>
@@ -46,6 +52,7 @@ async function searchAndUpsert() {
         <h3 class="font-mono text-red-400 hover:text-red-900 underline decoration-blue-300 hover:decoration-blue-400">
           <NuxtLink :to="{ name: 'id', params: { id: v._id }}">{{ v.title }}</NuxtLink>
           <span class="ml-8 mr-8">{{v.current_episode}}/{{v.episodes}}</span>
+          <button @click="updateVisual(v)">Update</button>
           <button @click="updateEpisode(v)">+1</button>
         </h3>
       </article>
