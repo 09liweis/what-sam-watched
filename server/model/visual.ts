@@ -40,4 +40,4 @@ const schema = new mongoose.Schema({
   }
 });
 
-export default mongoose.model('Visual', schema, 'visual');
+export default mongoose.model('Visual', schema, 'visuals');
