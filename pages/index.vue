@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from "vue";
-const {data} = await useFetch('https://samliweisen.cyclic.app/api/visuals');
+const {data} = await useFetch('/api/visuals');
 let {visuals} = data.value;
 
 async function updateEpisode(v) {
@@ -19,26 +19,11 @@ async function searchAndUpsert() {
     return;
   }
   const body = {douban_id}
-  const visualSummary = await $fetch('https://samliweisen.herokuapp.com/api/visuals/summary', {
-    method: 'POST',
+  await $fetch('/api/upsert',{
+    method:'POST',
     body
   });
-  const {douban_rating,poster,imdb_id,imdb_rating,visual_type,title,episodes} = visualSummary;
-  const upsertBody = {
-    douban_id,
-    douban_rating,
-    title,
-    imdb_id,
-    imdb_rating,
-    poster,
-    episodes,
-    visual_type
-  }
-  const upsertResult = await $fetch('https://samliweisen.cyclic.app/api/visuals',{
-    method:'POST',
-    body:upsertBody
-  });
-  const responseData = await $fetch('https://samliweisen.cyclic.app/api/visuals');
+  const responseData = await $fetch('/api/visuals');
   visuals = responseData.visuals;
 }
 </script>

@@ -5,7 +5,7 @@ import { join } from 'path';
 import { mkdirSync } from 'fs';
 import { parentPort, threadId } from 'worker_threads';
 import { provider, isWindows } from 'file:///Users/samli/Documents/Employers/what-sam-watched/node_modules/std-env/dist/index.mjs';
-import { eventHandler, setHeaders, sendRedirect, defineEventHandler, handleCacheHeaders, createEvent, getRequestHeader, createApp, createRouter as createRouter$1, lazyEventHandler, toNodeListener, getQuery, writeEarlyHints } from 'file:///Users/samli/Documents/Employers/what-sam-watched/node_modules/h3/dist/index.mjs';
+import { eventHandler, setHeaders, sendRedirect, defineEventHandler, handleCacheHeaders, createEvent, getRequestHeader, createApp, createRouter as createRouter$1, lazyEventHandler, toNodeListener, getQuery, useBody, writeEarlyHints } from 'file:///Users/samli/Documents/Employers/what-sam-watched/node_modules/h3/dist/index.mjs';
 import mongoose from 'file:///Users/samli/Documents/Employers/what-sam-watched/node_modules/mongoose/index.js';
 import { renderResourceHeaders, createRenderer } from 'file:///Users/samli/Documents/Employers/what-sam-watched/node_modules/vue-bundle-renderer/dist/runtime.mjs';
 import devalue from 'file:///Users/samli/Documents/Employers/what-sam-watched/node_modules/@nuxt/devalue/dist/devalue.mjs';
@@ -454,12 +454,14 @@ const errorHandler = (async function errorhandler(error, event) {
 
 const _lazy_gdT6qz = () => Promise.resolve().then(function () { return visuals$1; });
 const _lazy_gqmg1f = () => Promise.resolve().then(function () { return visual$1; });
+const _lazy_B0cjlD = () => Promise.resolve().then(function () { return upsert$1; });
 const _lazy_zsB0co = () => Promise.resolve().then(function () { return update$1; });
 const _lazy_Gd6gQt = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
   { route: '/api/visuals', handler: _lazy_gdT6qz, lazy: true, middleware: false, method: undefined },
   { route: '/api/visual', handler: _lazy_gqmg1f, lazy: true, middleware: false, method: undefined },
+  { route: '/api/upsert', handler: _lazy_B0cjlD, lazy: true, middleware: false, method: undefined },
   { route: '/api/update', handler: _lazy_zsB0co, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_error', handler: _lazy_Gd6gQt, lazy: true, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_Gd6gQt, lazy: true, middleware: false, method: undefined }
@@ -604,6 +606,38 @@ const visual = defineEventHandler(async (event) => {
 const visual$1 = /*#__PURE__*/Object.freeze({
   __proto__: null,
   'default': visual
+});
+
+const upsert = defineEventHandler(async (event) => {
+  const body = await useBody(event);
+  if (!body.douban_id) {
+    return { msg: "No douban id" };
+  }
+  const visualSummary = await $fetch("https://samliweisen.herokuapp.com/api/visuals/summary", {
+    method: "POST",
+    body
+  });
+  const { douban_id, douban_rating, poster, imdb_id, imdb_rating, visual_type, title, episodes } = visualSummary;
+  const update = {
+    douban_id,
+    douban_rating,
+    title,
+    imdb_id,
+    imdb_rating,
+    poster,
+    episodes,
+    visual_type,
+    date_updated: new Date(),
+    date_watched: new Date()
+  };
+  const filter = { douban_id: update.douban_id };
+  const doc = await visualModel.findOneAndUpdate(filter, update, { new: true, upsert: true });
+  return doc;
+});
+
+const upsert$1 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  'default': upsert
 });
 
 const update = defineEventHandler(async (event) => {

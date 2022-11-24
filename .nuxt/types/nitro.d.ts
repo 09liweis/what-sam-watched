@@ -4,6 +4,7 @@ declare module 'nitropack' {
   interface InternalApi {
     '/api/visuals': Awaited<ReturnType<typeof import('../../server/api/visuals').default>>
     '/api/visual': Awaited<ReturnType<typeof import('../../server/api/visual').default>>
+    '/api/upsert': Awaited<ReturnType<typeof import('../../server/api/upsert').default>>
     '/api/update': Awaited<ReturnType<typeof import('../../server/api/update').default>>
     '/__nuxt_error': Awaited<ReturnType<typeof import('../../node_modules/nuxt/dist/core/runtime/nitro/renderer').default>>
   }
