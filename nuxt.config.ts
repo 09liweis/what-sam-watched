@@ -1,5 +1,8 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+  server: {
+    host: '0.0.0.0'
+  },
   runtimeConfig: {
     mongoUrl: process.env.MONGO_URL,
   },
