@@ -21,8 +21,11 @@ export default defineNuxtConfig({
         // <meta name="description" content="My amazing site">
         { name: 'description', content: 'My amazing movie dashboard.' }
       ],
-      link:[
-        {href :'https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css',rel:'stylesheet'}
+      // link:[
+      //   {href :'https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css',rel:'stylesheet'}
+      // ],
+      script:[
+        {src:'https://cdn.tailwindcss.com'}
       ]
     }
   }
