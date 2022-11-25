@@ -27,7 +27,8 @@ const schema = new mongoose.Schema({
     type:String
   },
   current_episode:{
-    type:Number
+    type:Number,
+    default: 0
   },
   episodes:{
     type:Number
