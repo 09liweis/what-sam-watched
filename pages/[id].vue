@@ -1,9 +1,10 @@
 <template>
   <main>
-    <h2>{{visual.title}}</h2>
+    <h1>{{visual.title}}</h1>
     <p>{{visual.imdb_id}}</p>
     <p>{{visual.douban_id}}</p>
     <p>{{visual.douban_rating}}</p>
+    
   </main>
 </template>
 <script setup>
