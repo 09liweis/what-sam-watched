@@ -5,7 +5,7 @@ export default defineEventHandler(async(event)=>{
   if (!body.douban_id) {
     return {msg:'No douban id'};
   }
-  const visualSummary = await $fetch('https://samliweisen.herokuapp.com/api/visuals/summary', {
+  const visualSummary = await $fetch(process.env.FETCH_VISUAL, {
     method: 'POST',
     body
   });
