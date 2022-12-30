@@ -1,12 +1,15 @@
 <script setup>
 import { ref, computed } from "vue";
-const {data} = await useFetch('/api/visuals');
-let {visuals} = data.value;
-
 let loading = ref(false);
+let visuals = ref([]);
+
+const {data} = await useFetch('/api/visuals');
+visuals.value = data.value.visuals;
 
 async function updateEpisode(v) {
-  await useFetch(`/api/update?id=${v._id}`);
+  const response = await useFetch(`/api/update?id=${v._id}`);
+  const {data} = await useFetch('/api/visuals');
+  visuals.value = data;
 }
 
 async function updateVisual(v) {
@@ -32,7 +35,7 @@ async function searchAndUpsert() {
   });
   loading = false;
   const responseData = await $fetch('/api/visuals');
-  visuals = responseData.visuals;
+  visuals.value = responseData.visuals;
 }
 </script>
 <template>
