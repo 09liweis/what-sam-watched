@@ -9,6 +9,9 @@ export default defineNuxtConfig({
   nitro: {
     plugins: ["~/server/index.ts"],
   },
+  routeRules:{
+    '/api/visuals': { cors: true },
+  },
   image: {
     domains: ['https://img9.doubanio.com']
   },
