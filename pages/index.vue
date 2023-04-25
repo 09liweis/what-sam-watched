@@ -27,13 +27,14 @@ async function searchAndUpsert() {
   if (!douban_id) {
     return;
   }
-  loading = true;
+  loading.value = true;
   const body = {douban_id}
   await $fetch('/api/upsert',{
     method:'POST',
     body
   });
-  loading = false;
+  input.value = '';
+  loading.value = false;
   const responseData = await $fetch('/api/visuals');
   visuals.value = responseData.visuals;
 }
