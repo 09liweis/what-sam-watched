@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
-const API_HOST = process.env.API_HOST || '';
+const API_HOST = process?.env?.API_HOST || '';
 
 const dataFetch = async () => {
   const result = await useFetch(`${API_HOST}/api/visuals`);
