@@ -14,6 +14,7 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/api/visuals': { cors: true },
+    '/api/visual': { cors: true },
     '/api/upsert': { cors: true },
   },
   image: {
