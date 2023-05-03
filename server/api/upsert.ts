@@ -1,3 +1,5 @@
+const runtimeConfig = useRuntimeConfig();
+
 import { visualModel } from '../model/index';
 
 export default defineEventHandler(async (event) => {
@@ -5,10 +7,6 @@ export default defineEventHandler(async (event) => {
   if (!body.douban_id) {
     return { msg: 'No douban id' };
   }
-  const visualSummary = await $fetch(process.env.FETCH_VISUAL, {
-    method: 'POST',
-    body,
-  });
   const {
     douban_id,
     douban_rating,
@@ -18,7 +16,10 @@ export default defineEventHandler(async (event) => {
     visual_type,
     title,
     episodes,
-  } = visualSummary;
+  } = await $fetch(runtimeConfig.fetchVisual, {
+    method: 'POST',
+    body,
+  });
   const update = {
     _id: body._id,
     douban_id,
@@ -40,5 +41,5 @@ export default defineEventHandler(async (event) => {
     new: true,
     upsert: true,
   });
-  return doc;
+  return { visual: doc };
 });
