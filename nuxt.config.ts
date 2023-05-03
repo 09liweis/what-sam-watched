@@ -14,6 +14,7 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/api/visuals': { cors: true },
+    '/api/upsert': { cors: true },
   },
   image: {
     domains: ['https://img9.doubanio.com'],

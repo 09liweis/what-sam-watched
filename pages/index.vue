@@ -1,8 +1,9 @@
 <script setup>
 import Loading from '../components/Loading';
-
 import { ref, computed } from 'vue';
-const API_HOST = process?.env?.apiHost || '';
+
+const runtimeConfig = useRuntimeConfig();
+const API_HOST = runtimeConfig.public.apiHost || '';
 
 const dataFetch = async () => {
   const result = await useFetch(`${API_HOST}/api/visuals`);
