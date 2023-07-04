@@ -3,10 +3,11 @@ import Loading from '../components/Loading';
 import { ref, computed } from 'vue';
 
 const runtimeConfig = useRuntimeConfig();
-const API_HOST = runtimeConfig.public.apiHost || '';
+const API_HOST =
+  runtimeConfig.public.apiHost || 'https://samliweisen.onrender.com/api/movies';
 
 const dataFetch = async () => {
-  const result = await useFetch(`${API_HOST}/api/visuals`);
+  const result = await useFetch(`${API_HOST}?limit=50`);
   return result;
 };
 
@@ -14,7 +15,7 @@ let loading = ref(false);
 let visuals = ref([]);
 
 const { data } = await dataFetch();
-visuals.value = data.value.visuals;
+visuals.value = data.value.movies;
 
 async function updateEpisode(v) {
   const response = await useFetch(`/api/update?id=${v._id}`);
@@ -24,7 +25,7 @@ async function updateEpisode(v) {
 
 async function updateVisual(v) {
   v.loading = true;
-  await $fetch(`${API_HOST}/api/upsert`, {
+  await $fetch(`${API_HOST}/upsert`, {
     method: 'POST',
     body: v,
   });
@@ -40,14 +41,14 @@ async function searchAndUpsert() {
   }
   loading.value = true;
   const body = { douban_id };
-  await $fetch('/api/upsert', {
+  await $fetch(`${API_HOST}/upsert`, {
     method: 'POST',
     body,
   });
   input.value = '';
   loading.value = false;
-  const responseData = await $fetch('/api/visuals');
-  visuals.value = responseData.visuals;
+  const responseData = await $fetch(API_HOST);
+  visuals.value = responseData.movies;
 }
 </script>
 <template>

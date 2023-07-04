@@ -1,12 +1,9 @@
-import mongoose from 'mongoose';
-
 const config = useRuntimeConfig();
 
-export default async ()=>{
+export default async () => {
   try {
-    await mongoose.connect(config.mongoUrl);
-    console.log('DB connection works');
+    console.log('server start');
   } catch (err) {
-    console.error('DB connection fail', err);
+    console.error('server start fail', err);
   }
-}
+};
