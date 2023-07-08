@@ -25,11 +25,12 @@ async function updateEpisode(v) {
 
 async function updateVisual(v) {
   v.loading = true;
-  await $fetch(`${API_HOST}/upsert`, {
+  const response = await $fetch(`${API_HOST}/upsert`, {
     method: 'POST',
     body: v,
   });
-  // v.loading = false;
+  v.douban_rating = response.douban_rating;
+  v.loading = false;
 }
 
 let input = ref('');
@@ -91,8 +92,8 @@ async function searchAndUpsert() {
             class="mr-2 shadow bg-indigo-500 text-white p-1 flex rounded-md"
             @click="updateVisual(v)"
           >
-            <Loading v-if="v - loading" />
-            <span>Update</span>
+            <Loading v-if="v.loading" />
+            <span>{{ v.loading ? 'Updating' : 'Update' }}</span>
           </button>
           <button
             class="border px-1.5 border-amber-600 rounded"
