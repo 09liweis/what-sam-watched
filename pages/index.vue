@@ -68,7 +68,7 @@ async function searchAndUpsert() {
       <article
         v-for="v in visuals"
         :key="v.id"
-        class="flex justify-between mb-1.5"
+        class="flex justify-between items-center mb-1.5"
       >
         <h3
           class="
@@ -82,10 +82,14 @@ async function searchAndUpsert() {
           <NuxtLink :to="{ name: 'id', params: { id: v._id } }">{{
             v.title
           }}</NuxtLink>
-          <span class="ml-8 mr-8">Douban: {{ v.douban_rating }}</span>
-          <span class="ml-8 mr-8"
-            >{{ v.current_episode }}/{{ v.episodes }}</span
-          >
+          <section>
+            <span class="mr-8 text-green-700"
+              >Douban: {{ v.douban_rating }}</span
+            >
+            <span class="mr-8 text-sky-600"
+              >{{ v.current_episode }}/{{ v.episodes }}</span
+            >
+          </section>
         </h3>
         <div class="flex">
           <button
