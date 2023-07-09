@@ -1,6 +1,11 @@
 <script setup>
 import Loading from '../components/Loading';
 import { ref, computed } from 'vue';
+import { useMoviesStore } from '@/stores/movies';
+
+const moviesStore = useMoviesStore();
+
+const moviesCount = computed(() => moviesStore.movieList.length);
 
 const runtimeConfig = useRuntimeConfig();
 const API_HOST =
@@ -16,6 +21,8 @@ let visuals = ref([]);
 
 const { data } = await dataFetch();
 visuals.value = data.value.movies;
+
+moviesStore.setMovieList(data.value.movies);
 
 async function updateEpisode(v) {
   const response = await useFetch(`/api/update?id=${v._id}`);
@@ -56,7 +63,7 @@ async function searchAndUpsert() {
   <NuxtLayout>
     <main class="conatiner p-5">
       <h1 class="text-xl text-center text-red-500 font-bold mb-8">
-        What Sam Watched in Nuxt.js
+        What Sam Watched in Nuxt.js {{ moviesCount }} movies
       </h1>
       <input placeholder="Enter Douban Id" v-model="input" />
       <button
