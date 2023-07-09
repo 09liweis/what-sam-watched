@@ -17,17 +17,13 @@ const dataFetch = async () => {
 };
 
 let loading = ref(false);
-let visuals = ref([]);
 
 const { data } = await dataFetch();
-visuals.value = data.value.movies;
-
 moviesStore.setMovieList(data.value.movies);
 
 async function updateEpisode(v) {
   const response = await useFetch(`/api/update?id=${v._id}`);
   const { data } = await dataFetch();
-  visuals.value = data;
 }
 
 async function updateVisual(v) {
@@ -56,7 +52,7 @@ async function searchAndUpsert() {
   input.value = '';
   loading.value = false;
   const responseData = await $fetch(API_HOST);
-  visuals.value = responseData.movies;
+  moviesStore.setMovieList(responseData.movies);
 }
 </script>
 <template>
@@ -73,7 +69,7 @@ async function searchAndUpsert() {
         {{ loading ? 'Loading' : 'Add' }}
       </button>
       <article
-        v-for="v in visuals"
+        v-for="v in moviesStore.movieList"
         :key="v.id"
         class="flex justify-between items-center mb-1.5"
       >
