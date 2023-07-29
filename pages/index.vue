@@ -82,9 +82,11 @@ async function searchAndUpsert() {
             hover:decoration-blue-400
           "
         >
-          <NuxtLink :to="{ name: 'id', params: { id: v._id } }">{{
-            v.title
-          }}</NuxtLink>
+          <NuxtLink
+            @click="moviesStore.setCurrentMovie(v)"
+            :to="{ name: 'id', params: { id: v.douban_id } }"
+            >{{ v.title }}</NuxtLink
+          >
           <section>
             <span class="mr-8 text-green-700"
               >Douban: {{ v.douban_rating }}</span
