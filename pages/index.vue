@@ -22,7 +22,7 @@ const { data } = await dataFetch();
 moviesStore.setMovieList(data.value.movies);
 
 async function updateEpisode(v) {
-  const response = await $fetch(`${API_HOST}/${v._id}`, {
+  const response = await $fetch(`${API_HOST}/${v.douban_id}`, {
     method: 'PUT',
   });
   const { data } = await dataFetch();
