@@ -17,6 +17,7 @@ const dataFetch = async () => {
 };
 
 let loading = ref(false);
+const showSearchForm = ref(false);
 
 const { data } = await dataFetch();
 moviesStore.setMovieList(data.value.movies);
@@ -39,10 +40,23 @@ async function updateVisual(v) {
 }
 
 let input = ref('');
+let searchMovieTitle = ref('');
+const searchMovieLoading = ref(false);
+let searchMovieList = [];
+
+async function searchMovies() {
+  searchMovieLoading.value = true;
+  const searchMoviesResult = await $fetch(
+    `${API_HOST}/search?keyword=${searchMovieTitle.value}`
+  );
+  searchMovieLoading.value = false;
+  searchMovieList = searchMoviesResult.visuals;
+}
 
 async function searchAndUpsert() {
   const douban_id = input.value;
   if (!douban_id) {
+    showSearchForm.value = true;
     return;
   }
   loading.value = true;
@@ -60,6 +74,35 @@ async function searchAndUpsert() {
 <template>
   <NuxtLayout>
     <main class="conatiner p-5">
+      <section
+        v-show="showSearchForm"
+        class="
+          fixed
+          top-0
+          left-0
+          w-full
+          h-full
+          bg-black
+          flex
+          justify-center
+          items-center
+        "
+      >
+        <form class="w-96 p-2 bg-white rouned" @submit.prevent="searchMovies()">
+          <input
+            placeholder="Search movie title"
+            class="w-full p-2 border shadow"
+            v-model="searchMovieTitle"
+          />
+          <button class="p-2 rounded bg-red-400 text-white mt-2 flex">
+            <Loading v-if="searchMovieLoading" />
+            <span class="">Search</span>
+          </button>
+          <section class="max-h-60 overflow-y-auto">
+            <article v-for="v in searchMovieList">{{ v.title }}</article>
+          </section>
+        </form>
+      </section>
       <h1 class="text-xl text-center text-red-500 font-bold mb-8">
         What Sam Watched in Nuxt.js {{ moviesCount }} movies
       </h1>
