@@ -117,7 +117,7 @@ async function searchAndUpsert() {
       <article
         v-for="v in moviesStore.movieList"
         :key="v.id"
-        class="flex justify-between items-center mb-1.5"
+        class="flex justify-between items-center mb-1.5 p-1 border-2 rounded"
       >
         <h3
           class="
