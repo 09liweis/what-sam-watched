@@ -27,6 +27,7 @@ async function updateEpisode(v) {
     method: 'PUT',
   });
   const { data } = await dataFetch();
+  moviesStore.setMovieList(data.value.movies);
 }
 
 async function updateVisual(v) {
@@ -137,7 +138,7 @@ async function searchAndUpsert() {
               >Douban: {{ v.douban_rating }}</span
             >
             <span class="mr-8 text-sky-600"
-              >{{ v.current_episode }}/{{ v.episodes }}</span
+              >{{ v.current_episode }}/{{ v.episodes || 1 }}</span
             >
           </section>
         </h3>
