@@ -89,6 +89,20 @@ async function searchAndUpsert() {
           items-center
         "
       >
+        <span
+          class="
+            absolute
+            cursor-pointer
+            top-0
+            right-0
+            p-1
+            rounded
+            bg-red-500
+            text-white
+          "
+          @click="showSearchForm = false"
+          >x</span
+        >
         <form class="w-96 p-2 bg-white rouned" @submit.prevent="searchMovies()">
           <input
             placeholder="Search movie title"
