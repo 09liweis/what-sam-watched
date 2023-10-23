@@ -54,6 +54,12 @@ async function searchMovies() {
   searchMovieList = searchMoviesResult.visuals;
 }
 
+function clickSearchedMovie(movie) {
+  input.value = movie.douban_id;
+  showSearchForm.value = false;
+  searchAndUpsert();
+}
+
 async function searchAndUpsert() {
   const douban_id = input.value;
   if (!douban_id) {
@@ -118,7 +124,13 @@ async function searchAndUpsert() {
             <span class="">Search</span>
           </button>
           <section class="max-h-60 overflow-y-auto">
-            <article v-for="v in searchMovieList">{{ v.title }}</article>
+            <article
+              class="cursor-pointer hover:bg-gray-100 p-1 rounded"
+              v-for="v in searchMovieList"
+              @click="clickSearchedMovie(v)"
+            >
+              {{ v.title }}
+            </article>
           </section>
         </form>
       </section>
