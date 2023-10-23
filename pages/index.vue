@@ -89,19 +89,23 @@ async function searchAndUpsert() {
           items-center
         "
       >
-        <span
+        <a
           class="
+            block
             absolute
             cursor-pointer
-            top-0
-            right-0
+            top-2
+            right-2
             p-1
             rounded
             bg-red-500
             text-white
+            transition
+            duration-300
+            hover:bg-red-600 hover:scale-110
           "
           @click="showSearchForm = false"
-          >x</span
+          >x</a
         >
         <form class="w-96 p-2 bg-white rouned" @submit.prevent="searchMovies()">
           <input
