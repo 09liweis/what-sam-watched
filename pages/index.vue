@@ -171,17 +171,18 @@ async function searchAndUpsert() {
         </h3>
         <div class="flex">
           <button
-            class="mr-2 shadow bg-indigo-500 text-white p-1 flex rounded-md"
+            v-if="v.current_episode !== (v.episodes || 1)"
+            class="mr-2 border px-1.5 border-amber-600 rounded"
+            @click="updateEpisode(v)"
+          >
+            +1
+          </button>
+          <button
+            class="shadow bg-indigo-500 text-white p-1 flex rounded-md"
             @click="updateVisual(v)"
           >
             <Loading v-if="v.loading" />
             <span>{{ v.loading ? 'Updating' : 'Update' }}</span>
-          </button>
-          <button
-            class="border px-1.5 border-amber-600 rounded"
-            @click="updateEpisode(v)"
-          >
-            +1
           </button>
         </div>
       </article>
