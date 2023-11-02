@@ -134,13 +134,19 @@ async function searchAndUpsert() {
       <h1 class="text-xl text-center text-red-500 font-bold mb-8">
         What Sam Watched in Nuxt.js {{ moviesCount }} movies
       </h1>
-      <input placeholder="Enter Douban Id" v-model="input" />
-      <button
-        class="border px-1.5 border-amber-600 rounded"
-        @click="searchAndUpsert()"
-      >
-        {{ loading ? 'Loading' : 'Add' }}
-      </button>
+      <section class="flex items-center mb-1.5">
+        <input
+          class="border p-1.5 mr-1 rounded"
+          placeholder="Enter Douban Id"
+          v-model="input"
+        />
+        <button
+          class="border p-1.5 border-amber-600 rounded"
+          @click="searchAndUpsert()"
+        >
+          {{ loading ? 'Loading' : 'Add' }}
+        </button>
+      </section>
       <article
         v-for="v in moviesStore.movieList"
         :key="v.id"
