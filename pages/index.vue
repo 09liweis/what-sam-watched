@@ -149,7 +149,7 @@ async function searchAndUpsert() {
       </section>
       <article
         v-for="v in moviesStore.movieList"
-        :key="v.id"
+        :key="v._id"
         class="flex justify-between items-center mb-1.5 p-1 border-2 rounded"
       >
         <h3
