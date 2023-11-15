@@ -171,13 +171,13 @@ async function searchAndUpsert() {
               >Douban: {{ v.douban_rating }}</span
             >
             <span class="mr-8 text-sky-600"
-              >{{ v.current_episode }}/{{ v.episodes || 1 }}</span
+              >{{ v.current_episode }}/{{ v.episodes }}</span
             >
           </section>
         </h3>
         <div class="flex">
           <button
-            v-if="v.current_episode !== (v.episodes || 1)"
+            v-if="v.current_episode !== v.episodes"
             class="mr-2 border px-1.5 border-amber-600 rounded"
             @click="updateEpisode(v)"
           >
