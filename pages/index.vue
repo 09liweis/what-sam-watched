@@ -38,7 +38,7 @@ async function updateVisual(v) {
   v.loading = false;
 }
 
-let input = ref('');
+let doubanIdInput = ref('');
 let searchMovieTitle = ref('');
 const searchMovieLoading = ref(false);
 let searchMovieList = [];
@@ -53,13 +53,13 @@ async function searchMovies() {
 }
 
 function clickSearchedMovie(movie) {
-  input.value = movie.douban_id;
+  doubanIdInput.value = movie.douban_id;
   showSearchForm.value = false;
   searchAndUpsert();
 }
 
 async function searchAndUpsert() {
-  const douban_id = input.value;
+  const douban_id = doubanIdInput.value;
   if (!douban_id) {
     showSearchForm.value = true;
     return;
@@ -70,7 +70,7 @@ async function searchAndUpsert() {
     method: 'POST',
     body,
   });
-  input.value = '';
+  doubanIdInput.value = '';
   loading.value = false;
   fetchMovies();
 }
@@ -138,7 +138,7 @@ async function searchAndUpsert() {
         <input
           class="border p-1.5 mr-1 rounded"
           placeholder="Enter Douban Id"
-          v-model="input"
+          v-model="doubanIdInput"
         />
         <button
           class="border p-1.5 border-amber-600 rounded"
