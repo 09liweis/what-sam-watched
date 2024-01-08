@@ -167,11 +167,11 @@ async function searchAndUpsert() {
             >{{ v.title }}</NuxtLink
           >
           <section>
-            <span class="mr-8 text-green-700"
+            <span class="mr-4 text-green-700"
               >Douban: {{ v.douban_rating }}</span
             >
-            <span class="mr-8 text-yellow-700">IMDB: {{ v.imdb_rating }}</span>
-            <span class="mr-8 text-sky-600"
+            <span class="mr-4 text-yellow-700">IMDB: {{ v.imdb_rating }}</span>
+            <span class="mr-4 text-sky-600"
               >{{ v.current_episode }}/{{ v.episodes }}</span
             >
           </section>
