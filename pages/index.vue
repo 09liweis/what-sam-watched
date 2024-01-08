@@ -1,5 +1,6 @@
 <script setup>
 import Loading from '../components/Loading';
+import Button from '../components/Button';
 import { ref, computed } from 'vue';
 import { useMoviesStore } from '@/stores/movies';
 
@@ -140,12 +141,7 @@ async function searchAndUpsert() {
           placeholder="Enter Douban Id"
           v-model="doubanIdInput"
         />
-        <button
-          class="border p-1.5 border-amber-600 rounded"
-          @click="searchAndUpsert()"
-        >
-          {{ loading ? 'Loading' : 'Add' }}
-        </button>
+        <Button :text="loading ? 'Loading' : 'Add'" :onClick="searchAndUpsert" />
       </section>
       <article
         v-for="v in moviesStore.movieList"
