@@ -37,6 +37,6 @@ Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/prese
 
 ## TODO
 
-- [ ] search movie on douban search api
-- [ ] add search movie to db through api
+- [x] search movie on douban search api
+- [x] add search movie to db through api
 - [ ] movie detail page with douban summary api
