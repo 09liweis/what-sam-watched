@@ -170,6 +170,7 @@ async function searchAndUpsert() {
             <span class="mr-8 text-green-700"
               >Douban: {{ v.douban_rating }}</span
             >
+            <span class="mr-8 text-yellow-700">IMDB: {{ v.imdb_rating }}</span>
             <span class="mr-8 text-sky-600"
               >{{ v.current_episode }}/{{ v.episodes }}</span
             >
