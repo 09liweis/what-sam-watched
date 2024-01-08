@@ -28,7 +28,7 @@ onMounted(async () => {
     `https://samliweisen.onrender.com/api/movies/${route.params.id}`
   );
   loading.value = false;
-  movie = responseData;
-  moviesStore.setCurrentMovie(responseData);
+  movie = responseData.movie;
+  moviesStore.setCurrentMovie(movie);
 });
 </script>
