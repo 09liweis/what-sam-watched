@@ -5,8 +5,6 @@ export default defineNuxtConfig({
     host: '0.0.0.0',
   },
   runtimeConfig: {
-    mongoUrl: process.env.MONGO_URL,
-    fetchVisual: process.env.FETCH_VISUAL,
     public: {
       apiHost: process.env.API_HOST || '',
     },
