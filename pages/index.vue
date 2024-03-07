@@ -166,7 +166,7 @@ async function searchAndUpsert() {
             <span class="mr-4 text-green-700"
               >Douban: {{ v.douban_rating }}</span
             >
-            <span class="mr-4 text-yellow-700">IMDB: {{ v.imdb_rating }}</span>
+            <span v-if="v.imdb_rating" class="mr-4 text-yellow-700">IMDB: {{ v.imdb_rating }}</span>
             <span class="mr-4 text-sky-600"
               >{{ v.current_episode }}/{{ v.episodes }}</span
             >
