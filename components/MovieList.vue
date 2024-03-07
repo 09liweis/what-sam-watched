@@ -9,6 +9,7 @@ export default {
     :key="v._id"
     class="flex justify-between items-center mb-1.5 p-1 border-2 rounded"
   >
+    <NuxtImg :src="v.poster" width="100" class="rounded" />
     <h3
       class="
         font-mono

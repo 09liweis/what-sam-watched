@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     },
   },
   css: ['~/assets/css/main.css'],
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt','@nuxt/image'],
   server: {
     host: '0.0.0.0',
   },
@@ -25,6 +25,7 @@ export default defineNuxtConfig({
     '/api/upsert': { cors: true },
   },
   image: {
+    inject:true,
     domains: ['https://img9.doubanio.com'],
   },
   app: {
