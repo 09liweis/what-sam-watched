@@ -1,5 +1,12 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+  css: ['~/assets/css/main.css'],
   modules: ['@pinia/nuxt'],
   server: {
     host: '0.0.0.0',
@@ -26,10 +33,6 @@ export default defineNuxtConfig({
       viewport: 'width=device-width, initial-scale=1',
       title: 'What Sam Watched',
       meta: [{ name: 'description', content: 'My amazing movie dashboard.' }],
-      // link:[
-      //   {href :'https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css',rel:'stylesheet'}
-      // ],
-      script: [{ src: 'https://cdn.tailwindcss.com' }],
     },
   },
 });
