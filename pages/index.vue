@@ -1,6 +1,7 @@
 <script setup>
 import Loading from '../components/Loading';
 import Button from '../components/Button';
+import MovieList from '~/components/MovieList.vue';
 import { ref, computed } from 'vue';
 import { useMoviesStore } from '@/stores/movies';
 
@@ -22,14 +23,7 @@ const showSearchForm = ref(false);
 
 fetchMovies();
 
-async function updateEpisode(v) {
-  const response = await $fetch(`${API_HOST}/${v.douban_id}`, {
-    method: 'PUT',
-  });
-  fetchMovies();
-}
-
-async function updateVisual(v) {
+async function updateMovie(v) {
   v.loading = true;
   const response = await $fetch(`${API_HOST}/upsert`, {
     method: 'POST',
@@ -37,6 +31,13 @@ async function updateVisual(v) {
   });
   v.douban_rating = response.douban_rating;
   v.loading = false;
+}
+
+async function updateEpisode(v) {
+  const response = await $fetch(`${API_HOST}/${v.douban_id}`, {
+    method: 'PUT',
+  });
+  fetchMovies();
 }
 
 let doubanIdInput = ref('');
@@ -143,52 +144,7 @@ async function searchAndUpsert() {
         />
         <Button :text="loading ? 'Loading' : 'Add'" :onClick="searchAndUpsert" />
       </section>
-      <article
-        v-for="v in moviesStore.movieList"
-        :key="v._id"
-        class="flex justify-between items-center mb-1.5 p-1 border-2 rounded"
-      >
-        <h3
-          class="
-            font-mono
-            text-red-400
-            hover:text-red-900
-            decoration-blue-300
-            hover:decoration-blue-400
-          "
-        >
-          <NuxtLink
-            @click="moviesStore.setCurrentMovie(v)"
-            :to="{ name: 'id', params: { id: v.douban_id } }"
-            >{{ v.title }}</NuxtLink
-          >
-          <section>
-            <span class="mr-4 text-green-700"
-              >Douban: {{ v.douban_rating }}</span
-            >
-            <span v-if="v.imdb_rating" class="mr-4 text-yellow-700">IMDB: {{ v.imdb_rating }}</span>
-            <span class="mr-4 text-sky-600"
-              >{{ v.current_episode }}/{{ v.episodes }}</span
-            >
-          </section>
-        </h3>
-        <div class="flex">
-          <button
-            v-if="v.current_episode !== v.episodes"
-            class="mr-2 border px-1.5 border-amber-600 rounded"
-            @click="updateEpisode(v)"
-          >
-            +1
-          </button>
-          <button
-            class="shadow bg-indigo-500 text-white p-1 flex rounded-md"
-            @click="updateVisual(v)"
-          >
-            <Loading v-if="v.loading" />
-            <span>{{ v.loading ? 'Updating' : 'Update' }}</span>
-          </button>
-        </div>
-      </article>
+      <MovieList :movies="moviesStore.movieList" :updateMovie="updateMovie" :updateEpisode="updateEpisode" />
     </main>
   </NuxtLayout>
 </template>
