@@ -14,7 +14,7 @@ const API_HOST =
   runtimeConfig.public.apiHost || 'https://samliweisen.onrender.com/api/movies';
 
 const fetchMovies = async () => {
-  const fetchResp = await $fetch(`${API_HOST}?limit=50`);
+  const fetchResp = await $fetch(`${API_HOST}?limit=50&imgserver=img9`);
   moviesStore.setMovieList(fetchResp.movies);
 };
 
