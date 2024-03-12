@@ -7,17 +7,11 @@ export default {
   <article
     v-for="v in movies"
     :key="v._id"
-    class="flex justify-between items-center mb-1.5 p-1 border-2 rounded"
+    class="movie-article"
   >
     <NuxtImg :src="v.poster" width="100" class="rounded" />
     <h3
-      class="
-        font-mono
-        text-red-400
-        hover:text-red-900
-        decoration-blue-300
-        hover:decoration-blue-400
-      "
+      class="movie-title"
     >
       <NuxtLink
         @click="moviesStore.setCurrentMovie(v)"
