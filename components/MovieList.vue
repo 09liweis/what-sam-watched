@@ -9,7 +9,7 @@ export default {
     :key="v._id"
     class="movie-article"
   >
-    <NuxtImg :src="v.poster" width="100" class="rounded" />
+    <NuxtImg :src="v.poster" width="100" class="rounded hidden sm:block aspect-[3/4]" />
     <h3
       class="movie-title"
     >
@@ -23,21 +23,19 @@ export default {
           >Douban: {{ v.douban_rating }}</span
         >
         <span v-if="v.imdb_rating" class="mr-4 text-yellow-700">IMDB: {{ v.imdb_rating }}</span>
-        <span class="mr-4 text-sky-600"
-          >{{ v.current_episode }}/{{ v.episodes }}</span
-        >
       </section>
+      <span class="mr-4 text-sky-600">{{ v.current_episode }}/{{ v.episodes }}</span>
     </h3>
     <div class="flex">
       <button
         v-if="v.current_episode !== v.episodes"
-        class="mr-2 border px-1.5 border-amber-600 rounded"
+        class="movie-episode-btn"
         @click="updateEpisode(v)"
       >
         +1
       </button>
       <button
-        class="shadow bg-indigo-500 text-white p-1 flex rounded-md"
+        class="movie-update-btn"
         @click="updateMovie(v)"
       >
         <Loading v-if="v.loading" />

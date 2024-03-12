@@ -3,9 +3,17 @@
 @tailwind utilities;
 
 .movie-article {
-  @apply flex justify-between items-center mb-1.5 p-1 border-2 rounded;
+  @apply transition-shadow duration-300 flex justify-between items-center mb-1.5 p-1 border-2 rounded shadow hover:shadow-md;
 }
 
 .movie-title {
   @apply font-mono transition duration-300 text-red-400 hover:text-red-900 decoration-blue-300;
+}
+
+.movie-episode-btn {
+  @apply mr-2 border px-1.5 border-amber-600 rounded transition hover:scale-105;
+}
+
+.movie-update-btn {
+  @apply shadow bg-indigo-500 text-white p-1 flex rounded-md hover:scale-105 transition duration-200;
 }
