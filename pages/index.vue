@@ -124,11 +124,12 @@ async function searchAndUpsert() {
           </button>
           <section class="max-h-60 overflow-y-auto">
             <article
-              class="cursor-pointer hover:bg-gray-100 p-1 rounded"
+              class="cursor-pointer hover:bg-gray-100 p-1 rounded flex"
               v-for="v in searchMovieList"
               @click="clickSearchedMovie(v)"
             >
-              {{ v.title }}
+            <NuxtImg :src="v.poster" width="100" class="rounded hidden sm:block aspect-[3/4]" />
+            <span>{{ v.title }}</span>
             </article>
           </section>
         </form>
