@@ -9,23 +9,25 @@ export default {
     :key="v._id"
     class="movie-article"
   >
-    <NuxtImg :src="v.poster" width="100" class="rounded hidden sm:block aspect-[3/4]" />
-    <h3
-      class="movie-title"
-    >
-      <NuxtLink
-        @click="moviesStore.setCurrentMovie(v)"
-        :to="{ name: 'id', params: { id: v.douban_id } }"
-        >{{ v.title }}</NuxtLink
+    <section class="flex">
+      <NuxtImg :src="v.poster" width="100" :alt="v.title" loading="lazy" class="rounded hidden sm:block aspect-[3/4] mr-3 bg-gray-100" />
+      <h3
+        class="movie-title"
       >
-      <section>
-        <span class="mr-4 text-green-700"
-          >Douban: {{ v.douban_rating }}</span
+        <NuxtLink
+          @click="moviesStore.setCurrentMovie(v)"
+          :to="{ name: 'id', params: { id: v.douban_id } }"
+          >{{ v.title }}</NuxtLink
         >
-        <span v-if="v.imdb_rating" class="mr-4 text-yellow-700">IMDB: {{ v.imdb_rating }}</span>
-      </section>
-      <span class="mr-4 text-sky-600">{{ v.current_episode }}/{{ v.episodes }}</span>
-    </h3>
+        <section>
+          <span class="mr-4 text-green-700"
+            >Douban: {{ v.douban_rating }}</span
+          >
+          <span v-if="v.imdb_rating" class="mr-4 text-yellow-700">IMDB: {{ v.imdb_rating }}</span>
+        </section>
+        <span class="mr-4 text-sky-600">{{ v.current_episode }}/{{ v.episodes }}</span>
+      </h3>
+    </section>
     <div class="flex">
       <button
         v-if="v.current_episode !== v.episodes"
