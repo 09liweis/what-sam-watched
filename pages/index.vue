@@ -10,18 +10,11 @@ const moviesStore = useMoviesStore();
 const moviesCount = computed(() => moviesStore.movieList.length);
 
 const runtimeConfig = useRuntimeConfig();
-const API_HOST =
-  runtimeConfig.public.apiHost || 'https://samliweisen.onrender.com/api/movies';
-
-const fetchMovies = async () => {
-  const fetchResp = await $fetch(`${API_HOST}?limit=50&imgserver=img9`);
-  moviesStore.setMovieList(fetchResp.movies);
-};
 
 let loading = ref(false);
 const showSearchForm = ref(false);
 
-fetchMovies();
+moviesStore.fetchMovies();
 
 async function updateMovie(v) {
   v.loading = true;
@@ -37,7 +30,7 @@ async function updateEpisode(v) {
   const response = await $fetch(`${API_HOST}/${v.douban_id}`, {
     method: 'PUT',
   });
-  fetchMovies();
+  moviesStore.fetchMovies();
 }
 
 let doubanIdInput = ref('');
@@ -74,7 +67,7 @@ async function searchAndUpsert() {
   });
   doubanIdInput.value = '';
   loading.value = false;
-  fetchMovies();
+  moviesStore.fetchMovies();
 }
 </script>
 <template>
