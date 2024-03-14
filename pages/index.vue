@@ -26,13 +26,6 @@ async function updateMovie(v) {
   v.loading = false;
 }
 
-async function updateEpisode(v) {
-  const response = await $fetch(`${API_HOST}/${v.douban_id}`, {
-    method: 'PUT',
-  });
-  moviesStore.fetchMovies();
-}
-
 let doubanIdInput = ref('');
 let searchMovieTitle = ref('');
 const searchMovieLoading = ref(false);
@@ -138,7 +131,7 @@ async function searchAndUpsert() {
         />
         <Button :text="loading ? 'Loading' : 'Add'" :onClick="searchAndUpsert" />
       </section>
-      <MovieList :movies="moviesStore.movieList" :updateMovie="updateMovie" :updateEpisode="updateEpisode" />
+      <MovieList :movies="moviesStore.movieList" :updateMovie="updateMovie" :updateEpisode="moviesStore.updateEpisode" />
     </main>
   </NuxtLayout>
 </template>
