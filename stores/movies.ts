@@ -11,6 +11,7 @@ interface Movie {
 
 interface MoviesResponse {
   movies:Movie[]
+  err?: string
 }
 
 const API_HOST ='https://samliweisen.onrender.com/api/movies';
@@ -25,6 +26,12 @@ export const useMoviesStore = defineStore('movies', {
     async fetchMovies() {
       const moviesResp:MoviesResponse = await $fetch(`${API_HOST}?limit=50&imgserver=img9`);
       this.setMovieList(moviesResp.movies);
+    },
+    async searchDoubanMovies(title:string) {
+      const {movies,err}:MoviesResponse = await $fetch(
+        `${API_HOST}/search?keyword=${title}`
+      );
+      return movies;
     },
     setMovieList(movieList: Movie[]) {
       this.movieList = movieList;

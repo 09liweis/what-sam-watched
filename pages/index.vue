@@ -35,11 +35,8 @@ let searchMovieList = [];
 
 async function searchMovies() {
   searchMovieLoading.value = true;
-  const searchMoviesResult = await $fetch(
-    `${API_HOST}/search?keyword=${searchMovieTitle.value}`
-  );
+  searchMovieList = await moviesStore.searchDoubanMovies(searchMovieTitle.value);
   searchMovieLoading.value = false;
-  searchMovieList = searchMoviesResult.visuals;
 }
 
 function clickSearchedMovie(movie) {
