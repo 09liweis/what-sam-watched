@@ -33,6 +33,13 @@ export const useMoviesStore = defineStore('movies', {
       );
       return movies;
     },
+    async upsertMovie(douban_id:string) {
+      const body = { douban_id };
+      await $fetch(`${API_HOST}/upsert`, {
+        method: 'POST',
+        body,
+      });
+    },
     setMovieList(movieList: Movie[]) {
       this.movieList = movieList;
     },

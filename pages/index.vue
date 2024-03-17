@@ -52,11 +52,7 @@ async function searchAndUpsert() {
     return;
   }
   loading.value = true;
-  const body = { douban_id };
-  await $fetch(`${API_HOST}/upsert`, {
-    method: 'POST',
-    body,
-  });
+  await moviesStore.upsertMovie(douban_id);
   doubanIdInput.value = '';
   loading.value = false;
   moviesStore.fetchMovies();
