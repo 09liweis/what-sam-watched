@@ -5,6 +5,8 @@ import MovieList from '~/components/MovieList.vue';
 import { ref, computed } from 'vue';
 import { useMoviesStore } from '@/stores/movies';
 
+const API_HOST ='https://samliweisen.onrender.com/api/movies';
+
 const moviesStore = useMoviesStore();
 
 const moviesCount = computed(() => moviesStore.movieList.length);
