@@ -20,10 +20,7 @@ moviesStore.fetchMovies();
 
 async function updateMovie(v) {
   v.loading = true;
-  const response = await $fetch(`${API_HOST}/upsert`, {
-    method: 'POST',
-    body: v,
-  });
+  const response = await moviesStore.getUpdatedMovie(v);
   v.douban_rating = response.douban_rating;
   v.loading = false;
 }

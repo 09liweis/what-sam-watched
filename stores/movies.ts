@@ -23,6 +23,13 @@ export const useMoviesStore = defineStore('movies', {
     currentMovie: {},
   }),
   actions: {
+    async getUpdatedMovie(movie:Movie) {
+      const response:Movie = await $fetch(`${API_HOST}/upsert`, {
+        method: 'POST',
+        body: movie,
+      });
+      return response;
+    },
     async fetchMovies() {
       const moviesResp:MoviesResponse = await $fetch(`${API_HOST}?limit=50&imgserver=img9`);
       this.setMovieList(moviesResp.movies);
