@@ -6,6 +6,7 @@ interface Movie {
   poster:string,
   current_episode:number,
   episodes:number,
+  imdb_id:string,
   imdb_rating:string
 }
 
