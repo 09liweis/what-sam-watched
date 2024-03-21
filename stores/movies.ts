@@ -7,7 +7,8 @@ interface Movie {
   current_episode:number,
   episodes:number,
   imdb_id:string,
-  imdb_rating:string
+  imdb_rating:string,
+  loading: boolean
 }
 
 interface MoviesResponse {
@@ -25,11 +26,14 @@ export const useMoviesStore = defineStore('movies', {
   }),
   actions: {
     async getUpdatedMovie(movie:Movie) {
+      movie.loading = true;
       const response:Movie = await $fetch(`${API_HOST}/upsert`, {
         method: 'POST',
         body: movie,
       });
-      return response;
+      movie.douban_rating = response.douban_rating;
+      movie.imdb_rating = response.imdb_rating;
+      movie.loading = false;
     },
     async fetchMovies() {
       const moviesResp:MoviesResponse = await $fetch(`${API_HOST}?limit=50&imgserver=img9`);

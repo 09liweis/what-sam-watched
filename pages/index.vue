@@ -14,13 +14,6 @@ const runtimeConfig = useRuntimeConfig();
 let loading = ref(false);
 const showSearchForm = ref(false);
 
-async function updateMovie(v) {
-  v.loading = true;
-  const response = await moviesStore.getUpdatedMovie(v);
-  v.douban_rating = response.douban_rating;
-  v.loading = false;
-}
-
 let doubanIdInput = ref('');
 let searchMovieTitle = ref('');
 const searchMovieLoading = ref(false);
@@ -119,7 +112,7 @@ async function searchAndUpsert() {
         />
         <Button :text="loading ? 'Loading' : 'Add'" :onClick="searchAndUpsert" />
       </section>
-      <MovieList :movies="moviesStore.movieList" :updateMovie="updateMovie" :updateEpisode="moviesStore.updateEpisode" />
+      <MovieList />
     </main>
   </NuxtLayout>
 </template>

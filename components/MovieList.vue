@@ -1,7 +1,4 @@
 <script setup>
-// export default {
-//   props:['movies','updateMovie','updateEpisode']
-// }
 import { useMoviesStore } from '@/stores/movies';
 const moviesStore = useMoviesStore();
 moviesStore.fetchMovies();
@@ -35,13 +32,13 @@ moviesStore.fetchMovies();
       <button
         v-if="v.current_episode !== v.episodes"
         class="movie-episode-btn"
-        @click="updateEpisode(v)"
+        @click="moviesStore.updateEpisode(v)"
       >
         +1
       </button>
       <button
         class="movie-update-btn"
-        @click="updateMovie(v)"
+        @click="moviesStore.getUpdatedMovie(v)"
       >
         <Loading v-if="v.loading" />
         <span>{{ v.loading ? 'Updating' : 'Update' }}</span>
