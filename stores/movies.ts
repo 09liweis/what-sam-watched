@@ -18,7 +18,11 @@ interface MoviesResponse {
 
 interface Stats {
   total:number,
-  movie:number
+  movie:number,
+  tv:number,
+  languages:string[],
+  countries:string[],
+  genres:string[]
 }
 
 interface StatsResponse {
@@ -51,7 +55,8 @@ export const useMoviesStore = defineStore('movies', {
       movie.loading = false;
     },
     async fetchMovies() {
-      const moviesResp:MoviesResponse = await $fetch(`${API_HOST}?limit=50&imgserver=img9`);
+      const route = useRoute()
+      const moviesResp:MoviesResponse = await $fetch(`${API_HOST}?limit=50&imgserver=img9&lang=${route.query.lang}`);
       this.setMovieList(moviesResp.movies);
     },
     async searchDoubanMovies(title:string) {

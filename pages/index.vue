@@ -3,11 +3,19 @@ import Loading from '../components/Loading';
 import Button from '../components/Button';
 import MovieList from '~/components/MovieList.vue';
 import Stats from '~/components/Stats.vue';
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useMoviesStore } from '@/stores/movies';
 
 const moviesStore = useMoviesStore();
 moviesStore.getStats();
+
+const route = useRoute();
+// You can watch the property for triggering some other action on change
+watch(() => route.query, () => {
+  moviesStore.fetchMovies();
+// Optionally you can set immediate: true config for the watcher to run on init
+//}, { immediate: true });
+});
 
 const moviesCount = computed(() => moviesStore.movieList.length);
 
