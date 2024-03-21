@@ -16,6 +16,16 @@ interface MoviesResponse {
   err?: string
 }
 
+interface Stats {
+  total:number,
+  movie:number
+}
+
+interface StatsResponse {
+  name:string,
+  details:Stats
+}
+
 const API_HOST ='https://samliweisen.onrender.com/api/movies';
 const emptyMovieList:Movie[] = [];
 
@@ -23,8 +33,13 @@ export const useMoviesStore = defineStore('movies', {
   state: () => ({
     movieList: emptyMovieList,
     currentMovie: {},
+    stats:{},
   }),
   actions: {
+    async getStats() {
+      const response:StatsResponse = await $fetch(`https://samliweisen.onrender.com/api/stats/movie`);
+      this.stats = response.details;
+    },
     async getUpdatedMovie(movie:Movie) {
       movie.loading = true;
       const response:Movie = await $fetch(`${API_HOST}/upsert`, {

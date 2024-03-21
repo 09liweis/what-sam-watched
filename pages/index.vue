@@ -2,10 +2,12 @@
 import Loading from '../components/Loading';
 import Button from '../components/Button';
 import MovieList from '~/components/MovieList.vue';
+import Stats from '~/components/Stats.vue';
 import { ref, computed } from 'vue';
 import { useMoviesStore } from '@/stores/movies';
 
 const moviesStore = useMoviesStore();
+moviesStore.getStats();
 
 const moviesCount = computed(() => moviesStore.movieList.length);
 
@@ -47,6 +49,7 @@ async function searchAndUpsert() {
 <template>
   <NuxtLayout>
     <main class="conatiner p-5">
+      <Stats :stats="moviesStore.stats" />
       <section
         v-show="showSearchForm"
         class="
@@ -102,7 +105,7 @@ async function searchAndUpsert() {
         </form>
       </section>
       <h1 class="text-xl text-center text-red-500 font-bold mb-8">
-        What Sam Watched in Nuxt.js {{ moviesCount }} movies
+        What Sam Watched in Nuxt.js {{ moviesStore.stats?.total || 0 }} movies
       </h1>
       <section class="flex items-center mb-1.5">
         <input
