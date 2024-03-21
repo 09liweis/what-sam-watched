@@ -20,9 +20,7 @@ moviesStore.fetchMovies();
           >{{ v.title }}</NuxtLink
         >
         <section>
-          <a :href="`https://movie.douban.com/subject/${v.douban_id}`" target="_blank" class="mr-4 text-green-700"
-            >Douban: {{ v.douban_rating }}</a
-          >
+          <Rating title="Douban" :rating="v.douban_rating" :movieLink="`https://movie.douban.com/subject/${v.douban_id}`" />
           <a v-if="v.imdb_rating" :href="`https://www.imdb.com/title/${v.imdb_id}`" target="_blank" class="mr-4 text-yellow-700">IMDB: {{ v.imdb_rating }}</a>
         </section>
         <span class="mr-4 text-sky-600">{{ v.current_episode }}/{{ v.episodes }}</span>
