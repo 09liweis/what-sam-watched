@@ -1,11 +1,14 @@
-<script>
-export default {
-  props:['movies','updateMovie','updateEpisode']
-}
+<script setup>
+// export default {
+//   props:['movies','updateMovie','updateEpisode']
+// }
+import { useMoviesStore } from '@/stores/movies';
+const moviesStore = useMoviesStore();
+moviesStore.fetchMovies();
 </script>
 <template>
   <article
-    v-for="v in movies"
+    v-for="v in moviesStore.movieList"
     :key="v._id"
     class="movie-article"
   >
