@@ -57,7 +57,7 @@ async function searchAndUpsert() {
 <template>
   <NuxtLayout>
     <main class="conatiner p-5">
-      <Stats :stats="moviesStore.stats" />
+      <Stats :stats="moviesStore.stats" :curLang="moviesStore.curLang" />
       <section
         v-show="showSearchForm"
         class="
