@@ -1,4 +1,6 @@
 <script>
+import Loading from './Loading.vue';
+
 export default {
   props: ['stats','curLang'],
   setup(props) {
@@ -16,7 +18,10 @@ export default {
     </section>
     <section class="flex gap-x-3 flex-wrap">
       <span>Languages: </span>
-      <NuxtLink v-for="count,lang of stats.languages" :class="curLang == lang?'text-red-500':''" :to="{query:{lang}}">{{ `${lang}(${count})` }}</NuxtLink>
+      <NuxtLink v-for="count,lang of stats.languages" :class="curLang == lang?'text-red-500':'hover-lang'" :to="{query:{lang}}">{{ `${lang}(${count})` }}</NuxtLink>
     </section>
+  </section>
+  <section v-if="!stats.total">
+    <Loading />
   </section>
 </template>

@@ -17,3 +17,6 @@
 .movie-update-btn {
   @apply shadow bg-indigo-500 font-mono text-white p-1 flex rounded-md hover:scale-105 transition duration-200;
 }
+.hover-lang {
+  @apply hover:text-red-500 transition duration-300;
+}
