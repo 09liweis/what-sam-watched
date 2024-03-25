@@ -113,7 +113,7 @@ async function searchAndUpsert() {
         </form>
       </section>
       <h1 class="text-xl text-center text-red-500 font-bold mb-8">
-        What Sam Watched in Nuxt.js {{ moviesStore.stats?.total || 0 }} movies
+        What Sam Watched in Nuxt.js {{ moviesStore.total }} movies
       </h1>
       <section class="flex items-center mb-1.5">
         <input

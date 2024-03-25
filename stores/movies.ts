@@ -12,8 +12,10 @@ interface Movie {
 }
 
 interface MoviesResponse {
-  movies:Movie[]
-  err?: string
+  movies:Movie[],
+  err?: string,
+  total: number,
+  page: number
 }
 
 interface Stats {
@@ -36,6 +38,7 @@ const emptyMovieList:Movie[] = [];
 export const useMoviesStore = defineStore('movies', {
   state: () => ({
     movieList: emptyMovieList,
+    total: 0,
     isfetchingMovieList: false,
     currentMovie: {},
     stats:{},
@@ -66,6 +69,7 @@ export const useMoviesStore = defineStore('movies', {
       this.isfetchingMovieList = true;
       const moviesResp:MoviesResponse = await $fetch(`${API_HOST}?limit=50&imgserver=img9&lang=${lang}&genre=${genre}`);
       this.setMovieList(moviesResp.movies);
+      this.total = moviesResp.total;
       this.isfetchingMovieList = false;
     },
     async searchDoubanMovies(title:string) {
