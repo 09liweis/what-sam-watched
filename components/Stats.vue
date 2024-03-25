@@ -2,7 +2,7 @@
 import Loading from './Loading.vue';
 
 export default {
-  props: ['stats','curLang'],
+  props: ['stats','curLang','curGenre'],
   setup(props) {
     
   }
@@ -16,10 +16,19 @@ export default {
       <a>Movie: {{stats.movie}}</a>
       <a>TV: {{stats.tv}}</a>
     </section>
+    
     <section class="flex gap-x-3 flex-wrap">
       <span>Languages: </span>
-      <NuxtLink v-for="count,lang of stats.languages" :class="curLang == lang?'text-red-500':'hover-lang'" :to="{query:{lang}}">{{ `${lang}(${count})` }}</NuxtLink>
+      <NuxtLink :class="curLang == ''?'text-red-500':'hover-lang'" :to="{query:{genre:curGenre}}">All</NuxtLink>
+      <NuxtLink v-for="count,lang of stats.languages" :class="curLang == lang?'text-red-500':'hover-lang'" :to="{query:{lang,genre:curGenre}}">{{ `${lang}(${count})` }}</NuxtLink>
     </section>
+
+    <section class="flex gap-x-3 flex-wrap">
+      <span>Genres: </span>
+      <NuxtLink :class="curGenre == ''?'text-red-500':'hover-lang'" :to="{query:{lang:curLang}}">All</NuxtLink>
+      <NuxtLink v-for="count,genre of stats.genres" :class="curGenre == genre?'text-red-500':'hover-lang'" :to="{query:{genre,lang:curLang}}">{{ `${genre}(${count})` }}</NuxtLink>
+    </section>
+
   </section>
   <section v-if="!stats.total">
     <Loading />
