@@ -4,7 +4,8 @@ const moviesStore = useMoviesStore();
 moviesStore.fetchMovies();
 </script>
 <template>
-  <article
+  <section v-if="moviesStore.isfetchingMovieList" class="flex justify-center"><Loading color="'text-red-500'" /></section>
+  <article v-else
     v-for="v in moviesStore.movieList"
     :key="v._id"
     class="movie-article"

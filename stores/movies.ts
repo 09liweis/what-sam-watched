@@ -36,6 +36,7 @@ const emptyMovieList:Movie[] = [];
 export const useMoviesStore = defineStore('movies', {
   state: () => ({
     movieList: emptyMovieList,
+    isfetchingMovieList: false,
     currentMovie: {},
     stats:{},
     curLang:'',
@@ -59,8 +60,10 @@ export const useMoviesStore = defineStore('movies', {
       const route = useRoute();
       const lang = route.query.lang?.toString() || '';
       this.curLang = lang;
+      this.isfetchingMovieList = true;
       const moviesResp:MoviesResponse = await $fetch(`${API_HOST}?limit=50&imgserver=img9&lang=${lang}`);
       this.setMovieList(moviesResp.movies);
+      this.isfetchingMovieList = false;
     },
     async searchDoubanMovies(title:string) {
       const {movies,err}:MoviesResponse = await $fetch(
