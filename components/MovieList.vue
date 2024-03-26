@@ -36,11 +36,12 @@ moviesStore.fetchMovies();
         +1
       </button>
       <button
+        :disabled="v.loading"
         class="movie-update-btn"
         @click="moviesStore.getUpdatedMovie(v)"
       >
-        <Loading v-if="v.loading" />
-        <span>{{ v.loading ? 'Updating' : 'Update' }}</span>
+        <Loading v-if="v.loading"/>
+        <span v-else>Update</span>
       </button>
     </div>
   </article>
