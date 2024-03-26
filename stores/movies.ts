@@ -43,7 +43,8 @@ export const useMoviesStore = defineStore('movies', {
     currentMovie: {},
     stats:{},
     curLang:'',
-    curGenre:''
+    curGenre:'',
+    curCountry:''
   }),
   actions: {
     async getStats() {
@@ -64,10 +65,12 @@ export const useMoviesStore = defineStore('movies', {
       const route = useRoute();
       const lang = route.query.lang?.toString() || '';
       const genre = route.query.genre?.toString() || '';
+      const country = route.query.country?.toString() || '';
       this.curLang = lang;
       this.curGenre = genre;
+      this.curCountry = country;
       this.isfetchingMovieList = true;
-      const moviesResp:MoviesResponse = await $fetch(`${API_HOST}?limit=50&imgserver=img9&lang=${lang}&genre=${genre}`);
+      const moviesResp:MoviesResponse = await $fetch(`${API_HOST}?limit=50&imgserver=img9&lang=${lang}&genre=${genre}&country=${country}`);
       this.setMovieList(moviesResp.movies);
       this.total = moviesResp.total;
       this.isfetchingMovieList = false;
