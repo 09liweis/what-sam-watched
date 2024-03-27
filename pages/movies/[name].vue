@@ -6,7 +6,8 @@
         <video v-if="movie.video" autoplay loop>
           <source :src="movie.video" type="video/mp4">
         </video>
-        <NuxtImg v-else :src="movie.poster" width="100%" :alt="movie.title" loading="lazy" class="w-full rounded aspect-[3/4] bg-gray-100" />
+        <NuxtImg v-else :src="movie.poster" width="100%" :alt="movie.title" placeholder="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" loading="lazy" class="w-full rounded aspect-[3/4] bg-gray-100" />
+        <h3>{{ movie.title }}</h3>
       </article>
     </section>
   </main>
@@ -25,7 +26,7 @@
   
   onMounted(async () => {
     loading.value = true;
-    await moviesStore.fetchMovies(route.params.name);
+    await moviesStore.fetchMovies(route.params?.name);
     loading.value = false;
   });
   </script>

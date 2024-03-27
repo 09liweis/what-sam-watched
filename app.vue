@@ -17,9 +17,9 @@ watch(() => route.params, () => {
 </script>
 <template>
   <section>
-      <header>
+      <header class="mt-2 mb-4">
         <nav class="flex justify-center gap-x-2">
-          <NuxtLink v-for="route in ROUTES" :class="routeName == route.id?'text-red-500':''" :to="route.to">{{ route.nm }}</NuxtLink>
+          <NuxtLink v-for="route in ROUTES" :class="`menu-item ${routeName == route.id?'active':''}`" :to="route.to">{{ route.nm }}</NuxtLink>
         </nav>
       </header>
     <NuxtLayout>

@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.menu-item {
+  @apply border p-1 transition duration-200 rounded;
+}
+
+.menu-item.active, .menu-item:hover {
+  @apply text-red-500 border-red-500;
+}
+
 .movie-article {
   @apply transition-shadow duration-300 flex justify-between items-center mb-1.5 p-1 border-2 rounded shadow hover:shadow-md;
 }
