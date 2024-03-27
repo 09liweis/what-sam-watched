@@ -28,3 +28,7 @@
 .hover-lang {
   @apply hover:text-red-500 transition duration-300;
 }
+
+.movie-poster {
+  @apply w-full rounded aspect-[3/4] bg-gray-100
+}
