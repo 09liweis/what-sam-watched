@@ -2,7 +2,10 @@
   <main class="flex flex-wrap">
     <Loading color="text-red-500" v-if="loading" />
     <article v-for="movie in moviesStore.movieList" class="w-1/2 sm:1/3 md:w-1/4 lg:w-1/6 p-2">
-      <NuxtImg v-if="movie.poster" :src="movie.poster" width="100%" :alt="movie.title" loading="lazy" class="w-full rounded aspect-[3/4] bg-gray-100" />
+      <video v-if="movie.video" autoplay loop>
+        <source :src="movie.video" type="video/mp4">
+      </video>
+      <NuxtImg v-else :src="movie.poster" width="100%" :alt="movie.title" loading="lazy" class="w-full rounded aspect-[3/4] bg-gray-100" />
     </article>
   </main>
 </template>

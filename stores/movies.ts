@@ -4,6 +4,7 @@ interface Movie {
   douban_id:string,
   douban_rating:string,
   poster:string,
+  video?:string,
   current_episode:number,
   episodes:number,
   imdb_id:string,
