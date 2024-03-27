@@ -1,7 +1,7 @@
 <template>
   <section>
       <header>
-        <nav>
+        <nav class="flex justify-center gap-x-2">
           <NuxtLink to="/movies/hongkong">Hongkong</NuxtLink>
           <NuxtLink to="/movies/popular">Popular</NuxtLink>
           <NuxtLink to="/movies/imdb_boxoffice">IMDB Box office</NuxtLink>
