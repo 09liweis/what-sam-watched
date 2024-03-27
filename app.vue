@@ -1,10 +1,25 @@
+<script setup>
+import { ref, computed, watch } from 'vue';
+const route = useRoute();
+let routeName = ref(route.params?.name);
+const ROUTES = [
+  {id:'sam',to:'/',nm:'Sam'},
+  {id:'in_theatre',to:'/movies/in_theatre',nm:'Mainland'},
+  {id:'hongkong',to:'/movies/hongkong',nm:'Hongkong'},
+  {id:'popular',to:'/movies/popular',nm:'Popular'},
+  {id:'imdb_boxoffice',to:'/movies/imdb_boxoffice',nm:'IMDB Box Office'}
+]
+watch(() => route.params, () => {
+  routeName.value = route.params?.name;
+// Optionally you can set immediate: true config for the watcher to run on init
+//}, { immediate: true });
+});
+</script>
 <template>
   <section>
       <header>
         <nav class="flex justify-center gap-x-2">
-          <NuxtLink to="/movies/hongkong">Hongkong</NuxtLink>
-          <NuxtLink to="/movies/popular">Popular</NuxtLink>
-          <NuxtLink to="/movies/imdb_boxoffice">IMDB Box office</NuxtLink>
+          <NuxtLink v-for="route in ROUTES" :class="routeName == route.id?'text-red-500':''" :to="route.to">{{ route.nm }}</NuxtLink>
         </nav>
       </header>
     <NuxtLayout>
