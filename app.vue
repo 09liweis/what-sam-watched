@@ -1,6 +1,12 @@
 <template>
   <section>
-      <header>Header comming</header>
+      <header>
+        <nav>
+          <NuxtLink to="/movies/hongkong">Hongkong</NuxtLink>
+          <NuxtLink to="/movies/popular">Popular</NuxtLink>
+          <NuxtLink to="/movies/imdb_boxoffice">IMDB Box office</NuxtLink>
+        </nav>
+      </header>
     <NuxtLayout>
       <NuxtPage/>
     </NuxtLayout>

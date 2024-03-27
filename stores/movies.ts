@@ -32,7 +32,7 @@ interface StatsResponse {
   details:Stats
 }
 
-const API_HOST ='https://samliweisen.onrender.com/api/movies';
+const API_HOST ='https://samliweisen.onrender.com/api/movies/';
 const emptyMovieList:Movie[] = [];
 
 export const useMoviesStore = defineStore('movies', {
@@ -61,7 +61,7 @@ export const useMoviesStore = defineStore('movies', {
       movie.imdb_rating = response.imdb_rating;
       movie.loading = false;
     },
-    async fetchMovies() {
+    async fetchMovies(name='') {
       const route = useRoute();
       const lang = route.query.lang?.toString() || '';
       const genre = route.query.genre?.toString() || '';
@@ -70,7 +70,7 @@ export const useMoviesStore = defineStore('movies', {
       this.curGenre = genre;
       this.curCountry = country;
       this.isfetchingMovieList = true;
-      const moviesResp:MoviesResponse = await $fetch(`${API_HOST}?limit=50&imgserver=img9&lang=${lang}&genre=${genre}&country=${country}`);
+      const moviesResp:MoviesResponse = await $fetch(`${API_HOST}${name}?limit=50&imgserver=img9&lang=${lang}&genre=${genre}&country=${country}`);
       this.setMovieList(moviesResp.movies);
       this.total = moviesResp.total;
       this.isfetchingMovieList = false;
