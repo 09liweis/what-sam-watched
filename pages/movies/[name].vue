@@ -6,7 +6,7 @@
         <video v-if="movie.video" autoplay loop class="movie-poster">
           <source :src="movie.video" type="video/mp4">
         </video>
-        <NuxtImg v-else :src="movie.poster" width="100%" :alt="movie.title" placeholder="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" loading="lazy" class="movie-poster" />
+        <NuxtImg v-else :src="movie.poster" onerror="this.src=movie.origin_poster" width="100%" :alt="movie.title" placeholder="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" loading="lazy" class="movie-poster" />
         <h3>{{ movie.title }}</h3>
       </article>
     </section>
