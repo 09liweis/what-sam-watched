@@ -33,7 +33,8 @@ interface StatsResponse {
   details:Stats
 }
 
-const API_HOST ='https://samliweisen.onrender.com/api/movies/';
+const API_DOMAIN:string = 'https://samliweisen.onrender.com/api/';
+const API_ENDPOINT:string =`${API_DOMAIN}movies/`;
 const emptyMovieList:Movie[] = [];
 
 export const useMoviesStore = defineStore('movies', {
@@ -49,12 +50,12 @@ export const useMoviesStore = defineStore('movies', {
   }),
   actions: {
     async getStats() {
-      const response:StatsResponse = await $fetch(`https://samliweisen.onrender.com/api/stats/movie`);
+      const response:StatsResponse = await $fetch(`${API_DOMAIN}stats/movie`);
       this.stats = response.details;
     },
     async getUpdatedMovie(movie:Movie) {
       movie.loading = true;
-      const response:Movie = await $fetch(`${API_HOST}/upsert`, {
+      const response:Movie = await $fetch(`${API_ENDPOINT}/upsert`, {
         method: 'POST',
         body: movie,
       });
@@ -71,20 +72,20 @@ export const useMoviesStore = defineStore('movies', {
       this.curGenre = genre;
       this.curCountry = country;
       this.isfetchingMovieList = true;
-      const moviesResp:MoviesResponse = await $fetch(`${API_HOST}${name}?limit=50&imgserver=img9&lang=${lang}&genre=${genre}&country=${country}`);
+      const moviesResp:MoviesResponse = await $fetch(`${API_ENDPOINT}${name}?limit=50&imgserver=img9&lang=${lang}&genre=${genre}&country=${country}`);
       this.setMovieList(moviesResp.movies);
       this.total = moviesResp.total;
       this.isfetchingMovieList = false;
     },
     async searchDoubanMovies(title:string) {
       const {movies,err}:MoviesResponse = await $fetch(
-        `${API_HOST}/search?keyword=${title}`
+        `${API_ENDPOINT}/search?keyword=${title}`
       );
       return movies;
     },
     async upsertMovie(douban_id:string) {
       const body = { douban_id };
-      await $fetch(`${API_HOST}/upsert`, {
+      await $fetch(`${API_ENDPOINT}/upsert`, {
         method: 'POST',
         body,
       });
@@ -96,7 +97,7 @@ export const useMoviesStore = defineStore('movies', {
       this.currentMovie = movie;
     },
     async updateEpisode(v:Movie) {
-      const response = await $fetch(`${API_HOST}/${v.douban_id}`, {
+      const response = await $fetch(`${API_ENDPOINT}/${v.douban_id}`, {
         method: 'PUT',
       });
       console.log(response);
