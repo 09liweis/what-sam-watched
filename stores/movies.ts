@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia';
 import type { Movie, MoviesResponse, StatsResponse } from '../types/movie';
+import { API_ENDPOINT, API_STATS, API_UPSERT } from '~/constants/api';
 
-const API_DOMAIN:string = 'https://samliweisen.onrender.com/api/';
-const API_ENDPOINT:string =`${API_DOMAIN}movies/`;
 const emptyMovieList:Movie[] = [];
 
 export const useMoviesStore = defineStore('movies', {
@@ -18,12 +17,12 @@ export const useMoviesStore = defineStore('movies', {
   }),
   actions: {
     async getStats() {
-      const response:StatsResponse = await $fetch(`${API_DOMAIN}stats/movie`);
+      const response:StatsResponse = await $fetch(API_STATS);
       this.stats = response.details;
     },
     async getUpdatedMovie(movie:Movie) {
       movie.loading = true;
-      const response:Movie = await $fetch(`${API_ENDPOINT}/upsert`, {
+      const response:Movie = await $fetch(API_UPSERT, {
         method: 'POST',
         body: movie,
       });
@@ -53,7 +52,7 @@ export const useMoviesStore = defineStore('movies', {
     },
     async upsertMovie(douban_id:string) {
       const body = { douban_id };
-      await $fetch(`${API_ENDPOINT}/upsert`, {
+      await $fetch(API_UPSERT, {
         method: 'POST',
         body,
       });
