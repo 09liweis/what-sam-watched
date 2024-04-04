@@ -1,37 +1,5 @@
 import { defineStore } from 'pinia';
-
-interface Movie {
-  douban_id:string,
-  douban_rating:string,
-  poster:string,
-  video?:string,
-  current_episode:number,
-  episodes:number,
-  imdb_id:string,
-  imdb_rating:string,
-  loading: boolean
-}
-
-interface MoviesResponse {
-  movies:Movie[],
-  err?: string,
-  total: number,
-  page: number
-}
-
-interface Stats {
-  total:number,
-  movie:number,
-  tv:number,
-  languages:string[],
-  countries:string[],
-  genres:string[]
-}
-
-interface StatsResponse {
-  name:string,
-  details:Stats
-}
+import type { Movie, MoviesResponse, StatsResponse } from '../types/movie';
 
 const API_DOMAIN:string = 'https://samliweisen.onrender.com/api/';
 const API_ENDPOINT:string =`${API_DOMAIN}movies/`;
