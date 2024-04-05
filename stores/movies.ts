@@ -31,10 +31,10 @@ export const useMoviesStore = defineStore('movies', {
       movie.loading = false;
     },
     async fetchMovies(name='') {
-      const route = useRoute();
-      const lang = route.query.lang?.toString() || '';
-      const genre = route.query.genre?.toString() || '';
-      const country = route.query.country?.toString() || '';
+      const {query} = useRoute();
+      const lang = query.lang?.toString() || '';
+      const genre = query.genre?.toString() || '';
+      const country = query.country?.toString() || '';
       this.curLang = lang;
       this.curGenre = genre;
       this.curCountry = country;
