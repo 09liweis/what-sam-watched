@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import type { Movie, MoviesResponse, StatsResponse } from '../types/movie';
-import { API_ENDPOINT, API_STATS, API_UPSERT } from '~/constants/api';
+import { API_ENDPOINT, API_SEARCH, API_STATS, API_UPSERT } from '~/constants/api';
 
 const emptyMovieList:Movie[] = [];
 
@@ -46,7 +46,7 @@ export const useMoviesStore = defineStore('movies', {
     },
     async searchDoubanMovies(title:string) {
       const {movies,err}:MoviesResponse = await $fetch(
-        `${API_ENDPOINT}/search?keyword=${title}`
+        `${API_SEARCH}${title}`
       );
       return movies;
     },
