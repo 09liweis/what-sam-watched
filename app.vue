@@ -24,9 +24,9 @@ watch(() => route.params, () => {
 });
 </script>
 <template>
-  <section>
+  <section class="bg-gray-50">
       <header class="mt-2 mb-4">
-        <nav class="flex justify-center gap-x-2">
+        <nav class="flex flex-wrap justify-center gap-2">
           <NuxtLink v-for="route in ROUTES" :class="getRouteStyleClass(routeName, route.id)" :to="route.to">{{ route.nm }}</NuxtLink>
         </nav>
       </header>
