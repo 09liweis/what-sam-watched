@@ -8,6 +8,7 @@
         </video>
         <NuxtImg v-else :src="movie.poster" onerror="this.src=movie.origin_poster" width="100%" :alt="movie.title" placeholder="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" loading="lazy" class="movie-poster" />
         <h3>{{ movie.title }}</h3>
+        <Rating v-if="movie.douban_id" :rating="movie.douban_rating" :movieLink="movie.origin_url" :title="'Douban'" />
       </article>
     </section>
   </main>
@@ -15,6 +16,7 @@
   <style></style>
 <script setup>
   import Loading from '../components/Loading';
+  import Rating from '../components/Rating';
   import { onMounted, ref } from 'vue';
   import { useMoviesStore } from '@/stores/movies';
   const runtimeConfig = useRuntimeConfig();

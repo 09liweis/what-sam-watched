@@ -8,5 +8,5 @@ export default {
 }
 </script>
 <template>
-  <a :href="movieLink" target="_blank" class="mr-4 text-green-700">{{ `${title}: ${rating}` }}</a>
+  <a :href="movieLink" target="_blank" class="mr-4 cursor-pointer text-green-700">{{ `${title}: ${rating}` }}</a>
 </template>
