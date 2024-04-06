@@ -1,5 +1,5 @@
 <template>
-  <main class="flex justify-center items-center max-h-max">
+  <main class="flex justify-center items-center h-full">
     <Loading color="text-red-500" v-if="loading" />
     <section class="flex flex-wrap" v-else>
       <article v-for="movie in moviesStore.movieList" class="w-1/2 sm:1/3 md:w-1/4 lg:w-1/6 p-2 transition duration-200 hover:scale-105">
