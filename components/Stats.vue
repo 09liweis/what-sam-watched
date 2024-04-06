@@ -15,6 +15,7 @@ export default {
       <a>Total: {{stats.total}}</a>
       <a>Movie: {{stats.movie}}</a>
       <a>TV: {{stats.tv}}</a>
+      <a>Not Started: {{ stats.not_started }}</a>
     </section>
 
     <section class="flex gap-x-3 flex-wrap">
