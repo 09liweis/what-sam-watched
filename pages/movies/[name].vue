@@ -9,6 +9,7 @@
         <NuxtImg v-else :src="movie.poster" onerror="this.src=movie.origin_poster" width="100%" :alt="movie.title" placeholder="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg" loading="lazy" class="movie-poster" />
         <h3>{{ movie.title }}</h3>
         <Rating v-if="movie.douban_id" :rating="movie.douban_rating" :movieLink="movie.origin_url" :title="'Douban'" />
+        <p v-if="movie.release" class="text-sky-600">{{ movie.release }}</p>
       </article>
     </section>
   </main>
