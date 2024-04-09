@@ -24,7 +24,13 @@ export const ROUTES:ROUTES_TYPE = {
     }
   },
   cineplex:{to:'/movies/cineplex',nm:'Cineplex'},
-  hongkong: {to:'/movies/hongkong',nm:'Hongkong'},
+  hongkong: {
+    to:'/movies/hongkong?nm=hongkong/showing',nm:'Hongkong',
+    subRoutes:{
+      'showing':{to:'/movies/hongkong?nm=hongkong/showing',nm:'In theatre'},
+      'coming':{to:'/movies/hongkong?nm=hongkong/coming',nm:'In comming'}
+    }
+  },
   taiwan: {to:'/movies/taiwan',nm:'Taiwan'},
   imdb_boxoffice: {to:'/movies/imdb_boxoffice',nm:'IMDB Box Office'}
 }
