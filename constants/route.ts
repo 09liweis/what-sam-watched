@@ -1,4 +1,4 @@
-export const SAM = 'sam';
+export const SAM:string = 'sam';
 
 type ROUTE = {
   to: string,
@@ -25,9 +25,10 @@ export const ROUTES:ROUTES_TYPE = {
   },
   cineplex:{to:'/movies/cineplex',nm:'Cineplex'},
   hongkong: {to:'/movies/hongkong',nm:'Hongkong'},
-  imdb: {to:'/movies/imdb_boxoffice',nm:'IMDB Box Office'}
+  taiwan: {to:'/movies/taiwan',nm:'Taiwan'},
+  imdb_boxoffice: {to:'/movies/imdb_boxoffice',nm:'IMDB Box Office'}
 }
 
-export const getSubroutes = (name:string) => {
+export const getSubroutes = (name:string):ROUTES_TYPE|null => {
   return ROUTES[name]?.subRoutes || null;
 }
