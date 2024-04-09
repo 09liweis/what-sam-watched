@@ -1,12 +1,18 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
-import {SAM, ROUTES} from './constants/route';
+import {SAM, ROUTES, getSubroutes} from './constants/route';
 const route = useRoute();
 
 const getRouteName = (route) => {
   return route.params?.name || SAM;
 }
+
+const getSubRouteName = (route) => {
+  return route.query?.nm;
+}
+
 let routeName = ref(getRouteName(route));
+let subRouteName = ref(getSubRouteName(route));
 
 const getRouteStyleClass = (routeName, routeId) => {
   return `menu-item ${routeName == routeId?'active':''}`;
@@ -16,13 +22,23 @@ watch(() => route.params, () => {
 // Optionally you can set immediate: true config for the watcher to run on init
 //}, { immediate: true });
 });
+
+watch(() => route.query, () => {
+  subRouteName.value = getSubRouteName(route);
+// Optionally you can set immediate: true config for the watcher to run on init
+//}, { immediate: true });
+});
+
 </script>
 <template>
   <section class="bg-gray-50 h-screen">
       <header class="mt-2 mb-4">
         <nav class="flex flex-wrap justify-center gap-2">
-          <NuxtLink v-for="route in ROUTES" :class="getRouteStyleClass(routeName, route.id)" :to="route.to">{{ route.nm }}</NuxtLink>
+          <NuxtLink v-for="(route,id,index) in ROUTES" :class="getRouteStyleClass(routeName, id)" :to="route.to">{{ route.nm }}</NuxtLink>
         </nav>
+        <section v-if="getSubroutes(routeName)" class="flex flex-wrap justify-center gap-2">
+          <NuxtLink v-for="(route,id) in getSubroutes(routeName)" :class="getRouteStyleClass(subRouteName, id)" :to="route.to">{{ route.nm }}</NuxtLink>
+        </section>
       </header>
     <NuxtLayout>
       <NuxtPage/>

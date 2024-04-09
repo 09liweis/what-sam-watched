@@ -27,11 +27,20 @@
   const moviesStore = useMoviesStore();
   
   let loading = ref(false);
+
+  const fetchMovies = async () => {
+    loading.value = true;
+    await moviesStore.fetchMovies(route.query?.nm || route.params?.name);
+    loading.value = false;
+  }
   
   onMounted(async () => {
-    loading.value = true;
-    await moviesStore.fetchMovies(route.params?.name);
-    loading.value = false;
+    await fetchMovies();
   });
+
+  watch(() => route.query, async() => {
+    await fetchMovies();
+  });
+
   </script>
   
