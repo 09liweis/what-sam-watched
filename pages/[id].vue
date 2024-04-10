@@ -35,7 +35,6 @@ onMounted(async () => {
   );
   loading.value = false;
   movie = responseData.movie;
-  console.log(movie);
   moviesStore.setCurrentMovie(movie);
 });
 </script>

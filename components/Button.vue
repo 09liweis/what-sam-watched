@@ -3,7 +3,6 @@ export default {
   props: ['text','onClick'],
   setup(props) {
     // setup() receives props as the first argument.
-    console.log(props.text)
   }
 }
 </script>

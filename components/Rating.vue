@@ -3,7 +3,6 @@ export default {
   props: ['title','rating','movieLink'],
   setup(props) {
     // setup() receives props as the first argument.
-    console.log(props.title)
   }
 }
 </script>

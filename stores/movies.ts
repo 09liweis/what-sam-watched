@@ -67,7 +67,6 @@ export const useMoviesStore = defineStore('movies', {
       const response = await $fetch(`${API_ENDPOINT}/${v.douban_id}`, {
         method: 'PUT',
       });
-      console.log(response);
       this.fetchMovies();
     }
   },
