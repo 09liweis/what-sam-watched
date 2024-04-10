@@ -30,7 +30,7 @@
 
   const fetchMovies = async () => {
     loading.value = true;
-    await moviesStore.fetchMovies(route.query?.nm || route.params?.name);
+    await moviesStore.fetchMovies(`${route.params?.name}/${route.query?.nm||''}`);
     loading.value = false;
   }
   

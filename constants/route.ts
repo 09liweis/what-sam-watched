@@ -25,14 +25,14 @@ export const ROUTES:ROUTES_TYPE = {
   },
   cineplex:{to:'/movies/cineplex',nm:'Cineplex'},
   hongkong: {
-    to:'/movies/hongkong?nm=hongkong/showing',nm:'Hongkong',
+    to:'/movies/hongkong?nm=showing',nm:'Hongkong',
     subRoutes:{
-      'showing':{to:'/movies/hongkong?nm=hongkong/showing',nm:'In theatre'},
-      'coming':{to:'/movies/hongkong?nm=hongkong/coming',nm:'In comming'}
+      'showing':{to:'/movies/hongkong?nm=showing',nm:'In theatre'},
+      'coming':{to:'/movies/hongkong?nm=coming',nm:'In comming'}
     }
   },
   taiwan: {to:'/movies/taiwan',nm:'Taiwan'},
-  imdb: {to:'/movies/imdb?nm=imdb/boxoffice',nm:'IMDB'}
+  imdb: {to:'/movies/imdb?nm=boxoffice',nm:'IMDB'}
 }
 
 export const getSubroutes = (name:string):ROUTES_TYPE|null => {
