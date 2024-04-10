@@ -36,7 +36,7 @@ watch(() => route.query, () => {
         <nav class="flex flex-wrap justify-center gap-2">
           <NuxtLink v-for="(route,id,index) in ROUTES" :class="getRouteStyleClass(routeName, id)" :to="route.to">{{ route.nm }}</NuxtLink>
         </nav>
-        <section v-if="getSubroutes(routeName)" class="flex flex-wrap justify-center gap-2">
+        <section v-if="getSubroutes(routeName)" class="flex flex-wrap justify-center gap-2 mt-2">
           <NuxtLink v-for="(route,id) in getSubroutes(routeName)" :class="getRouteStyleClass(subRouteName, id)" :to="route.to">{{ route.nm }}</NuxtLink>
         </section>
       </header>
