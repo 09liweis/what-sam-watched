@@ -32,7 +32,7 @@ export const ROUTES:ROUTES_TYPE = {
     }
   },
   taiwan: {to:'/movies/taiwan',nm:'Taiwan'},
-  imdb_boxoffice: {to:'/movies/imdb_boxoffice',nm:'IMDB Box Office'}
+  imdb: {to:'/movies/imdb?nm=imdb/boxoffice',nm:'IMDB'}
 }
 
 export const getSubroutes = (name:string):ROUTES_TYPE|null => {
