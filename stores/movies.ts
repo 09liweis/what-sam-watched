@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import type { Movie, MoviesResponse, StatsResponse } from '../types/movie';
-import { API_ENDPOINT, API_SEARCH, API_STATS, API_UPSERT } from '~/constants/api';
+import { API_ENDPOINT, API_SEARCH, API_STATS, API_UPSERT, API_MOVIE_ENDPOINT } from '~/constants/api';
 
 const emptyMovieList:Movie[] = [];
 
@@ -64,7 +64,7 @@ export const useMoviesStore = defineStore('movies', {
       this.currentMovie = movie;
     },
     async updateEpisode(v:Movie) {
-      const response = await $fetch(`${API_ENDPOINT}/${v.douban_id}`, {
+      const response = await $fetch(`${API_MOVIE_ENDPOINT}${v.douban_id}`, {
         method: 'PUT',
       });
       this.fetchMovies();
