@@ -33,7 +33,12 @@ export const ROUTES:ROUTES_TYPE = {
       'coming':{to:'/movies/hongkong?nm=coming',nm:'In comming'}
     }
   },
-  taiwan: {to:'/movies/taiwan',nm:'Taiwan'},
+  taiwan: {to:'/movies/taiwan?nm=showing',nm:'Taiwan',
+    subRoutes:{
+      'showing':{to:'/movies/taiwan?nm=showing',nm:'In theatre'},
+      'coming':{to:'/movies/taiwan?nm=coming',nm:'In comming'}
+    }
+  },
   imdb: {to:'/movies/imdb?nm=boxoffice',nm:'IMDB'}
 }
 
