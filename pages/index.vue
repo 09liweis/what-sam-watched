@@ -3,6 +3,7 @@ import Loading from '../components/Loading';
 import Button from '../components/Button';
 import MovieList from '~/components/MovieList.vue';
 import Stats from '~/components/Stats.vue';
+import Pagination from '~/components/Pagination.vue';
 import { ref, computed, watch } from 'vue';
 import { useMoviesStore } from '@/stores/movies';
 
@@ -114,6 +115,7 @@ async function searchAndUpsert() {
     <h1 :data-text="`What Sam Watched in Nuxt.js ${moviesStore.total} movies`" class="relative text-2xl text-center text-red-500 font-bold mb-8">
       What Sam Watched in Nuxt.js {{ moviesStore.total }} movies
     </h1>
+    <Pagination/>
     <section class="flex items-center mb-1.5">
       <input
         class="border p-1.5 mr-1 rounded"
@@ -123,5 +125,6 @@ async function searchAndUpsert() {
       <Button :text="loading ? 'Loading' : 'Add'" :onClick="searchAndUpsert" />
     </section>
     <MovieList />
+    <Pagination/>
   </main>
 </template>
