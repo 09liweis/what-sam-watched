@@ -45,8 +45,10 @@ export const useMoviesStore = defineStore('movies', {
       this.isfetchingMovieList = true;
       const moviesResp:MoviesResponse = await $fetch(`${API_ENDPOINT}${name}?page=${this.page}&limit=${this.limit}&imgserver=img9&lang=${lang}&genre=${genre}&country=${country}`);
       this.setMovieList(moviesResp.movies);
-      this.total = moviesResp.total;
-      this.pages = [...Array(Math.ceil(this.total/this.limit)).keys()];
+      if (moviesResp.total) {
+        this.total = moviesResp.total;
+        this.pages = [...Array(Math.ceil(this.total/this.limit)).keys()];
+      }
       this.isfetchingMovieList = false;
     },
     async searchDoubanMovies(title:string) {
