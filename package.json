@@ -1,6 +1,6 @@
 {
   "name": "what-sam-watched",
-  "version": "13.18.9",
+  "version": "13.18.10",
   "private": true,
   "scripts": {
     "build": "nuxt build",

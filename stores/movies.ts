@@ -3,6 +3,7 @@ import type { Movie, MoviesResponse, StatsResponse } from '../types/movie';
 import { API_ENDPOINT, API_SEARCH, API_STATS, API_UPSERT, API_MOVIE_ENDPOINT } from '~/constants/api';
 
 const emptyMovieList:Movie[] = [];
+const emptyPages:number[] = [];
 
 export const useMoviesStore = defineStore('movies', {
   state: () => ({
@@ -10,7 +11,7 @@ export const useMoviesStore = defineStore('movies', {
     total: 0,
     limit: 50,
     page: '1',
-    pages:[0],
+    pages:emptyPages,
     isfetchingMovieList: false,
     currentMovie: {},
     stats:{},
