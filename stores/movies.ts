@@ -4,6 +4,9 @@ import { API_ENDPOINT, API_SEARCH, API_STATS, API_UPSERT, API_MOVIE_ENDPOINT } f
 
 const emptyMovieList:Movie[] = [];
 const emptyPages:number[] = [];
+interface QUERY_PARAMS {
+  [key: string]: boolean | number | string;
+}
 
 export const useMoviesStore = defineStore('movies', {
   state: () => ({
@@ -34,7 +37,7 @@ export const useMoviesStore = defineStore('movies', {
       movie.imdb_rating = response.imdb_rating;
       movie.loading = false;
     },
-    async fetchMovies(name='') {
+    setQueryParams() {
       const {query} = useRoute();
       const lang = query.lang?.toString() || '';
       const genre = query.genre?.toString() || '';
@@ -43,8 +46,27 @@ export const useMoviesStore = defineStore('movies', {
       this.curLang = lang;
       this.curGenre = genre;
       this.curCountry = country;
+    },
+    getMoviesAPIUrl(name:string):string {
+      let result = `${API_ENDPOINT}${name}?imgserver=img9`;
+      const queryParams:QUERY_PARAMS = {
+        page:this.page,
+        limit:this.limit,
+        lang:this.curLang,
+        genre:this.curGenre,
+        country:this.curCountry
+      };
+      for (const query in queryParams) {
+        if (queryParams[query]) {
+          result += `&${query}=${queryParams[query]}`;
+        }
+      }
+      return result;
+    },
+    async fetchMovies(name='') {
+      this.setQueryParams();
       this.isfetchingMovieList = true;
-      const moviesResp:MoviesResponse = await $fetch(`${API_ENDPOINT}${name}?page=${this.page}&limit=${this.limit}&imgserver=img9&lang=${lang}&genre=${genre}&country=${country}`);
+      const moviesResp:MoviesResponse = await $fetch(this.getMoviesAPIUrl(name));
       this.setMovieList(moviesResp.movies);
       if (moviesResp.total) {
         this.total = moviesResp.total;
