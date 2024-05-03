@@ -22,7 +22,7 @@ export const ROUTES:ROUTES_TYPE = {
       'comming':{to:'/movies/douban?nm=comming',nm:'In comming'},
       'popular':{to:'/movies/douban?nm=popular',nm:'Popular'},
       'chart':{to:'/movies/douban?nm=chart',nm:'Chart'},
-      'boxoffice':{to:'/movies/douban?nm=alltime_boxoffice',nm:'All Boxoffice'}
+      'alltime_boxoffice':{to:'/movies/douban?nm=alltime_boxoffice',nm:'All Boxoffice'}
     }
   },
   cineplex:{to:'/movies/cineplex',nm:'Cineplex'},
