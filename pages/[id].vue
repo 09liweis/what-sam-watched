@@ -31,7 +31,7 @@ let loading = ref(false);
 onMounted(async () => {
   loading.value = true;
   const responseData = await $fetch(
-    `https://samliweisen.onrender.com/api/movies/${route.params.id}?imgserver=img9`
+    `https://samliweisen.onrender.com/api/movie/${route.params.id}?imgserver=img9`
   );
   loading.value = false;
   movie = responseData.movie;
