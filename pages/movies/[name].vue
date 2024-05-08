@@ -15,14 +15,13 @@
   const runtimeConfig = useRuntimeConfig();
   
   const route = useRoute();
-  const {params,query} = route;
   const moviesStore = useMoviesStore();
   
   let loading = ref(false);
 
   const fetchMovies = async () => {
     loading.value = true;
-    await moviesStore.fetchMovies(`${params?.name}/${query?.nm||''}`);
+    await moviesStore.fetchMovies(`${route.params?.name}/${route.query?.nm||''}`);
     loading.value = false;
   }
   
