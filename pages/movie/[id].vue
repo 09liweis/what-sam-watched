@@ -48,8 +48,8 @@
       </section>
 
       <section v-if="currentTab === 'photos'" class="flex flex-wrap">
-        <article v-for="photo in movie.photos" class="w-1/4" v-if="photo?.thumb">
-          <NuxtImg :src="photo.thumb" width="100%"/>
+        <article v-for="photo in movie.photos" class="w-1/4">
+          <NuxtImg v-if="photo?.thumb" :src="photo.thumb || POSTER_DEFAULT" width="100%"/>
         </article>
       </section>
 
@@ -74,6 +74,7 @@
 import Loading from '../components/Loading';
 import { onMounted, ref } from 'vue';
 import { useMoviesStore } from '@/stores/movies';
+import {POSTER_DEFAULT} from '../../constants/movie';
 const runtimeConfig = useRuntimeConfig();
 const API_HOST = runtimeConfig.public.apiHost || '';
 
@@ -100,6 +101,5 @@ const fetchMovieDetailAPI = async (api, name) =>{
   const apiData = await $fetch(api);
   loading.value = false;
   movie = {...movie, [name]:apiData[name]};
-  console.log(movie);
 }
 </script>
