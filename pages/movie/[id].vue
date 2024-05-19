@@ -16,34 +16,56 @@
 
       <header class="mt-4">
         <nav>
-          <a class="capitalize mr-3 text-red-500 border-red-100 border p-1 rounded" v-for="(api, key) of movie.apis">{{ key }}</a>
+          <a @click="fetchMovieDetailAPI(api, key)" :class="`capitalize mr-3 border p-1 rounded ${currentTab === key ? 'text-red-800 border-red-800': ''}`" v-for="(api, key) of movie.apis">{{ key }}</a>
         </nav>
       </header>
       
-      <section class="flex mt-3">
-        <article v-for="photo in movie.photos" class="w-1/5 gap-x-2">
-          <NuxtImg :src="photo.src" width="100%" class="rounded" />
+      <section v-if="currentTab === 'summary'">
+        <section class="flex mt-3">
+          <article v-for="photo in movie.photos" class="w-1/5 gap-x-2">
+            <NuxtImg :src="photo.src" width="100%" class="rounded" />
+          </article>
+        </section>
+
+        <section class="mt-3">
+          <article v-for="comment in movie.comments" class="mt-1">
+            <p>{{ comment.text }}</p>
+          </article>
+        </section>
+
+        <section class="mt-3">
+          <article v-for="review in movie.reviews" class="mt-2">
+            <h3 class="font-bold">{{ review.title }}</h3>
+            <p>{{ review.content }}</p>
+          </article>
+        </section>
+
+        <section class="mt-3 flex">
+          <article v-for="recommend in movie.recommends" class="w-1/4 gap-x-1">
+            <NuxtImg :src="recommend.poster" width="100%" class="rounded"/>
+          </article>
+        </section>
+      </section>
+
+      <section v-if="currentTab === 'photos'" class="flex flex-wrap">
+        <article v-for="photo in movie.photos" class="w-1/4" v-if="photo?.thumb">
+          <NuxtImg :src="photo.thumb" width="100%"/>
         </article>
       </section>
 
-      <section class="mt-3">
+      <section class="" v-if="currentTab === 'comments'">
         <article v-for="comment in movie.comments" class="mt-1">
           <p>{{ comment.text }}</p>
         </article>
       </section>
 
-      <section class="mt-3">
+      <section class="" v-if="currentTab === 'reviews'">
         <article v-for="review in movie.reviews" class="mt-2">
           <h3 class="font-bold">{{ review.title }}</h3>
           <p>{{ review.content }}</p>
         </article>
       </section>
 
-      <section class="mt-3 flex">
-        <article v-for="recommend in movie.recommends" class="w-1/4 gap-x-1">
-          <NuxtImg :src="recommend.poster" width="100%" class="rounded"/>
-        </article>
-      </section>
     </section>
   </main>
 </template>
@@ -60,6 +82,7 @@ const moviesStore = useMoviesStore();
 let movie = moviesStore.currentMovie;
 
 let loading = ref(false);
+const currentTab = ref('summary');
 
 onMounted(async () => {
   loading.value = true;
@@ -70,4 +93,13 @@ onMounted(async () => {
   movie = responseData;
   moviesStore.setCurrentMovie(movie);
 });
+
+const fetchMovieDetailAPI = async (api, name) =>{
+  currentTab.value = name;
+  loading.value = true;
+  const apiData = await $fetch(api);
+  loading.value = false;
+  movie = {...movie, [name]:apiData[name]};
+  console.log(movie);
+}
 </script>
