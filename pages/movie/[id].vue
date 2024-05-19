@@ -13,6 +13,12 @@
           <p>{{ movie.douban_rating }}</p>
         </section>
       </section>
+
+      <header class="mt-4">
+        <nav>
+          <a class="capitalize mr-3 text-red-500 border-red-100 border p-1 rounded" v-for="(api, key) of movie.apis">{{ key }}</a>
+        </nav>
+      </header>
       
       <section class="flex mt-3">
         <article v-for="photo in movie.photos" class="w-1/5 gap-x-2">
