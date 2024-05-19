@@ -13,9 +13,16 @@
           <p>{{ movie.douban_rating }}</p>
         </section>
       </section>
+      
       <section class="flex mt-3">
         <article v-for="photo in movie.photos" class="w-1/5 gap-x-2">
           <NuxtImg :src="photo.src" width="100%" class="rounded" />
+        </article>
+      </section>
+
+      <section class="mt-3">
+        <article v-for="comment in movie.comments" class="mt-1">
+          <p>{{ comment.text }}</p>
         </article>
       </section>
     </section>
