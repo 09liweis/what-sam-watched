@@ -17,7 +17,7 @@ moviesStore.fetchMovies();
       >
         <NuxtLink
           @click="moviesStore.setCurrentMovie(v)"
-          :to="{ name: 'id', params: { id: v.douban_id } }"
+          :to="`/movie/${v.douban_id}`"
           >{{ v.title }}</NuxtLink
         >
         <section>
