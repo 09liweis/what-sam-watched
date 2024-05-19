@@ -26,6 +26,13 @@
         </article>
       </section>
 
+      <section class="mt-3">
+        <article v-for="review in movie.reviews" class="mt-2">
+          <h3 class="font-bold">{{ review.title }}</h3>
+          <p>{{ review.content }}</p>
+        </article>
+      </section>
+
       <section class="mt-3 flex">
         <article v-for="recommend in movie.recommends" class="w-1/4 gap-x-1">
           <NuxtImg :src="recommend.poster" width="100%" class="rounded"/>
