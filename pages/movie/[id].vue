@@ -49,7 +49,7 @@
 
       <section v-if="currentTab === 'photos'" class="flex flex-wrap">
         <article v-for="photo in movie.photos" class="w-1/4">
-          <NuxtImg v-if="photo?.thumb" :src="photo.thumb || POSTER_DEFAULT" width="100%"/>
+          <NuxtImg v-if="photo?.origin" :src="photo.origin || POSTER_DEFAULT" width="100%"/>
         </article>
       </section>
 
@@ -61,6 +61,22 @@
 
       <section class="" v-if="currentTab === 'reviews'">
         <article v-for="review in movie.reviews" class="mt-2">
+          <h3 class="font-bold">{{ review.title }}</h3>
+          <p>{{ review.content }}</p>
+        </article>
+      </section>
+
+      <section v-if="currentTab === 'casts'">
+        <section class="mt-2" v-for="castSection in movie.casts">
+          <h3 class="font-bold text-red-400">{{castSection.tl}}</h3>
+          <article v-for="cast in castSection.casts">
+            <h4>{{cast.name}}</h4>
+          </article>
+        </section>
+      </section>
+
+      <section v-if="currentTab === 'videos'">
+        <article v-for="video in movie.videos" class="mt-2">
           <h3 class="font-bold">{{ review.title }}</h3>
           <p>{{ review.content }}</p>
         </article>
