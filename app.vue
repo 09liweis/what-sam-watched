@@ -31,15 +31,15 @@ watch(() => route.query, () => {
 
 </script>
 <template>
-  <section class="bg-gray-50 h-screen">
-      <header class="mt-2 mb-4">
-        <nav class="flex flex-wrap justify-center gap-2">
-          <NuxtLink v-for="(route,id,index) in ROUTES" :class="getRouteStyleClass(routeName, id)" :to="route.to">{{ route.nm }}</NuxtLink>
-        </nav>
-        <section v-if="getSubroutes(routeName)" class="flex flex-wrap justify-center gap-2 mt-2">
-          <NuxtLink v-for="(route,id) in getSubroutes(routeName)" :class="getRouteStyleClass(subRouteName, id)" :to="route.to">{{ route.nm }}</NuxtLink>
-        </section>
-      </header>
+  <section class="bg-gray-50 h-screen max-w-5xl m-auto">
+    <header class="mt-2 mb-4">
+      <nav class="flex flex-wrap justify-center gap-2">
+        <NuxtLink v-for="(route,id,index) in ROUTES" :class="getRouteStyleClass(routeName, id)" :to="route.to">{{ route.nm }}</NuxtLink>
+      </nav>
+      <section v-if="getSubroutes(routeName)" class="flex flex-wrap justify-center gap-2 mt-2">
+        <NuxtLink v-for="(route,id) in getSubroutes(routeName)" :class="getRouteStyleClass(subRouteName, id)" :to="route.to">{{ route.nm }}</NuxtLink>
+      </section>
+    </header>
     <NuxtLayout>
       <NuxtPage/>
     </NuxtLayout>
