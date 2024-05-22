@@ -69,8 +69,12 @@
       <section v-if="currentTab === 'casts'">
         <section class="mt-2" v-for="castSection in movie.casts">
           <h3 class="font-bold text-red-400">{{castSection.tl}}</h3>
-          <article v-for="cast in castSection.casts">
-            <h4>{{cast.name}}</h4>
+          <article v-for="cast in castSection.casts" class="flex">
+            <NuxtImg :src="cast.avt" width="100px" class="rounded border aspect-square" />
+            <section class="p-2">
+              <h4>{{cast.name}}</h4>
+              <p>{{cast.role}}</p>
+            </section>
           </article>
         </section>
       </section>
