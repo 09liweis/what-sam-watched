@@ -31,8 +31,8 @@ watch(() => route.query, () => {
 
 </script>
 <template>
-  <section class="bg-gray-50 h-screen max-w-5xl m-auto">
-    <header class="mt-2 mb-4">
+  <section class="max-w-5xl m-auto max-h-max">
+    <header class="pt-2 pb-4 sticky top-0 bg-white z-10">
       <nav class="flex flex-wrap justify-center gap-2">
         <NuxtLink v-for="(route,id,index) in ROUTES" :class="getRouteStyleClass(routeName, id)" :to="route.to">{{ route.nm }}</NuxtLink>
       </nav>
