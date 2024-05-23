@@ -15,3 +15,23 @@ const moviesStore = useMoviesStore();
     <p v-if="movie.release" class="movie-card-year">{{ movie.release }}</p>
   </article>
 </template>
+<style scoped>
+@keyframes appear {
+  from {
+    opacity: 0;
+    scale: 0.5;
+  }
+  to {
+    opacity: 1;
+    sacle: 1;
+  }
+}
+.movie-card {
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 50%;
+  @media (prefers-reduced-motion) {
+    animation: none;
+  }
+}
+</style>
