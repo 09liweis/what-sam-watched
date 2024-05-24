@@ -81,8 +81,7 @@
 
       <section v-if="currentTab === 'videos'">
         <article v-for="video in movie.videos" class="mt-2">
-          <h3 class="font-bold">{{ review.title }}</h3>
-          <p>{{ review.content }}</p>
+          <h3 class="font-bold">{{ video.title }}</h3>
         </article>
       </section>
 
