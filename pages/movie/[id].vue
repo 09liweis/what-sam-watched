@@ -1,14 +1,13 @@
 <template>
   <main>
-    <Loading v-if="loading" color="text-red" />
+    <Loading v-if="loading" :color="'text-red'" />
     <section>
       <section class="flex" v-if="movie">
-        <NuxtImg v-if="movie?.poster" :src="movie.poster" width="30%" class="" />
-        <section>
-          <h1 class="mr-2 shadow bg-indigo-500 text-white p-1 flex rounded-md">
+        <Image v-if="movie?.poster" :alt="movie.title" :src="movie.poster" :class="'w-2/5 rounded'" />
+        <section class="p-2">
+          <h1 class="text-indigo-500 text-stroke font-mono text-xl">
             {{ movie.title }}
           </h1>
-          <p>{{ movie.imdb_id }}</p>
           <p>{{ movie.summary }}</p>
           <p>{{ movie.douban_rating }}</p>
         </section>
@@ -91,6 +90,7 @@
 <style></style>
 <script setup>
 import Loading from '../components/Loading';
+import Image from '../components/Image';
 import { onMounted, ref } from 'vue';
 import { useMoviesStore } from '@/stores/movies';
 import {POSTER_DEFAULT} from '../../constants/movie';
