@@ -18,8 +18,8 @@ const moviesStore = useMoviesStore();
 <style scoped>
 @keyframes appear {
   from {
-    opacity: 0;
-    scale: 0.5;
+    opacity: 0.5;
+    scale: 0.8;
   }
   to {
     opacity: 1;
