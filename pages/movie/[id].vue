@@ -9,7 +9,7 @@
             {{ movie.title }}
           </h1>
           <p>{{ movie.summary }}</p>
-          <p>{{ movie.douban_rating }}</p>
+          <Rating v-if="movie.douban_id" :rating="movie.douban_rating" :movieLink="movie.origin_url" :title="'Douban'" />
         </section>
       </section>
 
@@ -91,6 +91,7 @@
 <script setup>
 import Loading from '../components/Loading';
 import Image from '../components/Image';
+import Rating from '../components/Rating';
 import { onMounted, ref } from 'vue';
 import { useMoviesStore } from '@/stores/movies';
 import {POSTER_DEFAULT} from '../../constants/movie';
