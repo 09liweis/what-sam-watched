@@ -39,9 +39,9 @@
           </article>
         </section>
 
-        <section class="mt-3 flex">
-          <article v-for="recommend in movie.recommends" class="w-1/4 gap-x-1">
-            <NuxtImg :src="recommend.poster" width="100%" class="rounded"/>
+        <section class="mt-3 flex gap-x-1">
+          <article v-for="recommend in movie.recommends" class="w-1/4">
+            <Image :src="recommend.poster" :classes="'rounded'" />
           </article>
         </section>
       </section>
