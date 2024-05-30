@@ -70,7 +70,7 @@ export const useMoviesStore = defineStore('movies', {
       this.setMovieList(moviesResp.movies);
       if (moviesResp.total) {
         this.total = moviesResp.total;
-        this.pages = [...Array(Math.ceil(this.total/this.limit)).keys()];
+        this.pages = moviesResp.pages;
       }
       this.isfetchingMovieList = false;
     },

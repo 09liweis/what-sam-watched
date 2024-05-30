@@ -9,6 +9,6 @@ const getClass = (curPage, page) => {
 </script>
 <template>
   <section class="flex flex-wrap items-center justify-center gap-2">
-    <NuxtLink v-for="(page) in moviesStore.pages" :class="getClass(moviesStore.page, page+1)" :to="{query:{page:page+1}}">{{ page + 1 }}</NuxtLink>
+    <NuxtLink v-for="(page) in moviesStore.pages" :class="getClass(moviesStore.page, page)" :to="{query:{page:page}}">{{ page }}</NuxtLink>
   </section>
 </template>

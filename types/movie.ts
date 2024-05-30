@@ -14,7 +14,8 @@ export interface MoviesResponse {
   movies:Movie[],
   err?: string,
   total: number,
-  page: number
+  page: number,
+  pages:number[]
 }
 
 export interface Stats {
