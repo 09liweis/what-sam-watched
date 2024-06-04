@@ -1,7 +1,7 @@
 <template>
   <main>
     <Loading v-if="loading" :color="'text-red'" />
-    <section>
+    <section class="p-2">
       <section class="flex" v-if="movie">
         <Image v-if="movie?.poster" :alt="movie.title" :src="movie.poster" :class="'w-2/5 rounded'" />
         <section class="p-2">
@@ -27,7 +27,7 @@
         </section>
 
         <section class="mt-3">
-          <article v-for="comment in movie.comments" class="mt-1">
+          <article v-for="comment in movie.comments" class="mt-4 shadow-md p-2">
             <p>{{ comment.text }}</p>
           </article>
         </section>
