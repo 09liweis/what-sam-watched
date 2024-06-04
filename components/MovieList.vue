@@ -41,7 +41,7 @@ moviesStore.fetchMovies();
         @click="moviesStore.getUpdatedMovie(v)"
       >
         <Loading v-if="v.loading"/>
-        <span v-else>Update</span>
+        <span v-else>Refresh</span>
       </button>
     </div>
   </article>
