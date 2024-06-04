@@ -7,7 +7,8 @@ export interface Movie {
   episodes:number,
   imdb_id:string,
   imdb_rating:string,
-  loading: boolean
+  loading: boolean,
+  is_done:boolean
 }
 
 export interface MoviesResponse {

@@ -29,7 +29,7 @@ moviesStore.fetchMovies();
     </section>
     <div class="flex">
       <button
-        v-if="v.current_episode !== v.episodes"
+        v-if="!v.is_done"
         class="movie-episode-btn"
         @click="moviesStore.updateEpisode(v)"
       >
