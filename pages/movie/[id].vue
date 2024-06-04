@@ -33,14 +33,14 @@
         </section>
 
         <section class="mt-3">
-          <article v-for="review in movie.reviews" class="mt-2">
+          <article v-for="review in movie.reviews" class="mt-2 shadow-md p-2">
             <h3 class="font-bold">{{ review.title }}</h3>
             <p>{{ review.content }}</p>
           </article>
         </section>
 
-        <section class="mt-3 flex gap-x-1">
-          <article v-for="recommend in movie.recommends" class="w-1/4">
+        <section class="mt-3 flex flex-wrap">
+          <article v-for="recommend in movie.recommends" class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 p-1">
             <Image :src="recommend.poster" :classes="'rounded'" />
           </article>
         </section>
