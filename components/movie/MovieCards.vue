@@ -23,7 +23,7 @@ const moviesStore = useMoviesStore();
   }
   to {
     opacity: 1;
-    sacle: 1;
+    scale: 1;
   }
 }
 .movie-card {
