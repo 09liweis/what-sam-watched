@@ -3,8 +3,8 @@
     <Loading v-if="loading" :color="'text-red'" />
     <section class="p-2">
       <section class="flex" v-if="movie">
-        <Image v-if="movie?.poster" :alt="movie.title" :src="movie.poster" :class="'w-2/5 rounded'" />
-        <section class="p-2">
+        <Image v-if="movie?.poster" :alt="movie.title" :src="movie.poster" :class="'flex-2 w-2/5 aspect-[3/4] rounded'" />
+        <section class="p-2 flex-3">
           <h1 class="text-indigo-500 text-stroke font-mono text-xl">
             {{ movie.title }}
           </h1>
