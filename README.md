@@ -39,4 +39,5 @@ Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/prese
 
 - [x] search movie on douban search api
 - [x] add search movie to db through api
+- [ ] refactor search and add douban movie
 - [ ] movie detail page with douban summary api
