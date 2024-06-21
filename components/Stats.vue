@@ -10,7 +10,8 @@ export default {
 
 </script>
 <template>
-  <section v-if="stats.total">
+  <Loading v-if="!stats.total" />
+  <template v-else>
     <section class="flex gap-x-3">
       <a>Total: {{stats.total}}</a>
       <a>Movie: {{stats.movie}}</a>
@@ -36,8 +37,5 @@ export default {
       <NuxtLink v-for="count,genre of stats.genres" :class="getFilterCssClass(curGenre, genre)" :to="{query:{genre,lang:curLang,country:curCountry}}">{{ `${genre}(${count})` }}</NuxtLink>
     </section>
 
-  </section>
-  <section v-if="!stats.total">
-    <Loading />
-  </section>
+  </template>
 </template>
