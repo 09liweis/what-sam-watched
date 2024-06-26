@@ -49,10 +49,14 @@ async function searchAndUpsert() {
     return;
   }
   loading.value = true;
-  await moviesStore.upsertMovie(douban_id);
-  doubanIdInput.value = '';
-  loading.value = false;
-  moviesStore.fetchMovies();
+  try {
+    await moviesStore.upsertMovie(douban_id);
+    doubanIdInput.value = '';
+    loading.value = false;
+    moviesStore.fetchMovies();
+  } catch (error) {
+    alert(error);
+  }
 }
 </script>
 <template>
