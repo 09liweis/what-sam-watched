@@ -54,6 +54,8 @@ async function searchAndUpsert() {
     doubanIdInput.value = '';
     loading.value = false;
     moviesStore.fetchMovies();
+    searchMovieList = []
+    searchMovieTitle.value = '';
   } catch (error) {
     alert(error);
   }
