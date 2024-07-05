@@ -37,7 +37,6 @@ async function searchMovies() {
 }
 
 function clickSearchedMovie(movie) {
-  doubanIdInput.value = movie.douban_id;
   showSearchForm.value = false;
   searchAndUpsert(movie);
 }
@@ -46,7 +45,6 @@ async function searchAndUpsert(movie) {
   loading.value = true;
   try {
     await moviesStore.upsertMovie(movie.douban_id);
-    doubanIdInput.value = '';
     loading.value = false;
     moviesStore.fetchMovies();
     searchMovieList = []
