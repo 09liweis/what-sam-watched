@@ -39,18 +39,13 @@ async function searchMovies() {
 function clickSearchedMovie(movie) {
   doubanIdInput.value = movie.douban_id;
   showSearchForm.value = false;
-  searchAndUpsert();
+  searchAndUpsert(movie);
 }
 
-async function searchAndUpsert() {
-  const douban_id = doubanIdInput.value;
-  if (!douban_id) {
-    showSearchForm.value = true;
-    return;
-  }
+async function searchAndUpsert(movie) {
   loading.value = true;
   try {
-    await moviesStore.upsertMovie(douban_id);
+    await moviesStore.upsertMovie(movie.douban_id);
     doubanIdInput.value = '';
     loading.value = false;
     moviesStore.fetchMovies();
@@ -128,7 +123,7 @@ async function searchAndUpsert() {
         placeholder="Enter Douban Id"
         v-model="doubanIdInput"
       />
-      <Button :text="loading ? 'Loading' : 'Add'" :onClick="searchAndUpsert" />
+      <Button :text="loading ? 'Loading' : 'Add'" :onClick="()=>showSearchForm=true" />
     </section>
     <MovieList />
     <Pagination/>
