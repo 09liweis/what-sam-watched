@@ -28,6 +28,7 @@ const showSearchForm = ref(false);
 let doubanIdInput = ref('');
 let searchMovieTitle = ref('');
 const searchMovieLoading = ref(false);
+const showFilter = ref(false);
 let searchMovieList = [];
 
 async function searchMovies() {
@@ -56,7 +57,8 @@ async function searchAndUpsert(movie) {
 </script>
 <template>
   <main class="conatiner p-5">
-    <Stats :stats="moviesStore.stats" :curCountry="moviesStore.curCountry" :curLang="moviesStore.curLang" :curGenre="moviesStore.curGenre" />
+    <Button :text="showFilter?'Hide Filter':'Show Filter'" :onClick="()=>showFilter=!showFilter" />
+    <Stats v-if="showFilter" :stats="moviesStore.stats" :curCountry="moviesStore.curCountry" :curLang="moviesStore.curLang" :curGenre="moviesStore.curGenre" />
     <section
       v-show="showSearchForm"
       class="
