@@ -71,6 +71,7 @@ async function searchAndUpsert(movie) {
         flex
         justify-center
         items-center
+        z-10
       "
     >
       <a
