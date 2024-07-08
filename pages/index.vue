@@ -25,15 +25,15 @@ const runtimeConfig = useRuntimeConfig();
 let loading = ref(false);
 const showSearchForm = ref(false);
 
-let doubanIdInput = ref('');
 let searchMovieTitle = ref('');
+let searchDoubanMovieTitle = ref('');
 const searchMovieLoading = ref(false);
 const showFilter = ref(false);
 let searchMovieList = [];
 
 async function searchMovies() {
   searchMovieLoading.value = true;
-  searchMovieList = await moviesStore.searchDoubanMovies(searchMovieTitle.value);
+  searchMovieList = await moviesStore.searchDoubanMovies(searchDoubanMovieTitle.value);
   searchMovieLoading.value = false;
 }
 
@@ -49,7 +49,7 @@ async function searchAndUpsert(movie) {
     loading.value = false;
     moviesStore.fetchMovies();
     searchMovieList = []
-    searchMovieTitle.value = '';
+    searchDoubanMovieTitle.value = '';
   } catch (error) {
     alert(error);
   }
@@ -96,7 +96,7 @@ async function searchAndUpsert(movie) {
         <input
           placeholder="Search movie title"
           class="w-full p-2 border shadow"
-          v-model="searchMovieTitle"
+          v-model="searchDoubanMovieTitle"
         />
         <button class="p-2 rounded bg-red-400 text-white mt-2 flex">
           <Loading v-if="searchMovieLoading" />
@@ -121,8 +121,8 @@ async function searchAndUpsert(movie) {
     <section class="flex items-center mb-1.5">
       <input
         class="border p-1.5 mr-1 rounded"
-        placeholder="Enter Douban Id"
-        v-model="doubanIdInput"
+        placeholder="Search my movies"
+        v-model="searchMovieTitle"
       />
       <Button :text="loading ? 'Loading' : 'Add'" :onClick="()=>showSearchForm=true" />
     </section>
