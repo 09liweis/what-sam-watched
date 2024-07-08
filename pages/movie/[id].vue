@@ -1,6 +1,5 @@
 <template>
   <main>
-    <Loading v-if="loading" :color="'text-red'" />
     <section class="p-2">
       <section class="flex" v-if="movie">
         <Image v-if="movie?.poster" :alt="movie.title" :src="movie.poster" :class="'flex-2 w-2/5 aspect-[3/4] rounded'" />
@@ -18,6 +17,8 @@
           <a @click="fetchMovieDetailAPI(api, key)" :class="`capitalize mr-3 border p-1 rounded ${currentTab === key ? 'text-red-800 border-red-800': ''}`" v-for="(api, key) of movie.apis">{{ key }}</a>
         </nav>
       </header>
+
+      <Loading v-if="loading" :color="'text-red'" />
       
       <section v-if="currentTab === 'summary'">
         <section class="flex mt-3">
