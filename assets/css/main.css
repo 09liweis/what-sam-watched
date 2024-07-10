@@ -68,3 +68,7 @@
 .movie-card-year {
   @apply bg-white text-sky-600 rounded px-1 absolute top-2 left-2;
 }
+
+.movie-nav-menu {
+  @apply cursor-pointer capitalize mr-3 border p-1 rounded hover:text-red-800 hover:border-red-800 transition duration-150
+}

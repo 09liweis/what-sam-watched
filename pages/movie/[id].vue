@@ -14,7 +14,7 @@
 
       <header class="mt-4">
         <nav>
-          <a @click="fetchMovieDetailAPI(api, key)" :class="`capitalize mr-3 border p-1 rounded ${currentTab === key ? 'text-red-800 border-red-800': ''}`" v-for="(api, key) of movie.apis">{{ key }}</a>
+          <a @click="fetchMovieDetailAPI(api, key)" :class="`movie-nav-menu ${currentTab === key ? 'text-red-800 border-red-800': ''}`" v-for="(api, key) of movie.apis">{{ key }}</a>
         </nav>
       </header>
 
