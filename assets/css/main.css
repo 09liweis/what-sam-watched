@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .menu-item {
-  @apply border p-1 transition duration-200 rounded;
+  @apply border p-1 transition duration-200 rounded text-center min-w-7;
 }
 
 .menu-item.active, .menu-item:hover {

@@ -3,7 +3,7 @@ import { useMoviesStore } from '@/stores/movies';
 const moviesStore = useMoviesStore();
 
 const getClass = (curPage, page) => {
-  return `menu-item min-w-7 text-center ${curPage == page?'active':''}`;
+  return `menu-item ${curPage == page?'active':''}`;
 }
 
 </script>
