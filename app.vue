@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
 import {SAM, ROUTES, getSubroutes} from './constants/route';
+import LinkButton from '@/components/LinkButton';
 const route = useRoute();
 
 const getRouteName = (route) => {
@@ -34,10 +35,10 @@ watch(() => route.query, () => {
   <section class="max-w-5xl m-auto max-h-max box-border">
     <header class="pt-2 pb-4 sticky top-0 bg-white z-10">
       <nav class="flex flex-wrap justify-center gap-2">
-        <NuxtLink v-for="(route,id) in ROUTES" :class="getRouteStyleClass(routeName, id)" :to="route.to">{{ route.nm }}</NuxtLink>
+        <LinkButton v-for="(route,id) in ROUTES" :class="getRouteStyleClass(routeName, id)" :to="route.to" :text="route.nm" />
       </nav>
       <section v-if="getSubroutes(routeName)" class="flex flex-wrap justify-center gap-2 mt-2">
-        <NuxtLink v-for="(route,id) in getSubroutes(routeName)" :class="getRouteStyleClass(subRouteName, id)" :to="route.to">{{ route.nm }}</NuxtLink>
+        <LinkButton v-for="(route,id) in getSubroutes(routeName)" :class="getRouteStyleClass(subRouteName, id)" :to="route.to" :text="route.nm"/>
       </section>
     </header>
     <NuxtLayout>
