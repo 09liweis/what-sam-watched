@@ -31,7 +31,10 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
-      charset: 'utf-16',
+      link: [
+        { rel: "icon", type: "image/png", href: "/favicon.ico" }
+      ],
+      charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       title: 'What Sam Watched',
       meta: [{ name: 'description', content: 'My amazing movie dashboard.' }],
