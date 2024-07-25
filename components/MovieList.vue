@@ -1,11 +1,13 @@
 <script setup>
 import { useMoviesStore } from '@/stores/movies';
+import MovieCards from './movie/MovieCards.vue';
 const moviesStore = useMoviesStore();
 moviesStore.fetchMovies();
 </script>
 <template>
   <section v-if="moviesStore.isfetchingMovieList" class="flex justify-center"><Loading color="'text-red-500'" /></section>
-  <article v-else
+  <MovieCards v-else />
+  <!-- <article v-else
     v-for="v in moviesStore.movieList"
     :key="v._id"
     class="movie-article"
@@ -44,5 +46,5 @@ moviesStore.fetchMovies();
         <span v-else>Refresh</span>
       </button>
     </div>
-  </article>
+  </article> -->
 </template>

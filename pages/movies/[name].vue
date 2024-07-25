@@ -1,9 +1,7 @@
 <template>
   <main class="flex justify-center items-center h-full">
     <Loading color="text-red-500" v-if="loading" />
-    <section class="flex flex-wrap" v-else>
-      <MovieCards />
-    </section>
+    <MovieCards v-else />
   </main>
 </template>
   <style></style>
