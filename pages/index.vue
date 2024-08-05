@@ -114,7 +114,7 @@ async function searchAndUpsert(movie) {
         </section>
       </form>
     </section>
-    <h1 :data-text="`What Sam Watched in Nuxt.js ${moviesStore.total} movies`" id="home-title" class="relative text-2xl text-center text-black-500 font-bold mb-8">
+    <h1 :data-text="`What Sam Watched in Nuxt.js ${moviesStore.total} movies`" id="home-title" class="relative text-2xl text-center text-black-500 font-bold my-4">
       What Sam Watched in Nuxt.js {{ moviesStore.total }} movies
     </h1>
     <section class="flex items-center mb-1.5">
