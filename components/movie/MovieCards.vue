@@ -19,6 +19,14 @@ const moviesStore = useMoviesStore();
         <Rating v-if="movie.douban_id" :rating="movie.douban_rating" :movieLink="movie.origin_url" :title="'Douban'" />
         <p v-if="movie.release" class="movie-card-year">{{ movie.release }}</p>
       </NuxtLink>
+      <button
+        v-if="!movie.is_done"
+        class="movie-episode-btn"
+        @click="moviesStore.updateEpisode(movie)"
+      >
+      <span>{{movie.current_episode}}</span>
+      <span>+1</span>
+      </button>
     </article>
   </section>
 </template>
