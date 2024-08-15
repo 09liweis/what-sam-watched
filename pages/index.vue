@@ -1,6 +1,6 @@
 <script setup>
-import Loading from '../components/Loading';
-import Button from '../components/Button';
+import Loading from '~/components/Loading';
+import Button from '~/components/Button';
 import MovieList from '~/components/MovieList.vue';
 import Stats from '~/components/Stats.vue';
 import Pagination from '~/components/Pagination.vue';

@@ -6,10 +6,10 @@
 </template>
   <style></style>
 <script setup>
-  import Loading from '../components/Loading';
+  import Loading from '~/components/Loading';
   import { onMounted, ref } from 'vue';
   import { useMoviesStore } from '@/stores/movies';
-  import MovieCards from '../../components/movie/MovieCards.vue';
+  import MovieCards from '~/components/movie/MovieCards.vue';
   const runtimeConfig = useRuntimeConfig();
   
   const route = useRoute();

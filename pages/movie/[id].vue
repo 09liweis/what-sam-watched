@@ -90,12 +90,12 @@
 </template>
 <style></style>
 <script setup>
-import Loading from '../components/Loading';
-import Image from '../components/Image';
-import Rating from '../components/Rating';
+import Loading from '~/components/Loading';
+import Image from '~/components/Image';
+import Rating from '~/components/Rating';
 import { onMounted, ref } from 'vue';
 import { useMoviesStore } from '@/stores/movies';
-import {POSTER_DEFAULT} from '../../constants/movie';
+import {POSTER_DEFAULT} from '~/constants/movie';
 const runtimeConfig = useRuntimeConfig();
 const API_HOST = runtimeConfig.public.apiHost || '';
 
