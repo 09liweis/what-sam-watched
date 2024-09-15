@@ -20,8 +20,6 @@ const getRouteStyleClass = (routeName, routeId) => {
 }
 watch(() => route.params, () => {
   routeName.value = getRouteName(route);
-// Optionally you can set immediate: true config for the watcher to run on init
-//}, { immediate: true });
 });
 
 watch(() => route.query, () => {
