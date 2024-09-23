@@ -1,6 +1,6 @@
 <script setup>
-import {POSTER_DEFAULT} from '../../constants/movie';
-import Rating from '../components/Rating';
+import {POSTER_DEFAULT} from '@/constants/movie';
+import Rating from '@/components/Rating';
 import { useMoviesStore } from '@/stores/movies';
 const moviesStore = useMoviesStore();
 </script>
