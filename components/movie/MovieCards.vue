@@ -20,7 +20,7 @@ const moviesStore = useMoviesStore();
         <p v-if="movie.release" class="movie-card-year">{{ movie.release }}</p>
       </NuxtLink>
       <button
-        v-if="!movie.is_done"
+        v-if="(movie._id) && !movie.is_done"
         class="movie-episode-btn"
         @click="moviesStore.updateEpisode(movie)"
       >
