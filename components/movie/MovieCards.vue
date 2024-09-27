@@ -25,6 +25,7 @@ const moviesStore = useMoviesStore();
         @click="moviesStore.updateEpisode(movie)"
       >
       <span>{{movie.current_episode}}</span>
+      <span>{{movie.episodes}}</span>
       </button>
     </article>
   </section>
