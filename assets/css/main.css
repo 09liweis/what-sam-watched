@@ -58,7 +58,7 @@
 }
 
 .movie-poster {
-  @apply w-full rounded aspect-[3/4] bg-gray-100
+  @apply w-full rounded bg-gray-100
 }
 
 .movie-card {

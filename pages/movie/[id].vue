@@ -80,8 +80,14 @@
       </section>
 
       <section v-if="currentTab === 'videos'">
-        <article v-for="video in movie.videos" class="mt-2">
-          <h3 class="font-bold">{{ video.title }}</h3>
+        <article v-for="{title, videos} in movie.videos" class="mt-2">
+          <h3 class="font-bold">{{ title }}</h3>
+          <section class="flex flex-wrap">
+          <section v-for="video in videos" class="w-1/2 sm:w-1/4 md:w-1/5 lg:w-1/6">
+            <Image :src="video.photo" :alt="video.title" :classes="''" />
+            {{video.title}}
+          </section>
+        </section>
         </article>
       </section>
 
