@@ -83,11 +83,8 @@
         <article v-for="{title, videos} in movie.videos" class="mt-2">
           <h3 class="font-bold">{{ title }}</h3>
           <section class="flex flex-wrap">
-          <section v-for="video in videos" class="w-1/2 sm:w-1/4 md:w-1/5 lg:w-1/6">
-            <Image :src="video.photo" :alt="video.title" :classes="''" />
-            {{video.title}}
+            <VideoCard v-for="video in videos" :video="video" />
           </section>
-        </section>
         </article>
       </section>
 
@@ -98,6 +95,7 @@
 <script setup>
 import Loading from '~/components/Loading';
 import Image from '~/components/Image';
+import VideoCard from '~/components/videos/VideoCard';
 import Rating from '~/components/Rating';
 import { onMounted, ref } from 'vue';
 import { useMoviesStore } from '@/stores/movies';
