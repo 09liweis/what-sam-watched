@@ -8,6 +8,7 @@ export interface Movie {
   imdb_id:string,
   imdb_rating:string,
   loading: boolean,
+  progress: string,
   is_done:boolean
 }
 
