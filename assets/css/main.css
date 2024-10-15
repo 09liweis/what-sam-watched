@@ -43,7 +43,18 @@
 }
 
 .movie-episode-btn {
-  @apply block w-full flex justify-between border px-1.5 border-amber-600 rounded transition hover:scale-105;
+  @apply w-full flex relative justify-between border px-1.5 border-amber-600 rounded transition hover:scale-105;
+}
+
+.movie-episode-btn::after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: antiquewhite;
+  width: var(--progress);
+  height: 100%;
 }
 
 .movie-update-btn {

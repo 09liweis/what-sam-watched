@@ -20,12 +20,13 @@ const moviesStore = useMoviesStore();
         <p v-if="movie.release" class="movie-card-year">{{ movie.release }}</p>
       </NuxtLink>
       <button
-        v-if="(movie._id) && !movie.is_done"
+        :style="`--progress: ${movie.current_episode/movie.episodes*100}%`"
+        v-if="(movie._id)"
         class="movie-episode-btn"
         @click="moviesStore.updateEpisode(movie)"
       >
-      <span>{{movie.current_episode}}</span>
-      <span>{{movie.episodes}}</span>
+      <span class="relative z-0">{{movie.current_episode}}</span>
+      <span class="relative z-0">{{movie.episodes}}</span>
       </button>
     </article>
   </section>
