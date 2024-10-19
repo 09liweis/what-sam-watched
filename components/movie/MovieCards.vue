@@ -16,9 +16,10 @@ const moviesStore = useMoviesStore();
         </video>
         <NuxtImg v-else :src="movie.poster || POSTER_DEFAULT" width="100%" :alt="movie.title" :placeholder="POSTER_DEFAULT" loading="lazy" class="movie-poster" />
         <h3 class="text-red-500 font-xl font-bold">{{ movie.title }}</h3>
-        <Rating v-if="movie.douban_id" :rating="movie.douban_rating" :movieLink="movie.origin_url" :title="'Douban'" />
         <p v-if="movie.release||movie.year" class="movie-card-year">{{ movie.release||movie.year }}</p>
       </NuxtLink>
+      <Rating v-if="movie.douban_id" :rating="movie.douban_rating" :movieLink="movie.origin_url" :title="'Douban'" />
+      <p v-if="movie.imdb_rating" class="text-yellow-800">IMDB: {{movie.imdb_rating}}</p>
       <button
         :style="`--progress: ${movie.progress}`"
         v-if="(movie._id)"
