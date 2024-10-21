@@ -18,8 +18,8 @@ const moviesStore = useMoviesStore();
         <h3 class="text-red-500 font-xl font-bold">{{ movie.title }}</h3>
         <p v-if="movie.release||movie.year" class="movie-card-year">{{ movie.release||movie.year }}</p>
       </NuxtLink>
-      <Rating v-if="movie.douban_id" :rating="movie.douban_rating" :movieLink="movie.origin_url" :title="'Douban'" />
-      <p v-if="movie.imdb_rating" class="text-yellow-800">IMDB: {{movie.imdb_rating}}</p>
+      <Rating v-if="movie.douban_id" :styleClass="'text-green-700'" :rating="movie.douban_rating" :movieLink="movie.origin_url" :title="'Douban'" />
+      <Rating v-if="movie.imdb_id" :styleClass="'text-yellow-800'" :rating="movie.imdb_rating" :movieLink="movie.imdb_url" :title="'IMDB'" />
       <button
         :style="`--progress: ${movie.progress}`"
         v-if="(movie._id)"
