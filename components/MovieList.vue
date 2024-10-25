@@ -1,6 +1,6 @@
 <script setup>
 import { useMoviesStore } from '@/stores/movies';
-import MovieCards from './movie/MovieCards.vue';
+import MovieCards from '@/components/movie/MovieCards.vue';
 const moviesStore = useMoviesStore();
 moviesStore.fetchMovies();
 </script>
