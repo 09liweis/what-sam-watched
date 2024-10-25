@@ -20,6 +20,8 @@ const moviesStore = useMoviesStore();
       </NuxtLink>
       <Rating v-if="movie.douban_id" :styleClass="'text-green-700'" :rating="movie.douban_rating" :movieLink="movie.origin_url" :title="'Douban'" />
       <Rating v-if="movie.imdb_id" :styleClass="'text-yellow-800'" :rating="movie.imdb_rating" :movieLink="movie.imdb_url" :title="'IMDB'" />
+      <p v-if="movie.currentGross">Current Gross: {{movie.currentGross}}</p>
+      <p v-if="movie.totalGross">Total Gross: {{movie.totalGross}}</p>
       <button
         :style="`--progress: ${movie.progress}`"
         v-if="(movie._id)"
