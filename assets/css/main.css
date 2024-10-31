@@ -39,7 +39,7 @@
 }
 
 .movie-title {
-  @apply font-mono transition duration-300 text-red-400 hover:text-red-900 decoration-blue-300;
+  @apply font-mono transition duration-300 text-red-500 font-bold hover:text-red-900;
 }
 
 .movie-episode-btn {
