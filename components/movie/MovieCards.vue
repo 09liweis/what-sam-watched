@@ -1,6 +1,7 @@
 <script setup>
 import {POSTER_DEFAULT} from '@/constants/movie';
 import Rating from '@/components/Rating';
+import MovieEpisodeBtn from '@/components/movie/MovieEpisodeBtn';
 import { useMoviesStore } from '@/stores/movies';
 const moviesStore = useMoviesStore();
 </script>
@@ -22,15 +23,7 @@ const moviesStore = useMoviesStore();
       <Rating v-if="movie.imdb_id" :styleClass="'text-yellow-800'" :rating="movie.imdb_rating" :movieLink="movie.imdb_url" :title="'IMDB'" />
       <p v-if="movie.currentGross">Current Gross: {{movie.currentGross}}</p>
       <p v-if="movie.totalGross">Total Gross: {{movie.totalGross}}</p>
-      <button
-        :style="`--progress: ${movie.progress}`"
-        v-if="(movie._id)"
-        class="movie-episode-btn"
-        @click="moviesStore.updateEpisode(movie)"
-      >
-      <span class="relative z-0">{{movie.current_episode}}</span>
-      <span class="relative z-0">{{movie.episodes}}</span>
-      </button>
+      <MovieEpisodeBtn v-if="movie._id" :movie="movie" :updateEpisode="moviesStore.updateEpisode" />
     </article>
   </section>
 </template>
