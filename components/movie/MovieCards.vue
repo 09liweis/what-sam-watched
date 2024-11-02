@@ -27,23 +27,3 @@ const moviesStore = useMoviesStore();
     </article>
   </section>
 </template>
-<style scoped>
-@keyframes appear {
-  from {
-    opacity: 0.7;
-    scale: 0.9;
-  }
-  to {
-    opacity: 1;
-    scale: 1;
-  }
-}
-.movie-card {
-  animation: appear linear;
-  animation-timeline: view();
-  animation-range: entry 0% cover 50%;
-  @media (prefers-reduced-motion) {
-    animation: none;
-  }
-}
-</style>
