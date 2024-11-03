@@ -2,8 +2,10 @@
   <main>
     <section class="p-2">
       <section class="flex" v-if="movie">
-        <Image v-if="movie?.poster" :alt="movie.title" :src="movie.poster" :class="'flex-2 w-2/5 aspect-[3/4] rounded'" />
-        <section class="p-2 flex-3">
+        <div class="w-2/5">
+          <Image v-if="movie?.poster" :alt="movie.title" :src="movie.poster" :class="'rounded aspect-[3/4]'" />
+        </div>
+        <section class="p-2 w-3/5">
           <h1 class="text-indigo-500 text-stroke font-mono text-xl">
             {{ movie.title }}
           </h1>
