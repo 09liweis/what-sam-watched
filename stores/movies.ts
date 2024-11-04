@@ -20,7 +20,9 @@ export const useMoviesStore = defineStore('movies', {
     stats:{},
     curLang:'',
     curGenre:'',
-    curCountry:''
+    curCountry:'',
+    curVideo:{},
+    showVideo:false
   }),
   actions: {
     async getStats() {
@@ -98,6 +100,15 @@ export const useMoviesStore = defineStore('movies', {
         method: 'PUT',
       });
       this.fetchMovies();
+    },
+    async setCurVideo(video:any) {
+      this.showVideo = true;
+      this.curVideo = video;
+      const response:any = await $fetch(`${API_MOVIE_ENDPOINT}video/${video.video_id}`);
+      this.curVideo = response;
+    },
+    hideVideo() {
+      this.showVideo = false;
     }
   },
 });

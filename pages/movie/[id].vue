@@ -85,12 +85,20 @@
         <article v-for="{title, videos} in movie.videos" class="mt-2">
           <h3 class="font-bold">{{ title }}</h3>
           <section class="flex flex-wrap">
-            <VideoCard v-for="video in videos" :video="video" />
+            <VideoCard v-for="video in videos" :video="video" :setCurVideo="moviesStore.setCurVideo" />
           </section>
         </article>
       </section>
 
     </section>
+
+    <section v-if="moviesStore.showVideo" class="fixed w-full top-0 left-0 h-full bg-black bg-opacity-25 flex justify-center items-center">
+      <div class="cursor-pointer bg-white rounded p-2" @click="moviesStore.hideVideo()">X</div>
+      <video autoplay controls class="w-96">
+        <source :src="moviesStore.curVideo.src" type="video/mp4">
+      </video>
+    </section>
+
   </main>
 </template>
 <style></style>
