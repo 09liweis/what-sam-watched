@@ -8,9 +8,9 @@ export default defineNuxtConfig({
   },
   css: ['~/assets/css/main.css'],
   modules: ['@pinia/nuxt','@nuxt/image'],
-  server: {
-    host: '0.0.0.0',
-  },
+  // server: {
+  //   host: '0.0.0.0',
+  // },
   runtimeConfig: {
     public: {
       apiHost: process.env.API_HOST || '',
