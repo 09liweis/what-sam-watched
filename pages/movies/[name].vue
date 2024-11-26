@@ -1,5 +1,5 @@
 <template>
-  <main class="flex justify-center items-center h-full">
+  <main class="flex justify-center items-center h-full p-5">
     <Loading color="text-red-500" v-if="loading" />
     <MovieCards v-else />
   </main>
