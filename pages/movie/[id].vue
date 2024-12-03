@@ -1,117 +1,11 @@
-<template>
-  <main>
-    <section class="p-2">
-      <section class="flex" v-if="movie">
-        <div class="w-2/5">
-          <Image v-if="movie?.poster" :alt="movie.title" :src="movie.poster" :class="'rounded aspect-[3/4]'" />
-        </div>
-        <section class="p-2 w-3/5">
-          <h1 class="text-indigo-500 text-stroke font-mono text-xl">
-            {{ movie.title }}
-          </h1>
-          <p>{{ movie.summary }}</p>
-          <Rating v-if="movie.douban_id" :rating="movie.douban_rating" :movieLink="movie.origin_url" :title="'Douban'" />
-        </section>
-      </section>
-
-      <header class="mt-4">
-        <nav>
-          <a @click="fetchMovieDetailAPI(api, key)" :class="`movie-nav-menu ${currentTab === key ? 'text-red-800 border-red-800': ''}`" v-for="(api, key) of movie.apis">{{ key }}</a>
-        </nav>
-      </header>
-
-      <Loading v-if="loading" :color="'text-red'" />
-      
-      <section v-if="currentTab === 'summary'">
-        <section class="flex mt-3">
-          <article v-for="photo in movie.photos" class="w-1/5 gap-x-2">
-            <NuxtImg :src="photo.src" width="100%" class="rounded" />
-          </article>
-        </section>
-
-        <section class="mt-3">
-          <article v-for="comment in movie.comments" class="mt-4 shadow-md p-2">
-            <p>{{ comment.text }}</p>
-          </article>
-        </section>
-
-        <section class="mt-3">
-          <article v-for="review in movie.reviews" class="mt-2 shadow-md p-2">
-            <h3 class="font-bold">{{ review.title }}</h3>
-            <p>{{ review.content }}</p>
-          </article>
-        </section>
-
-        <section class="mt-3 flex flex-wrap">
-          <article v-for="recommend in movie.recommends" class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 p-1">
-            <Image :src="recommend.poster" :classes="'rounded'" />
-          </article>
-        </section>
-      </section>
-
-      <section v-if="currentTab === 'photos'" class="flex flex-wrap">
-        <article v-for="photo in movie.photos" class="w-1/4">
-          <NuxtImg v-if="photo?.origin" :src="photo.origin || POSTER_DEFAULT" width="100%"/>
-        </article>
-      </section>
-
-      <section class="" v-if="currentTab === 'comments'">
-        <article v-for="comment in movie.comments" class="mt-1">
-          <p>{{ comment.text }}</p>
-        </article>
-      </section>
-
-      <section class="" v-if="currentTab === 'reviews'">
-        <article v-for="review in movie.reviews" class="mt-2">
-          <h3 class="font-bold">{{ review.title }}</h3>
-          <p>{{ review.content }}</p>
-        </article>
-      </section>
-
-      <section v-if="currentTab === 'casts'">
-        <section class="mt-2" v-for="castSection in movie.casts">
-          <h3 class="font-bold text-red-400">{{castSection.tl}}</h3>
-          <article v-for="cast in castSection.casts" class="flex">
-            <NuxtImg :src="cast.avt" width="100px" class="rounded border aspect-square" />
-            <section class="p-2">
-              <h4>{{cast.name}}</h4>
-              <p>{{cast.role}}</p>
-            </section>
-          </article>
-        </section>
-      </section>
-
-      <section v-if="currentTab === 'videos'">
-        <article v-for="{title, videos} in movie.videos" class="mt-2">
-          <h3 class="font-bold">{{ title }}</h3>
-          <section class="flex flex-wrap">
-            <VideoCard v-for="video in videos" :video="video" :setCurVideo="moviesStore.setCurVideo" />
-          </section>
-        </article>
-      </section>
-
-    </section>
-
-    <section v-if="moviesStore.showVideo" class="fixed w-full top-0 left-0 h-full bg-black bg-opacity-25 flex justify-center items-center">
-      <div class="cursor-pointer bg-white rounded p-2" @click="moviesStore.hideVideo()">X</div>
-      <video autoplay controls class="w-96">
-        <source :src="moviesStore.curVideo.src" type="video/mp4">
-      </video>
-    </section>
-
-  </main>
-</template>
-<style></style>
 <script setup>
 import Loading from '~/components/Loading';
-import Image from '~/components/Image';
+import MovieHeader from '~/components/movie/detail/MovieHeader';
+import MovieTabs from '~/components/movie/detail/MovieTabs';
+import PhotosTab from '~/components/movie/detail/PhotosTab';
 import VideoCard from '~/components/videos/VideoCard';
-import Rating from '~/components/Rating';
 import { onMounted, ref } from 'vue';
 import { useMoviesStore } from '@/stores/movies';
-import {POSTER_DEFAULT} from '~/constants/movie';
-const runtimeConfig = useRuntimeConfig();
-const API_HOST = runtimeConfig.public.apiHost || '';
 
 const route = useRoute();
 const moviesStore = useMoviesStore();
@@ -130,11 +24,140 @@ onMounted(async () => {
   moviesStore.setCurrentMovie(movie);
 });
 
-const fetchMovieDetailAPI = async (api, name) =>{
+const fetchMovieDetailAPI = async (api, name) => {
   currentTab.value = name;
   loading.value = true;
   const apiData = await $fetch(api);
   loading.value = false;
-  movie = {...movie, [name]:apiData[name]};
+  movie = { ...movie, [name]: apiData[name] };
 }
 </script>
+
+<template>
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <div v-if="loading" class="flex justify-center items-center min-h-[50vh]">
+      <Loading color="text-indigo-600" />
+    </div>
+
+    <template v-else-if="movie">
+      <MovieHeader :movie="movie" />
+
+      <div class="mt-8">
+        <MovieTabs 
+          :currentTab="currentTab"
+          :tabs="movie.apis"
+          @tabChange="fetchMovieDetailAPI"
+        />
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div v-if="loading" class="flex justify-center py-8">
+            <Loading color="text-indigo-600" />
+          </div>
+
+          <!-- Summary Tab -->
+          <section v-else-if="currentTab === 'summary'" class="space-y-8">
+            <!-- Photos Grid -->
+            <div v-if="movie.photos?.length" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+              <div v-for="photo in movie.photos" class="rounded-lg overflow-hidden shadow-md">
+                <NuxtImg :src="photo.src" class="w-full h-48 object-cover" />
+              </div>
+            </div>
+
+            <!-- Comments -->
+            <div v-if="movie.comments?.length" class="space-y-4">
+              <h2 class="text-xl font-semibold text-gray-800">Comments</h2>
+              <div class="space-y-3">
+                <div v-for="comment in movie.comments" class="bg-gray-50 rounded-lg p-4 shadow-sm">
+                  <p class="text-gray-600">{{ comment.text }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reviews -->
+            <div v-if="movie.reviews?.length" class="space-y-4">
+              <h2 class="text-xl font-semibold text-gray-800">Reviews</h2>
+              <div class="space-y-4">
+                <article v-for="review in movie.reviews" class="bg-gray-50 rounded-lg p-4 shadow-sm">
+                  <h3 class="font-bold text-gray-800 mb-2">{{ review.title }}</h3>
+                  <p class="text-gray-600">{{ review.content }}</p>
+                </article>
+              </div>
+            </div>
+
+            <!-- Recommendations -->
+            <div v-if="movie.recommends?.length" class="space-y-4">
+              <h2 class="text-xl font-semibold text-gray-800">Recommended Movies</h2>
+              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div v-for="recommend in movie.recommends" class="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-200">
+                  <Image :src="recommend.poster" :classes="'w-full aspect-[3/4] object-cover'" />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Photos Tab -->
+          <PhotosTab v-else-if="currentTab === 'photos'" :photos="movie.photos" />
+
+          <!-- Comments Tab -->
+          <section v-else-if="currentTab === 'comments'" class="space-y-4">
+            <article v-for="comment in movie.comments" class="bg-gray-50 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-200">
+              <p class="text-gray-600">{{ comment.text }}</p>
+            </article>
+          </section>
+
+          <!-- Reviews Tab -->
+          <section v-else-if="currentTab === 'reviews'" class="space-y-6">
+            <article v-for="review in movie.reviews" class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
+              <h3 class="text-xl font-bold text-gray-800 mb-3">{{ review.title }}</h3>
+              <p class="text-gray-600 leading-relaxed">{{ review.content }}</p>
+            </article>
+          </section>
+
+          <!-- Casts Tab -->
+          <section v-else-if="currentTab === 'casts'" class="space-y-8">
+            <div v-for="castSection in movie.casts" class="space-y-4">
+              <h3 class="text-xl font-bold text-indigo-600">{{castSection.tl}}</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <article v-for="cast in castSection.casts" class="flex bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
+                  <NuxtImg :src="cast.avt" class="w-24 h-24 object-cover" />
+                  <div class="p-4">
+                    <h4 class="font-semibold text-gray-800">{{cast.name}}</h4>
+                    <p class="text-gray-600 text-sm">{{cast.role}}</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <!-- Videos Tab -->
+          <section v-else-if="currentTab === 'videos'" class="space-y-8">
+            <div v-for="{title, videos} in movie.videos" class="space-y-4">
+              <h3 class="text-xl font-bold text-gray-800">{{ title }}</h3>
+              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <VideoCard v-for="video in videos" :video="video" :setCurVideo="moviesStore.setCurVideo" />
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </template>
+
+    <!-- Video Modal -->
+    <div v-if="moviesStore.showVideo" class="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
+      <button 
+        @click="moviesStore.hideVideo()" 
+        class="absolute top-4 right-4 bg-white rounded-full p-2 hover:bg-gray-100 transition-colors duration-200"
+      >
+        <span class="sr-only">Close</span>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <div class="w-full max-w-3xl mx-4">
+        <video autoplay controls class="w-full rounded-lg shadow-2xl">
+          <source :src="moviesStore.curVideo.src" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </main>
+</template>
