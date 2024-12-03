@@ -37,7 +37,7 @@ const moviesStore = useMoviesStore();
           {{ movie.release||movie.year }}
         </span>
       </div>
-      <h3 class="mt-2 text-lg font-semibold text-gray-800 line-clamp-1 group-hover:text-red-500">
+      <h3 :title="movie.title"class="mt-2 text-lg font-semibold text-gray-800 line-clamp-1 group-hover:text-red-500">
         {{ movie.title }}
       </h3>
     </NuxtLink>
