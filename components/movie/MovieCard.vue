@@ -1,6 +1,7 @@
 <script setup>
 import Rating from '@/components/Rating';
 import MovieEpisodeBtn from '@/components/movie/MovieEpisodeBtn';
+import MoviePoster from '@/components/movie/MoviePoster';
 import { useMoviesStore } from '@/stores/movies';
 
 defineProps({
@@ -24,20 +25,18 @@ const moviesStore = useMoviesStore();
         <video v-if="movie.video" autoplay loop class="w-full aspect-[2/3] object-cover">
           <source :src="movie.video" type="video/mp4">
         </video>
-        <NuxtImg 
-          v-else 
-          :src="movie.poster || POSTER_DEFAULT" 
-          :alt="movie.title" 
-          :placeholder="POSTER_DEFAULT" 
-          loading="lazy" 
-          class="w-full aspect-[2/3] object-cover transition-transform duration-300 group-hover:scale-105"
+        <MoviePoster
+          v-else
+          :src="movie.poster"
+          :alt="movie.title"
+          className="aspect-[2/3] transition-transform duration-300 group-hover:scale-105"
         />
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
         <span v-if="movie.release||movie.year" class="movie-card-year">
           {{ movie.release||movie.year }}
         </span>
       </div>
-      <h3 :title="movie.title"class="mt-2 text-lg font-semibold text-gray-800 line-clamp-1 group-hover:text-red-500">
+      <h3 :title="movie.title" class="mt-2 text-lg font-semibold text-gray-800 line-clamp-1 group-hover:text-red-500">
         {{ movie.title }}
       </h3>
     </NuxtLink>
