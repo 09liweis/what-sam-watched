@@ -6,8 +6,10 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+
   css: ['~/assets/css/main.css'],
   modules: ['@pinia/nuxt','@nuxt/image'],
+
   // server: {
   //   host: '0.0.0.0',
   // },
@@ -16,18 +18,22 @@ export default defineNuxtConfig({
       apiHost: process.env.API_HOST || '',
     },
   },
+
   nitro: {
     plugins: ['~/server/index.ts'],
   },
+
   routeRules: {
     '/api/visuals': { cors: true },
     '/api/visual': { cors: true },
     '/api/upsert': { cors: true },
   },
+
   image: {
     inject:true,
     domains: ['https://img9.doubanio.com'],
   },
+
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
@@ -40,4 +46,6 @@ export default defineNuxtConfig({
       meta: [{ name: 'description', content: 'My amazing movie dashboard.' }],
     },
   },
+
+  compatibilityDate: '2024-12-10',
 });
