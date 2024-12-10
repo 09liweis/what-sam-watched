@@ -8,7 +8,9 @@ import SearchForm from '~/components/search/SearchForm.vue';
 import SearchResults from '~/components/search/SearchResults.vue';
 import { ref, computed, watch } from 'vue';
 import { useMoviesStore } from '@/stores/movies';
+import { useAuthStore } from '~/stores/auth';
 
+const authStore = useAuthStore();
 const moviesStore = useMoviesStore();
 moviesStore.getStats();
 
@@ -70,7 +72,7 @@ async function handleMovieSelect(movie) {
       What Sam Watched in Nuxt.js {{ moviesStore.total }} movies
     </h1>
 
-    <section class="flex items-center mb-1.5">
+    <section v-if="authStore.isAuthenticated" class="flex items-center mb-1.5">
       <input
         class="border p-1.5 mr-1 rounded"
         placeholder="Search my movies"

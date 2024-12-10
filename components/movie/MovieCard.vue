@@ -3,6 +3,7 @@ import Rating from '@/components/Rating';
 import MovieEpisodeBtn from '@/components/movie/MovieEpisodeBtn';
 import MoviePoster from '@/components/movie/MoviePoster';
 import { useMoviesStore } from '@/stores/movies';
+import { useAuthStore } from '~/stores/auth';
 
 defineProps({
   movie: {
@@ -11,6 +12,7 @@ defineProps({
   }
 });
 
+const authStore = useAuthStore();
 const moviesStore = useMoviesStore();
 </script>
 
@@ -63,7 +65,7 @@ const moviesStore = useMoviesStore();
         Total: ${{movie.totalGross}}
       </p>
       <MovieEpisodeBtn 
-        v-if="movie._id" 
+        v-if="movie._id && authStore.isAuthenticated" 
         :movie="movie" 
         :updateEpisode="moviesStore.updateEpisode" 
       />
