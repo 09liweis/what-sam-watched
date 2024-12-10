@@ -1,6 +1,7 @@
 <script setup>
 import Rating from '@/components/Rating';
 import Image from '@/components/Image';
+import MovieBudget from '@/components/movie/MovieBudget';
 
 defineProps({
   movie: {
@@ -32,6 +33,11 @@ defineProps({
           :movieLink="movie.origin_url" 
           :title="'Douban'"
           :styleClass="'text-lg font-semibold'" 
+        />
+        <MovieBudget 
+          v-if="movie.budget"
+          :budget="movie.budget"
+          :boxOffice="movie.boxOffice"
         />
       </div>
     </section>

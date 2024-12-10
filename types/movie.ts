@@ -9,7 +9,8 @@ export interface Movie {
   imdb_rating:string,
   loading: boolean,
   progress: string,
-  is_done:boolean
+  is_done:boolean,
+  budget?:String
 }
 
 export interface MoviesResponse {
