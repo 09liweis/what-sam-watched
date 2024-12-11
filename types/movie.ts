@@ -10,7 +10,9 @@ export interface Movie {
   loading: boolean,
   progress: string,
   is_done:boolean,
-  budget?:String
+  budget?:String,
+  summary?:string,
+  title:string
 }
 
 export interface MoviesResponse {

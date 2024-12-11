@@ -14,6 +14,7 @@ type ROUTES_TYPE = {
 
 export const ROUTES:ROUTES_TYPE = {
   sam:{to:'/',nm:'Sam'},
+  quiz:{to:'/quiz',nm:'Movie Quiz'},
   douban:{
     to:'/movies/douban?nm=in_theatre',
     nm:'Douban',
