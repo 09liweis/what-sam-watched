@@ -9,6 +9,7 @@ export const createQuiz = (movies: any[]) => {
   
   return {
     summary: correctAnswer.summary,
+    poster: correctAnswer.poster,
     correctTitle: correctAnswer.title,
     answers
   };

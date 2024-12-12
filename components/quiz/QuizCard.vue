@@ -2,8 +2,9 @@
 import QuizSummary from './QuizSummary.vue';
 import QuizAnswers from './QuizAnswers.vue';
 import QuizResult from './QuizResult.vue';
+import { ref } from 'vue';
 
-defineProps({
+const props = defineProps({
   quiz: {
     type: Object,
     required: true
@@ -18,12 +19,19 @@ defineProps({
   }
 });
 
+const showPoster = ref(false);
+
 defineEmits(['check-answer', 'next-quiz']);
 </script>
 
 <template>
   <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-    <QuizSummary :summary="quiz.summary" />
+    <QuizSummary 
+      :summary="quiz.summary" 
+      :poster="quiz.poster"
+      :show-poster="showPoster"
+      @toggle-view="showPoster = !showPoster"
+    />
     <QuizAnswers
       :answers="quiz.answers"
       :selected-answer="selectedAnswer"
