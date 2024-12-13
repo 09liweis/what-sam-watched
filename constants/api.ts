@@ -5,3 +5,4 @@ export const API_SEARCH:string = `${API_ENDPOINT}douban/search?keyword=`;
 
 export const API_MOVIE_ENDPOINT:string = `${API_DOMAIN}movie/`;
 export const API_UPSERT:string = `${API_MOVIE_ENDPOINT}upsert`;
+export const API_QUIZ:string = `${API_MOVIE_ENDPOINT}quiz`;

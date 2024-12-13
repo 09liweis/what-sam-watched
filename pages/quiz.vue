@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useMoviesStore } from '@/stores/movies';
-import { getRandomMovies, createQuiz } from '~/utils/quiz';
 import QuizCard from '~/components/quiz/QuizCard.vue';
 
 const moviesStore = useMoviesStore();
@@ -10,9 +9,8 @@ const selectedAnswer = ref(null);
 const isCorrect = ref(null);
 const loading = ref(false);
 
-const generateNewQuiz = () => {
-  const movies = getRandomMovies(moviesStore.movieList, 4);
-  currentQuiz.value = createQuiz(movies);
+const generateNewQuiz = async () => {
+  currentQuiz.value = await moviesStore.getMovieQuiz();
   selectedAnswer.value = null;
   isCorrect.value = null;
 };
@@ -24,9 +22,8 @@ const checkAnswer = (answer) => {
 
 onMounted(async () => {
   loading.value = true;
-  await moviesStore.fetchMovies();
-  loading.value = false;
   generateNewQuiz();
+  loading.value = false;
 });
 </script>
 
