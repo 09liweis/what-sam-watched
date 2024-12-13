@@ -69,7 +69,7 @@ export const useMoviesStore = defineStore('movies', {
       this.setQueryParams();
       this.isfetchingMovieList = true;
       const moviesResp:MoviesResponse = await $fetch(this.getMoviesAPIUrl(name));
-      this.setMovieList(moviesResp.movies.filter(movie => movie.summary));
+      this.setMovieList(moviesResp.movies);
       if (moviesResp.total) {
         this.total = moviesResp.total;
         this.pages = moviesResp.pages;
