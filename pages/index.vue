@@ -19,9 +19,6 @@ watch(() => route.query, () => {
   moviesStore.fetchMovies();
 });
 
-const moviesCount = computed(() => moviesStore.movieList.length);
-const runtimeConfig = useRuntimeConfig();
-
 let loading = ref(false);
 const showSearchForm = ref(false);
 let searchMovieTitle = ref('');
