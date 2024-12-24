@@ -59,10 +59,10 @@ const moviesStore = useMoviesStore();
         :title="'IMDB'" 
       />
       <p v-if="movie.currentGross" class="text-sm text-gray-600">
-        Current: ${{movie.currentGross}}
+        Current: {{movie.currentGross}}
       </p>
       <p v-if="movie.totalGross" class="text-sm text-gray-600">
-        Total: ${{movie.totalGross}}
+        Total: {{movie.totalGross}}
       </p>
       <MovieEpisodeBtn 
         v-if="movie._id && authStore.isAuthenticated" 
