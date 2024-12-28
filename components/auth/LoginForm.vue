@@ -18,9 +18,7 @@ const handleSubmit = async () => {
   error.value = '';
 
   try {
-    // TODO: Implement actual login logic here
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulated API call
-    emit('login', { email: email.value });
+    emit('login', { email: email.value, password:password.value });
     emit('close');
   } catch (err) {
     error.value = 'Invalid credentials';
