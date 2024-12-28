@@ -12,9 +12,15 @@ export const useAuthStore = defineStore('auth', {
   }),
   
   actions: {
-    login(user: User) {
+    async login(user: User) {
+      const response = await fetch('https:samliweisen.onrender.com/api/user/login',{
+        body:JSON.stringify({
+          eml: user.email,
+          pwd: user.password
+        })
+      })
       this.user = user;
-      this.isAuthenticated = true;
+      this.isAuthenticated = false;
     },
     
     logout() {
