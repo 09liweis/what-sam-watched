@@ -23,10 +23,13 @@ export default defineNuxtConfig({
     plugins: ['~/server/index.ts'],
   },
 
+  ssr: true,
+
   routeRules: {
-    '/api/visuals': { cors: true },
-    '/api/visual': { cors: true },
-    '/api/upsert': { cors: true },
+    '/': { prerender: true },
+    // '/api/visuals': { cors: true },
+    // '/api/visual': { cors: true },
+    // '/api/upsert': { cors: true },
   },
 
   image: {
