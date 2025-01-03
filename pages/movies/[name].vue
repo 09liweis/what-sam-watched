@@ -1,10 +1,13 @@
 <template>
   <main class="flex justify-center items-center h-full p-5">
-    <Loading color="text-red-500" v-if="loading" />
+    <Loading 
+      v-if="loading"
+      type="skeleton"
+      :count="12"
+    />
     <MovieCards v-else />
   </main>
 </template>
-  <style></style>
 <script setup>
   import Loading from '~/components/Loading';
   import { onMounted, ref } from 'vue';
