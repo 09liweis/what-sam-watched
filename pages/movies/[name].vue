@@ -1,18 +1,12 @@
 <template>
-  <main class="flex justify-center items-center h-full p-5">
-    <Loading 
-      v-if="loading"
-      type="skeleton"
-      :count="12"
-    />
-    <MovieCards v-else />
+  <main class="container p-5">
+    <MovieList />
   </main>
 </template>
 <script setup>
-  import Loading from '~/components/Loading';
+  import MovieList from '~/components/MovieList';
   import { onMounted, ref } from 'vue';
   import { useMoviesStore } from '@/stores/movies';
-  import MovieCards from '~/components/movie/MovieCards.vue';
   const runtimeConfig = useRuntimeConfig();
   
   const route = useRoute();
