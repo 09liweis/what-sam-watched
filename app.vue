@@ -42,7 +42,7 @@ watch(() => route.query, () => {
 <template>
   <section class="max-w-5xl m-auto max-h-max box-border">
     <header class="pt-2 pb-4 sticky top-0 bg-white z-10">
-      <nav class="flex flex-wrap justify-between items-center px-4">
+      <nav class="flex flex-wrap justify-center items-center px-4">
         <div class="flex flex-wrap gap-2">
           <LinkButton v-for="(route,id) in ROUTES" :class="getRouteStyleClass(routeName, id)" :to="route.to" :text="route.nm" />
         </div>
