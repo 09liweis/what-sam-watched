@@ -1,9 +1,9 @@
 <script setup>
-import Loading from '~/components/Loading';
 import MovieHeader from '~/components/movie/detail/MovieHeader';
 import MovieTabs from '~/components/movie/detail/MovieTabs';
 import PhotosTab from '~/components/movie/detail/PhotosTab';
 import VideoCard from '~/components/videos/VideoCard';
+import MovieDetailSkeleton from '~/components/movie/detail/MovieDetailSkeleton';
 import { onMounted, ref } from 'vue';
 import { useMoviesStore } from '@/stores/movies';
 
@@ -35,9 +35,7 @@ const fetchMovieDetailAPI = async (api, name) => {
 
 <template>
   <main class="max-w-7xl mx-auto px-4 py-8">
-    <div v-if="loading" class="flex justify-center items-center min-h-[50vh]">
-      <Loading color="text-indigo-600" />
-    </div>
+    <MovieDetailSkeleton v-if="loading" />
 
     <template v-else-if="movie">
       <MovieHeader :movie="movie" />
