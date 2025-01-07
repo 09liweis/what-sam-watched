@@ -1,10 +1,11 @@
 <script setup>
+import Loading from '~/components/Loading';
 import MovieHeader from '~/components/movie/detail/MovieHeader';
 import MovieTabs from '~/components/movie/detail/MovieTabs';
 import PhotosTab from '~/components/movie/detail/PhotosTab';
 import VideoCard from '~/components/videos/VideoCard';
 import MovieDetailSkeleton from '~/components/movie/detail/MovieDetailSkeleton';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useMoviesStore } from '@/stores/movies';
 
 const route = useRoute();
@@ -13,6 +14,17 @@ let movie = moviesStore.currentMovie;
 
 let loading = ref(false);
 const currentTab = ref('summary');
+
+// Update meta when movie data changes
+useHead(() => ({
+  title: movie?.title ? `${movie.title} - What Sam Watched` : 'Loading Movie - What Sam Watched',
+  meta: [
+    {
+      name: 'description',
+      content: movie?.summary || 'Loading movie details...'
+    }
+  ]
+}));
 
 onMounted(async () => {
   loading.value = true;
