@@ -8,19 +8,23 @@ interface User {
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null as User | null,
-    isAuthenticated: false,
+    isAuthenticated: true,
   }),
   
   actions: {
     async login(user: User) {
-      const response = await fetch('https//:samliweisen.onrender.com/api/user/login',{
-        body:JSON.stringify({
-          eml: user.email,
-          pwd: user.password
+      try {
+        const response:Response = await fetch('https//:samliweisen.onrender.com/api/user/login',{
+          body:JSON.stringify({
+            eml: user.email,
+            pwd: user.password
+          })
         })
-      })
-      this.user = user;
-      this.isAuthenticated = false;
+        // localStorage.setItem('token',response.token);
+        this.isAuthenticated = true;
+      } catch (error) {
+        console.error(error);
+      }
     },
     
     logout() {
