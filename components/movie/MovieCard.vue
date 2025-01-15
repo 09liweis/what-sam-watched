@@ -46,14 +46,12 @@ const moviesStore = useMoviesStore();
     <div class="mt-2 space-y-1">
       <Rating 
         v-if="movie.douban_id" 
-        :styleClass="'text-green-700 text-sm'" 
         :rating="movie.douban_rating" 
         :movieLink="movie.origin_url" 
         :title="'Douban'" 
       />
       <Rating 
         v-if="movie.imdb_id" 
-        :styleClass="'text-yellow-800 text-sm'" 
         :rating="movie.imdb_rating" 
         :movieLink="movie.imdb_url" 
         :title="'IMDB'" 
