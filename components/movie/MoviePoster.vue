@@ -21,7 +21,7 @@ const imageSource = computed(() => props.src || POSTER_DEFAULT);
 </script>
 
 <template>
-  <div :class="`relative ${className}`">
+  <div :class="className">
     <NuxtImg
       :src="imageSource"
       :alt="alt"
