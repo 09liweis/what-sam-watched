@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { API_USER_LOGIN } from '~/constants/api';
 
 interface User {
   email: string;
@@ -14,7 +15,7 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async login(user: User) {
       try {
-        const response:Response = await fetch('https//:samliweisen.onrender.com/api/user/login',{
+        const response:Response = await fetch(API_USER_LOGIN,{
           body:JSON.stringify({
             eml: user.email,
             pwd: user.password
