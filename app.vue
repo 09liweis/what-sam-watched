@@ -46,7 +46,7 @@ watch(() => route.query, () => {
         <div class="flex flex-wrap gap-2">
           <LinkButton v-for="(route,id) in ROUTES" :class="getRouteStyleClass(routeName, id)" :to="route.to" :text="route.nm" />
         </div>
-        <!-- <button
+        <button
           v-if="!authStore.isAuthenticated"
           @click="showLoginPopup = true"
           class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -59,7 +59,7 @@ watch(() => route.query, () => {
           class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900"
         >
           Sign Out
-        </button> -->
+        </button>
       </nav>
       <section v-if="getSubroutes(routeName)" class="flex flex-wrap justify-center gap-2 mt-2">
         <LinkButton v-for="(route,id) in getSubroutes(routeName)" :class="getRouteStyleClass(subRouteName, id)" :to="route.to" :text="route.nm"/>

@@ -6,6 +6,10 @@ interface User {
   password: string;
 }
 
+interface LOGIN_RESPONSE {
+  token: string;
+}
+
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null as User | null,
@@ -15,13 +19,14 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async login(user: User) {
       try {
-        const response:Response = await fetch(API_USER_LOGIN,{
-          body:JSON.stringify({
+        const response:LOGIN_RESPONSE = await $fetch(API_USER_LOGIN,{
+          method:'POST',
+          body:{
             eml: user.email,
             pwd: user.password
-          })
+          }
         })
-        // localStorage.setItem('token',response.token);
+        localStorage.setItem('token',response.token);
         this.isAuthenticated = true;
       } catch (error) {
         console.error(error);
