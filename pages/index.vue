@@ -1,5 +1,4 @@
 <script setup>
-import Loading from '~/components/Loading';
 import Button from '~/components/Button';
 import MovieList from '~/components/MovieList.vue';
 import Stats from '~/components/Stats.vue';
@@ -21,6 +20,7 @@ watch(() => route.query, () => {
 
 let loading = ref(false);
 const showSearchForm = ref(false);
+const showFilter = ref(false);
 let searchMovieTitle = ref('');
 const searchResults = ref([]);
 
