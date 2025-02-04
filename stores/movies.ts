@@ -90,6 +90,11 @@ export const useMoviesStore = defineStore('movies', {
       await $fetch(API_UPSERT, {
         method: 'POST',
         body,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('auth-token') || ''}`
+        },
       });
     },
     setMovieList(movieList: Movie[]) {
