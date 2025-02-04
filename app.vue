@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import { useAuthStore } from './stores/auth';
 import {SAM, ROUTES, getSubroutes} from './constants/route';
 import LinkButton from '@/components/LinkButton';
@@ -9,6 +9,8 @@ const route = useRoute();
 const authStore = useAuthStore();
 
 const showLoginPopup = ref(false);
+const isHeaderVisible = ref(true);
+let lastScrollPosition = 0;
 
 const getRouteName = (route) => {
   return route.params?.name || SAM;
@@ -30,6 +32,23 @@ const handleLogin = (userData) => {
   showLoginPopup.value = false;
 }
 
+const handleScroll = () => {
+  const currentScrollPosition = window.scrollY;
+  
+  // Show header when scrolling up or at the top
+  if (currentScrollPosition < lastScrollPosition || currentScrollPosition < 50) {
+    isHeaderVisible.value = true;
+  } else {
+    isHeaderVisible.value = false;
+  }
+  
+  lastScrollPosition = currentScrollPosition;
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll, { passive: true });
+});
+
 watch(() => route.params, () => {
   routeName.value = getRouteName(route);
 });
@@ -41,7 +60,10 @@ watch(() => route.query, () => {
 
 <template>
   <section class="max-w-5xl m-auto max-h-max box-border">
-    <header class="pt-2 pb-4 sticky top-0 bg-white z-10">
+    <header 
+      class="pt-2 pb-4 sticky top-0 bg-white z-10 transition-transform duration-300"
+      :class="{ '-translate-y-full': !isHeaderVisible }"
+    >
       <nav class="flex flex-wrap justify-center items-center px-4">
         <div class="flex flex-wrap gap-2">
           <LinkButton v-for="(route,id) in ROUTES" :class="getRouteStyleClass(routeName, id)" :to="route.to" :text="route.nm" />
