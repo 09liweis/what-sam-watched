@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face{font-family: "mtsi-font";src:url("//s3plus.meituan.net/v1/mss_73a511b8f91f43d0bdae92584ea6330b/font/2a70c44b.eot");src:url("//s3plus.meituan.net/v1/mss_73a511b8f91f43d0bdae92584ea6330b/font/2a70c44b.eot?#iefix") format("embedded-opentype"),url("//s3plus.meituan.net/v1/mss_73a511b8f91f43d0bdae92584ea6330b/font/2a70c44b.woff");} 
+
+.font-mtsi {
+  font-family: 'mtsi-font';
+}
+
 .menu-item {
   @apply border p-1 transition duration-200 rounded text-center min-w-7;
 }

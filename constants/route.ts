@@ -26,6 +26,7 @@ export const ROUTES:ROUTES_TYPE = {
       'alltime_boxoffice':{to:'/movies/douban?nm=alltime_boxoffice',nm:'All Boxoffice'}
     }
   },
+  maoyan:{to:'/movies/maoyan',nm:'Maoyan'},
   cineplex:{to:'/movies/cineplex',nm:'Canada Cineplex'},
   hongkong: {
     to:'/movies/hongkong?nm=showing',nm:'China Hongkong',
