@@ -8,3 +8,4 @@ export const API_UPSERT:string = `${API_MOVIE_ENDPOINT}upsert`;
 export const API_QUIZ:string = `${API_MOVIE_ENDPOINT}quiz`;
 
 export const API_USER_LOGIN:string = `${API_DOMAIN}user/login`;
+export const API_USER_DETAIL:string = `${API_DOMAIN}user/detail`;
