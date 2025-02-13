@@ -46,6 +46,7 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
+  authStore.checkToken();
   window.addEventListener('scroll', handleScroll, { passive: true });
 });
 
