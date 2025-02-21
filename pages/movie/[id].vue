@@ -98,9 +98,9 @@ const fetchMovieDetailAPI = async (api, name) => {
             <div v-if="movie.recommends?.length" class="space-y-4">
               <h2 class="text-xl font-semibold text-gray-800">Recommended Movies</h2>
               <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                <div v-for="recommend in movie.recommends" class="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-200">
+                <NuxtLink v-for="recommend in movie.recommends" :to="`/movie/${recommend.douban_id}`" class="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-200">
                   <Image :src="recommend.poster" :classes="'w-full aspect-[3/4] object-cover'" />
-                </div>
+                </NuxtLink>
               </div>
             </div>
           </section>
