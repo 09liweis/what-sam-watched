@@ -4,7 +4,6 @@ import MovieCards from '@/components/movie/MovieCards.vue';
 import Loading from '@/components/Loading.vue';
 
 const moviesStore = useMoviesStore();
-moviesStore.fetchMovies();
 </script>
 
 <template>

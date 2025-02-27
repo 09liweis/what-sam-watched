@@ -18,6 +18,10 @@ watch(() => route.query, () => {
   moviesStore.fetchMovies();
 });
 
+onMounted(()=>{
+  moviesStore.fetchMovies();
+});
+
 let loading = ref(false);
 const showSearchForm = ref(false);
 const showFilter = ref(false);
