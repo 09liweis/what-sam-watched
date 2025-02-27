@@ -37,7 +37,7 @@ const handleSubmit = async () => {
         v-model="email"
         type="email"
         required
-        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+        class="p-3 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
         placeholder="Enter your email"
       />
     </div>
@@ -49,7 +49,7 @@ const handleSubmit = async () => {
         v-model="password"
         type="password"
         required
-        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+        class="p-3 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
         placeholder="Enter your password"
       />
     </div>
