@@ -7,35 +7,111 @@ export default {
   setup(props) {
   }
 }
-
 </script>
+
 <template>
   <Loading v-if="!stats.total" />
   <template v-else>
-    <section class="flex gap-x-3">
-      <a>Total: {{stats.total}}</a>
-      <a>Movie: {{stats.movie}}</a>
-      <a>TV: {{stats.tv}}</a>
-      <a>Not Started: {{ stats.not_started }}</a>
+    <!-- Overview Stats -->
+    <section class="flex flex-wrap gap-4 mb-6">
+      <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm">
+        <span class="text-gray-600">Total:</span>
+        <span class="font-semibold text-indigo-600">{{ stats.total }}</span>
+      </div>
+      <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm">
+        <span class="text-gray-600">Movies:</span>
+        <span class="font-semibold text-indigo-600">{{ stats.movie }}</span>
+      </div>
+      <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm">
+        <span class="text-gray-600">TV Shows:</span>
+        <span class="font-semibold text-indigo-600">{{ stats.tv }}</span>
+      </div>
+      <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm">
+        <span class="text-gray-600">Not Started:</span>
+        <span class="font-semibold text-indigo-600">{{ stats.not_started }}</span>
+      </div>
     </section>
 
-    <section class="flex gap-x-3 flex-wrap">
-      <span>Countries: </span>
-      <NuxtLink :class="getFilterCssClass(curCountry, '')" :to="{query:{genre:curGenre,lang:curLang}}">All</NuxtLink>
-      <NuxtLink v-for="count,country of stats.countries" :class="getFilterCssClass(curCountry, country)" :to="{query:{lang:curLang,country,genre:curGenre}}">{{ `${country}(${count})` }}</NuxtLink>
-    </section>
-    
-    <section class="flex gap-x-3 flex-wrap">
-      <span>Languages: </span>
-      <NuxtLink :class="getFilterCssClass(curLang, '')" :to="{query:{genre:curGenre}}">All</NuxtLink>
-      <NuxtLink v-for="count,lang of stats.languages" :class="getFilterCssClass(curLang, lang)" :to="{query:{lang,genre:curGenre,country:curCountry}}">{{ `${lang}(${count})` }}</NuxtLink>
-    </section>
+    <!-- Filter Sections -->
+    <div class="space-y-6">
+      <!-- Countries Filter -->
+      <section class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="text-gray-700 font-medium mb-3">Countries</h3>
+        <div class="flex flex-wrap gap-2">
+          <NuxtLink 
+            :class="getFilterCssClass(curCountry, '')" 
+            :to="{query:{genre:curGenre,lang:curLang}}"
+            class="px-3 py-1.5 text-sm"
+          >
+            All
+          </NuxtLink>
+          <NuxtLink 
+            v-for="(count, country) in stats.countries" 
+            :key="country"
+            :class="getFilterCssClass(curCountry, country)" 
+            :to="{query:{lang:curLang,country,genre:curGenre}}"
+            class="px-3 py-1.5 text-sm"
+          >
+            {{ country }} ({{ count }})
+          </NuxtLink>
+        </div>
+      </section>
 
-    <section class="flex gap-x-3 flex-wrap">
-      <span>Genres: </span>
-      <NuxtLink :class="getFilterCssClass(curGenre, '')" :to="{query:{lang:curLang}}">All</NuxtLink>
-      <NuxtLink v-for="count,genre of stats.genres" :class="getFilterCssClass(curGenre, genre)" :to="{query:{genre,lang:curLang,country:curCountry}}">{{ `${genre}(${count})` }}</NuxtLink>
-    </section>
+      <!-- Languages Filter -->
+      <section class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="text-gray-700 font-medium mb-3">Languages</h3>
+        <div class="flex flex-wrap gap-2">
+          <NuxtLink 
+            :class="getFilterCssClass(curLang, '')" 
+            :to="{query:{genre:curGenre}}"
+            class="px-3 py-1.5 text-sm"
+          >
+            All
+          </NuxtLink>
+          <NuxtLink 
+            v-for="(count, lang) in stats.languages" 
+            :key="lang"
+            :class="getFilterCssClass(curLang, lang)" 
+            :to="{query:{lang,genre:curGenre,country:curCountry}}"
+            class="px-3 py-1.5 text-sm"
+          >
+            {{ lang }} ({{ count }})
+          </NuxtLink>
+        </div>
+      </section>
 
+      <!-- Genres Filter -->
+      <section class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="text-gray-700 font-medium mb-3">Genres</h3>
+        <div class="flex flex-wrap gap-2">
+          <NuxtLink 
+            :class="getFilterCssClass(curGenre, '')" 
+            :to="{query:{lang:curLang}}"
+            class="px-3 py-1.5 text-sm"
+          >
+            All
+          </NuxtLink>
+          <NuxtLink 
+            v-for="(count, genre) in stats.genres" 
+            :key="genre"
+            :class="getFilterCssClass(curGenre, genre)" 
+            :to="{query:{genre,lang:curLang,country:curCountry}}"
+            class="px-3 py-1.5 text-sm"
+          >
+            {{ genre }} ({{ count }})
+          </NuxtLink>
+        </div>
+      </section>
+    </div>
   </template>
 </template>
+
+<style scoped>
+.movie-filter {
+  @apply transition-all duration-200 border border-gray-200 rounded-md hover:border-indigo-500 hover:text-indigo-600 hover:shadow-sm;
+}
+
+.movie-filter.active {
+  @apply border-indigo-500 bg-indigo-50 text-indigo-600;
+}
+</style>
