@@ -13,29 +13,29 @@ export default {
   <Loading v-if="!stats.total" />
   <template v-else>
     <!-- Overview Stats -->
-    <section class="flex flex-wrap gap-4 mb-6">
-      <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm">
+    <section class="flex flex-wrap gap-4">
+      <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow">
         <span class="text-gray-600">Total:</span>
         <span class="font-semibold text-indigo-600">{{ stats.total }}</span>
       </div>
-      <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm">
+      <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow">
         <span class="text-gray-600">Movies:</span>
         <span class="font-semibold text-indigo-600">{{ stats.movie }}</span>
       </div>
-      <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm">
+      <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow">
         <span class="text-gray-600">TV Shows:</span>
         <span class="font-semibold text-indigo-600">{{ stats.tv }}</span>
       </div>
-      <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm">
+      <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow">
         <span class="text-gray-600">Not Started:</span>
         <span class="font-semibold text-indigo-600">{{ stats.not_started }}</span>
       </div>
     </section>
 
     <!-- Filter Sections -->
-    <div class="space-y-6">
+    <div class="space-y-2">
       <!-- Countries Filter -->
-      <section class="bg-white p-4 rounded-lg shadow-sm">
+      <section class="bg-white p-4 rounded-lg shadow">
         <h3 class="text-gray-700 font-medium mb-3">Countries</h3>
         <div class="flex flex-wrap gap-2">
           <NuxtLink 
@@ -58,7 +58,7 @@ export default {
       </section>
 
       <!-- Languages Filter -->
-      <section class="bg-white p-4 rounded-lg shadow-sm">
+      <section class="bg-white p-4 rounded-lg shadow">
         <h3 class="text-gray-700 font-medium mb-3">Languages</h3>
         <div class="flex flex-wrap gap-2">
           <NuxtLink 
@@ -81,7 +81,7 @@ export default {
       </section>
 
       <!-- Genres Filter -->
-      <section class="bg-white p-4 rounded-lg shadow-sm">
+      <section class="bg-white p-4 rounded-lg shadow">
         <h3 class="text-gray-700 font-medium mb-3">Genres</h3>
         <div class="flex flex-wrap gap-2">
           <NuxtLink 
