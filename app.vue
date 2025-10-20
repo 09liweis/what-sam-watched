@@ -65,7 +65,7 @@ watch(() => route.query, () => {
       class="pt-2 pb-4 sticky top-0 bg-white z-10 transition-transform duration-300"
       :class="{ '-translate-y-full': !isHeaderVisible }"
     >
-      <nav class="flex flex-wrap justify-center items-center px-4">
+      <nav class="flex flex-wrap justify-center items-center px-4 gap-2">
         <div class="flex flex-wrap gap-2">
           <LinkButton v-for="(route,id) in ROUTES" :class="getRouteStyleClass(routeName, id)" :to="route.to" :text="route.nm" />
         </div>
