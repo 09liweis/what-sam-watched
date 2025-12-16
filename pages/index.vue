@@ -1,31 +1,34 @@
 <script setup>
-import Button from '~/components/Button';
-import MovieList from '~/components/MovieList.vue';
-import Stats from '~/components/Stats.vue';
-import Pagination from '~/components/Pagination.vue';
-import SearchForm from '~/components/search/SearchForm.vue';
-import SearchResults from '~/components/search/SearchResults.vue';
-import { ref, computed, watch } from 'vue';
-import { useMoviesStore } from '@/stores/movies';
-import { useAuthStore } from '~/stores/auth';
+import Button from "~/components/Button";
+import MovieList from "~/components/MovieList.vue";
+import Stats from "~/components/Stats.vue";
+import Pagination from "~/components/Pagination.vue";
+import SearchForm from "~/components/search/SearchForm.vue";
+import SearchResults from "~/components/search/SearchResults.vue";
+import { ref, computed, watch } from "vue";
+import { useMoviesStore } from "@/stores/movies";
+import { useAuthStore } from "~/stores/auth";
 
 const authStore = useAuthStore();
 const moviesStore = useMoviesStore();
 moviesStore.getStats();
 
 const route = useRoute();
-watch(() => route.query, () => {
-  moviesStore.fetchMovies();
-});
+watch(
+  () => route.query,
+  () => {
+    moviesStore.fetchMovies();
+  }
+);
 
-onMounted(()=>{
+onMounted(() => {
   moviesStore.fetchMovies();
 });
 
 let loading = ref(false);
 const showSearchForm = ref(false);
 const showFilter = ref(false);
-let searchMovieTitle = ref('');
+let searchMovieTitle = ref("");
 const searchResults = ref([]);
 
 async function handleSearch(query) {
@@ -48,9 +51,18 @@ async function handleMovieSelect(movie) {
 
 <template>
   <main class="container p-5">
-    <Button :text="showFilter ? 'Hide Filter' : 'Show Filter'" :onClick="() => showFilter = !showFilter" />
-    <Stats v-if="showFilter" :stats="moviesStore.stats" :curCountry="moviesStore.curCountry" :curLang="moviesStore.curLang" :curGenre="moviesStore.curGenre" />
-    
+    <Button
+      :text="showFilter ? 'Hide Filter' : 'Show Filter'"
+      :onClick="() => (showFilter = !showFilter)"
+    />
+    <Stats
+      v-if="showFilter"
+      :stats="moviesStore.stats"
+      :curCountry="moviesStore.curCountry"
+      :curLang="moviesStore.curLang"
+      :curGenre="moviesStore.curGenre"
+    />
+
     <SearchForm
       v-if="showSearchForm"
       @close="showSearchForm = false"
@@ -58,17 +70,14 @@ async function handleMovieSelect(movie) {
       @selectMovie="handleMovieSelect"
     >
       <template #results="{ onSelect }">
-        <SearchResults
-          :results="searchResults"
-          :onSelect="onSelect"
-        />
+        <SearchResults :results="searchResults" :onSelect="onSelect" />
       </template>
     </SearchForm>
 
-    <h1 
-      :data-text="`What Sam Watched in Nuxt.js ${moviesStore.total} movies`" 
-      id="home-title" 
-      class="relative text-2xl text-center text-black-500 font-bold my-4"
+    <h1
+      :data-text="`What Sam Watched in Nuxt.js ${moviesStore.total} movies`"
+      id="home-title"
+      class="relative text-3xl text-center text-black-500 font-bold my-5"
     >
       What Sam Watched in Nuxt.js {{ moviesStore.total }} movies
     </h1>
@@ -79,9 +88,9 @@ async function handleMovieSelect(movie) {
         placeholder="Search my movies"
         v-model="searchMovieTitle"
       />
-      <Button 
-        :text="loading ? 'Loading' : 'Add'" 
-        :onClick="() => showSearchForm = true" 
+      <Button
+        :text="loading ? 'Loading' : 'Add'"
+        :onClick="() => (showSearchForm = true)"
       />
     </section>
 
