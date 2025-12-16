@@ -2,17 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face{font-family: "mtsi-font";src:url("//s3plus.meituan.net/v1/mss_73a511b8f91f43d0bdae92584ea6330b/font/2a70c44b.eot");src:url("//s3plus.meituan.net/v1/mss_73a511b8f91f43d0bdae92584ea6330b/font/2a70c44b.eot?#iefix") format("embedded-opentype"),url("//s3plus.meituan.net/v1/mss_73a511b8f91f43d0bdae92584ea6330b/font/2a70c44b.woff");} 
+@font-face {
+  font-family: "mtsi-font";
+  src: url("//s3plus.meituan.net/v1/mss_73a511b8f91f43d0bdae92584ea6330b/font/2a70c44b.eot");
+  src: url("//s3plus.meituan.net/v1/mss_73a511b8f91f43d0bdae92584ea6330b/font/2a70c44b.eot?#iefix")
+      format("embedded-opentype"),
+    url("//s3plus.meituan.net/v1/mss_73a511b8f91f43d0bdae92584ea6330b/font/2a70c44b.woff");
+}
 
 .font-mtsi {
-  font-family: 'mtsi-font';
+  font-family: "mtsi-font";
 }
 
 .menu-item {
   @apply border p-1 transition duration-200 rounded text-center min-w-7;
 }
 
-.menu-item.active, .menu-item:hover {
+.menu-item.active,
+.menu-item:hover {
   @apply text-red-500 border-red-500;
 }
 
@@ -54,7 +61,7 @@
 
 .movie-episode-btn::after {
   z-index: 0;
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -77,7 +84,7 @@
 }
 
 .movie-card-year {
-  @apply absolute top-2 left-2 bg-white/90 text-red-600 text-sm font-medium px-2 py-0.5 rounded shadow;
+  @apply absolute top-2 left-2 bg-white/90 text-red-600 px-1 py-0.5 rounded shadow;
 }
 
 .movie-card {
