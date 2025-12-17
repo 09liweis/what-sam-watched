@@ -60,7 +60,7 @@ watch(() => route.query, () => {
 </script>
 
 <template>
-  <section class="max-w-5xl m-auto max-h-max box-border">
+  <section class="max-w-7xl m-auto max-h-max box-border">
     <header 
       class="pt-2 pb-4 sticky top-0 bg-white z-10 transition-transform duration-300"
       :class="{ '-translate-y-full': !isHeaderVisible }"
