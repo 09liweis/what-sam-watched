@@ -14,13 +14,22 @@ defineProps({
 
 const authStore = useAuthStore();
 const moviesStore = useMoviesStore();
+
+const getMovieUrl = (movie) => {
+  if (movie.douban_id) {
+    return `https://movie.douban.com/subject/${movie.douban_id}`;
+  } else {
+    return movie.original_url;
+  }
+};
 </script>
 
 <template>
   <article class="movie-card group">
     <NuxtLink
       @click="moviesStore.setCurrentMovie(movie)"
-      :to="`/movie/${movie.douban_id}`"
+      :to="getMovieUrl(movie)"
+      target="_blank"
       class="block overflow-hidden"
     >
       <div
