@@ -55,7 +55,14 @@ export const ROUTES: ROUTES_TYPE = {
       coming: { to: getListsUrl("taiwan?nm=coming"), nm: "In comming" },
     },
   },
-  imdb: { to: getListsUrl("imdb?nm=boxoffice"), nm: "IMDB" },
+  imdb: {
+    to: getListsUrl("imdb?nm=boxoffice"),
+    nm: "IMDB",
+    subRoutes: {
+      boxoffice: { to: getListsUrl("imdb?nm=boxoffice"), nm: "BoxOffice" },
+      popular: { to: getListsUrl("imdb?nm=popular"), nm: "Popular" },
+    },
+  },
 };
 
 export const getSubroutes = (name: string): ROUTES_TYPE | null => {
