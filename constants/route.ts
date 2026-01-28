@@ -1,49 +1,55 @@
-export const SAM:string = 'sam';
+export const SAM: string = "sam";
 
 type ROUTE = {
-  to: string,
-  nm: string,
-  subRoutes?:{
-    [key:string]: ROUTE
-  }
-}
+  to: string;
+  nm: string;
+  subRoutes?: {
+    [key: string]: ROUTE;
+  };
+};
 
 type ROUTES_TYPE = {
-  [key:string]: ROUTE
-}
+  [key: string]: ROUTE;
+};
 
-export const ROUTES:ROUTES_TYPE = {
-  sam:{to:'/',nm:'Sam'},
-  quiz:{to:'/quiz',nm:'Quiz'},
-  douban:{
-    to:'/movies/douban?nm=in_theatre',
-    nm:'Douban',
-    subRoutes:{
-      'in_theatre':{to:'/movies/douban?nm=in_theatre',nm:'In theatre'},
-      'comming':{to:'/movies/douban?nm=comming',nm:'In comming'},
-      'popular':{to:'/movies/douban?nm=popular',nm:'Popular'},
-      'chart':{to:'/movies/douban?nm=chart',nm:'Chart'},
-      'alltime_boxoffice':{to:'/movies/douban?nm=alltime_boxoffice',nm:'All Boxoffice'}
-    }
+export const ROUTES: ROUTES_TYPE = {
+  sam: { to: "/", nm: "Sam" },
+  quiz: { to: "/quiz", nm: "Quiz" },
+  douban: {
+    to: "/lists/douban?nm=in_theatre",
+    nm: "Douban",
+    subRoutes: {
+      in_theatre: { to: "/lists/douban?nm=in_theatre", nm: "In theatre" },
+      comming: { to: "/lists/douban?nm=comming", nm: "In comming" },
+      popular: { to: "/lists/douban?nm=popular", nm: "Popular" },
+      chart: { to: "/lists/douban?nm=chart", nm: "Chart" },
+      alltime_boxoffice: {
+        to: "/lists/douban?nm=alltime_boxoffice",
+        nm: "All Boxoffice",
+      },
+    },
   },
-  maoyan:{to:'/movies/maoyan',nm:'Maoyan'},
-  cineplex:{to:'/movies/cineplex',nm:'Canada Cineplex'},
+  maoyan: { to: "/lists/maoyan", nm: "Maoyan" },
+  cineplex: { to: "/lists/cineplex", nm: "Canada Cineplex" },
   hongkong: {
-    to:'/movies/hongkong?nm=showing',nm:'China Hongkong',
-    subRoutes:{
-      'showing':{to:'/movies/hongkong?nm=showing',nm:'In theatre'},
-      'coming':{to:'/movies/hongkong?nm=coming',nm:'In comming'}
-    }
+    to: "/lists/hongkong?nm=showing",
+    nm: "China Hongkong",
+    subRoutes: {
+      showing: { to: "/lists/hongkong?nm=showing", nm: "In theatre" },
+      coming: { to: "/lists/hongkong?nm=coming", nm: "In comming" },
+    },
   },
-  taiwan: {to:'/movies/taiwan?nm=showing',nm:'China Taiwan',
-    subRoutes:{
-      'showing':{to:'/movies/taiwan?nm=showing',nm:'In theatre'},
-      'coming':{to:'/movies/taiwan?nm=coming',nm:'In comming'}
-    }
+  taiwan: {
+    to: "/lists/taiwan?nm=showing",
+    nm: "China Taiwan",
+    subRoutes: {
+      showing: { to: "/lists/taiwan?nm=showing", nm: "In theatre" },
+      coming: { to: "/lists/taiwan?nm=coming", nm: "In comming" },
+    },
   },
-  imdb: {to:'/movies/imdb?nm=boxoffice',nm:'IMDB'}
-}
+  imdb: { to: "/lists/imdb?nm=boxoffice", nm: "IMDB" },
+};
 
-export const getSubroutes = (name:string):ROUTES_TYPE|null => {
+export const getSubroutes = (name: string): ROUTES_TYPE | null => {
   return ROUTES[name]?.subRoutes || null;
-}
+};
