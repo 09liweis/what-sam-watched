@@ -65,6 +65,7 @@ export const ROUTES: ROUTES_TYPE = {
     subRoutes: {
       boxoffice: { to: getIMDBListsUrl("?nm=boxoffice"), nm: "BoxOffice" },
       popular: { to: getIMDBListsUrl("?nm=popular"), nm: "Popular" },
+      calendar: { to: getIMDBListsUrl("?nm=calendar"), nm: "Comming" },
     },
   },
 };
