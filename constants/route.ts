@@ -12,42 +12,46 @@ type ROUTES_TYPE = {
   [key: string]: ROUTE;
 };
 
+const getListsUrl = (path: string) => {
+  return `/lists/${path}`;
+};
+
 export const ROUTES: ROUTES_TYPE = {
   sam: { to: "/", nm: "Sam" },
   quiz: { to: "/quiz", nm: "Quiz" },
   douban: {
-    to: "/lists/douban?nm=in_theatre",
+    to: getListsUrl("douban?nm=in_theatre"),
     nm: "Douban",
     subRoutes: {
-      in_theatre: { to: "/lists/douban?nm=in_theatre", nm: "In theatre" },
-      comming: { to: "/lists/douban?nm=comming", nm: "In comming" },
-      popular: { to: "/lists/douban?nm=popular", nm: "Popular" },
-      chart: { to: "/lists/douban?nm=chart", nm: "Chart" },
+      in_theatre: { to: getListsUrl("douban?nm=in_theatre"), nm: "In theatre" },
+      comming: { to: getListsUrl("douban?nm=comming"), nm: "In comming" },
+      popular: { to: getListsUrl("douban?nm=popular"), nm: "Popular" },
+      chart: { to: getListsUrl("douban?nm=chart"), nm: "Chart" },
       alltime_boxoffice: {
-        to: "/lists/douban?nm=alltime_boxoffice",
+        to: getListsUrl("douban?nm=alltime_boxoffice"),
         nm: "All Boxoffice",
       },
     },
   },
-  maoyan: { to: "/lists/maoyan", nm: "Maoyan" },
-  cineplex: { to: "/lists/cineplex", nm: "Canada Cineplex" },
+  maoyan: { to: getListsUrl("maoyan"), nm: "Maoyan" },
+  cineplex: { to: getListsUrl("cineplex"), nm: "Canada Cineplex" },
   hongkong: {
-    to: "/lists/hongkong?nm=showing",
+    to: getListsUrl("hongkong?nm=showing"),
     nm: "China Hongkong",
     subRoutes: {
-      showing: { to: "/lists/hongkong?nm=showing", nm: "In theatre" },
-      coming: { to: "/lists/hongkong?nm=coming", nm: "In comming" },
+      showing: { to: getListsUrl("hongkong?nm=showing"), nm: "In theatre" },
+      coming: { to: getListsUrl("hongkong?nm=coming"), nm: "In comming" },
     },
   },
   taiwan: {
-    to: "/lists/taiwan?nm=showing",
+    to: getListsUrl("taiwan?nm=showing"),
     nm: "China Taiwan",
     subRoutes: {
-      showing: { to: "/lists/taiwan?nm=showing", nm: "In theatre" },
-      coming: { to: "/lists/taiwan?nm=coming", nm: "In comming" },
+      showing: { to: getListsUrl("taiwan?nm=showing"), nm: "In theatre" },
+      coming: { to: getListsUrl("taiwan?nm=coming"), nm: "In comming" },
     },
   },
-  imdb: { to: "/lists/imdb?nm=boxoffice", nm: "IMDB" },
+  imdb: { to: getListsUrl("imdb?nm=boxoffice"), nm: "IMDB" },
 };
 
 export const getSubroutes = (name: string): ROUTES_TYPE | null => {
