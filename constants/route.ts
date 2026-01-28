@@ -20,6 +20,10 @@ const getDoubanListsUrl = (path: string) => {
   return getListsUrl(`douban${path}`);
 };
 
+const getIMDBListsUrl = (path: string) => {
+  return getListsUrl(`imdb${path}`);
+};
+
 export const ROUTES: ROUTES_TYPE = {
   sam: { to: "/", nm: "Sam" },
   quiz: { to: "/quiz", nm: "Quiz" },
@@ -56,11 +60,11 @@ export const ROUTES: ROUTES_TYPE = {
     },
   },
   imdb: {
-    to: getListsUrl("imdb?nm=boxoffice"),
+    to: getIMDBListsUrl("?nm=boxoffice"),
     nm: "IMDB",
     subRoutes: {
-      boxoffice: { to: getListsUrl("imdb?nm=boxoffice"), nm: "BoxOffice" },
-      popular: { to: getListsUrl("imdb?nm=popular"), nm: "Popular" },
+      boxoffice: { to: getIMDBListsUrl("?nm=boxoffice"), nm: "BoxOffice" },
+      popular: { to: getIMDBListsUrl("?nm=popular"), nm: "Popular" },
     },
   },
 };
