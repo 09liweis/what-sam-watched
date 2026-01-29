@@ -4,6 +4,7 @@ import { useAuthStore } from './stores/auth';
 import {SAM, ROUTES, getSubroutes} from './constants/route';
 import LinkButton from '@/components/LinkButton';
 import LoginPopup from '@/components/auth/LoginPopup.vue';
+import ScrollToTop from '@/components/ScrollToTop.vue';
 
 const route = useRoute();
 const authStore = useAuthStore();
@@ -97,6 +98,7 @@ watch(() => route.query, () => {
       @close="showLoginPopup = false"
       @login="handleLogin"
     />
+    <ScrollToTop />
   </section>
 </template>
 
