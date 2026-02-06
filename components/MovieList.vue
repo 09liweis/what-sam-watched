@@ -10,7 +10,7 @@ const moviesStore = useMoviesStore();
   <Loading 
     v-if="moviesStore.isfetchingMovieList" 
     type="skeleton"
-    :count="12"
+    :count="15"
   />
   <MovieCards v-else />
 </template>
