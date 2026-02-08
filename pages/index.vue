@@ -39,7 +39,7 @@ async function handleMovieSelect(movie) {
   showSearchForm.value = false;
   loading.value = true;
   try {
-    await moviesStore.upsertMovie(movie.douban_id);
+    await moviesStore.upsertMovie(movie);
     loading.value = false;
     moviesStore.fetchMovies();
     searchResults.value = [];
