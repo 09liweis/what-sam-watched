@@ -39,16 +39,6 @@ export const useMoviesStore = defineStore("movies", {
       const response: StatsResponse = await $fetch(API_STATS);
       this.stats = response.details;
     },
-    async getUpdatedMovie(movie: Movie) {
-      movie.loading = true;
-      const response: Movie = await $fetch(API_UPSERT, {
-        method: "POST",
-        body: movie,
-      });
-      movie.douban_rating = response.douban_rating;
-      movie.imdb_rating = response.imdb_rating;
-      movie.loading = false;
-    },
     setQueryParams() {
       const { query } = useRoute();
       const lang = query.lang?.toString() || "";
@@ -130,17 +120,6 @@ export const useMoviesStore = defineStore("movies", {
         method: "PUT",
       });
       this.fetchMovies();
-    },
-    async setCurVideo(video: any) {
-      this.showVideo = true;
-      this.curVideo = video;
-      const response: any = await $fetch(
-        `${API_MOVIE_ENDPOINT}video/${video.video_id}`
-      );
-      this.curVideo = response;
-    },
-    hideVideo() {
-      this.showVideo = false;
     },
   },
 });
