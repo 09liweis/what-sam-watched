@@ -27,7 +27,6 @@ const getMovieUrl = (movie) => {
 <template>
   <article class="movie-card group">
     <NuxtLink
-      @click="moviesStore.setCurrentMovie(movie)"
       :to="getMovieUrl(movie)"
       target="_blank"
       class="block overflow-hidden"

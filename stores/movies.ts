@@ -112,9 +112,6 @@ export const useMoviesStore = defineStore("movies", {
     setMovieList(movieList: Movie[]) {
       this.movieList = movieList;
     },
-    setCurrentMovie(movie: {}) {
-      this.currentMovie = movie;
-    },
     async updateEpisode(v: Movie) {
       const response = await $fetch(`${API_MOVIE_ENDPOINT}${v.douban_id}`, {
         method: "PUT",
