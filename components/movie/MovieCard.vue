@@ -25,15 +25,11 @@ const getMovieUrl = (movie) => {
 </script>
 
 <template>
-  <article class="movie-card group">
-    <NuxtLink
-      :to="getMovieUrl(movie)"
-      target="_blank"
-      class="block overflow-hidden"
+  <article class="movie-card group block overflow-hidden">
+    <div
+      class="relative overflow-hidden rounded shadow transition-all duration-300 group-hover:shadow-xl"
     >
-      <div
-        class="relative overflow-hidden rounded shadow transition-all duration-300 group-hover:shadow-xl"
-      >
+      <NuxtLink :to="getMovieUrl(movie)" target="_blank">
         <video
           v-if="movie.video"
           autoplay
@@ -51,34 +47,33 @@ const getMovieUrl = (movie) => {
         <div
           class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         ></div>
-        <span v-if="movie.release || movie.year" class="movie-card-year">
-          {{ movie.release || movie.year }}
-        </span>
+      </NuxtLink>
+      <span v-if="movie.release || movie.year" class="movie-card-year">
+        {{ movie.release || movie.year }}
+      </span>
 
-        <button
-          v-if="movie._id && authStore.isAuthenticated"
-          @click="moviesStore.deleteMovie(movie._id)"
-          class="absolute bottom-2 left-2 text-red-600 bg-red-50 hover:bg-red-100 px-2 py-1 rounded-md transition-colors duration-200 text-sm font-medium"
-        >
-          Delete
-        </button>
-
-        <button
-          v-if="!movie._id && authStore.isAuthenticated"
-          @click="moviesStore.upsertMovie(movie)"
-          class="absolute top-2 right-2 text-green-600 bg-red-50 hover:bg-green-100 px-2 py-1 rounded-md transition-colors duration-200 text-sm font-medium"
-        >
-          Upsert
-        </button>
-
-      </div>
-      <h3
-        :title="movie.title"
-        class="mt-2 text-lg font-semibold text-gray-800 line-clamp-1 group-hover:text-red-500"
+      <button
+        v-if="movie._id && authStore.isAuthenticated"
+        @click="moviesStore.deleteMovie(movie._id)"
+        class="absolute bottom-2 left-2 text-red-600 bg-red-50 hover:bg-red-100 px-2 py-1 rounded-md transition-colors duration-200 text-sm font-medium"
       >
-        {{ movie.title }}
-      </h3>
-    </NuxtLink>
+        Delete
+      </button>
+
+      <button
+        v-if="!movie._id && authStore.isAuthenticated"
+        @click="moviesStore.upsertMovie(movie)"
+        class="absolute top-2 right-2 text-green-600 bg-red-50 hover:bg-green-100 px-2 py-1 rounded-md transition-colors duration-200 text-sm font-medium"
+      >
+        Upsert
+      </button>
+    </div>
+    <h3
+      :title="movie.title"
+      class="mt-2 text-lg font-semibold text-gray-800 line-clamp-1 group-hover:text-red-500"
+    >
+      {{ movie.title }}
+    </h3>
 
     <div class="mt-2 space-y-1">
       <Rating
@@ -104,7 +99,6 @@ const getMovieUrl = (movie) => {
         :movie="movie"
         :updateEpisode="moviesStore.updateEpisode"
       />
-      
     </div>
   </article>
 </template>
