@@ -5,12 +5,19 @@
 </template>
 <script setup>
   import MovieList from '~/components/MovieList';
-  import { onMounted, ref } from 'vue';
+  import { onMounted, ref, watch } from 'vue';
   import { useMoviesStore } from '@/stores/movies';
+  import { useSeo } from '~/utils/seo';
   const runtimeConfig = useRuntimeConfig();
   
   const route = useRoute();
   const moviesStore = useMoviesStore();
+  
+  // set SEO based on list name
+  useSeo({
+    title: `Movies in ${route.params.name}`,
+    description: `Explore the ${route.params.name} collection of movies Sam has watched.`,
+  });
   
   let loading = ref(false);
 

@@ -1,4 +1,6 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
+import { SITE_URL } from './constants/seo';
+
 export default defineNuxtConfig({
   postcss: {
     plugins: {
@@ -46,7 +48,31 @@ export default defineNuxtConfig({
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       title: 'What Sam Watched',
-      meta: [{ name: 'description', content: 'My amazing movie dashboard.' }],
+      meta: [
+        { name: 'description', content: 'My amazing movie dashboard.' },
+        { name: 'robots', content: 'index,follow' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: 'What Sam Watched' },
+        { property: 'og:description', content: 'A dashboard of movies Sam has watched.' },
+        { property: 'og:url', content: process.env.PUBLIC_URL || SITE_URL },
+        { property: 'og:image', content: '/og-image.png' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: 'What Sam Watched' },
+        { name: 'twitter:description', content: 'A dashboard of movies Sam has watched.' },
+        { name: 'twitter:image', content: '/og-image.png' }
+      ],
+      script: [
+        {
+          type: 'application/ld+json',
+          children: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'What Sam Watched',
+            url: process.env.PUBLIC_URL || SITE_URL,
+            description: 'A dashboard of movies Sam has watched.'
+          })
+        }
+      ]
     },
   },
 

@@ -5,15 +5,22 @@ import Stats from "~/components/Stats.vue";
 import Pagination from "~/components/Pagination.vue";
 import SearchForm from "~/components/search/SearchForm.vue";
 import SearchResults from "~/components/search/SearchResults.vue";
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, onMounted } from "vue";
 import { useMoviesStore } from "@/stores/movies";
 import { useAuthStore } from "~/stores/auth";
+import { useSeo } from "~/utils/seo";
 
 const authStore = useAuthStore();
 const moviesStore = useMoviesStore();
 moviesStore.getStats();
 
 const route = useRoute();
+// apply default homepage SEO
+useSeo({
+  title: 'What Sam Watched',
+  description: 'Browse the movies Sam has watched and keep track of his film journey.',
+});
+
 watch(
   () => route.query,
   () => {
