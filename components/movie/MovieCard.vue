@@ -70,7 +70,7 @@ const getMovieUrl = (movie) => {
     </div>
     <h3
       :title="movie.title"
-      class="mt-2 text-lg font-semibold text-gray-800 line-clamp-1 group-hover:text-red-500"
+      class="mt-2 text-lg md:text-xl font-semibold text-gray-800 line-clamp-1 group-hover:text-red-500"
     >
       {{ movie.title }}
     </h3>
