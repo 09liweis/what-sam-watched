@@ -27,7 +27,7 @@ defineEmits(['close', 'login']);
 
         <span class="hidden sm:inline-block sm:h-screen sm:align-middle" aria-hidden="true">&#8203;</span>
 
-        <div class="relative inline-block transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6 sm:align-middle">
+        <div class="relative w-full max-w-2xl inline-block transform overflow-hidden rounded bg-white px-4 pt-5 pb-4 text-left shadow transition-all sm:my-8 sm:p-6 sm:align-middle">
           <div class="absolute top-0 right-0 pt-4 pr-4">
             <button
               type="button"
