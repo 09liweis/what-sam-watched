@@ -84,7 +84,7 @@
 }
 
 .movie-card-year {
-  @apply absolute top-2 left-2 bg-white/90 text-red-600 px-1 py-0.5 rounded shadow;
+  @apply absolute top-2 left-2 bg-white text-sky-600 px-1 py-0.5 rounded;
 }
 
 .movie-card {
