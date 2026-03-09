@@ -113,7 +113,3 @@ watch(
     />
   </header>
 </template>
-
-<style scoped>
-/* header-specific styles */
-</style>
