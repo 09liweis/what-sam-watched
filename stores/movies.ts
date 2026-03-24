@@ -68,15 +68,26 @@ export const useMoviesStore = defineStore("movies", {
     async fetchMovies(name = "") {
       this.setQueryParams();
       this.isfetchingMovieList = true;
-      const moviesResp: MoviesResponse = await $fetch(
-        this.getMoviesAPIUrl(name)
-      );
-      this.setMovieList(moviesResp.movies);
-      if (moviesResp.total) {
-        this.total = moviesResp.total;
-        this.pages = moviesResp.pages;
+      try {
+        const moviesResp: MoviesResponse = await $fetch(
+          this.getMoviesAPIUrl(name)
+        );
+        if (moviesResp.err) {
+          this.setMovieList([]);
+          return;
+        }
+        this.setMovieList(moviesResp.movies);
+        if (moviesResp.total) {
+          this.total = moviesResp.total;
+          this.pages = moviesResp.pages;
+        }
+        
+      } catch (error) {
+        
+      } finally {
+        this.isfetchingMovieList = false;
       }
-      this.isfetchingMovieList = false;
+      
     },
     async searchDoubanMovies(title: string) {
       const { movies, err }: MoviesResponse = await $fetch(
