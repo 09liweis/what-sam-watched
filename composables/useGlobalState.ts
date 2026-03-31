@@ -17,6 +17,7 @@ export const useGlobalState = () => {
   };
 
   const movies = useState<Movie[]>("movies", () => []);
+  const total = useState<number>("total", () => 0);
   const isfetchingMovieList = useState<boolean>(
     "isFetchingMovieList",
     () => true
@@ -48,6 +49,9 @@ export const useGlobalState = () => {
         return;
       }
       movies.value = moviesResp.movies;
+      if (moviesResp.total) {
+        total.value = moviesResp.total;
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -67,6 +71,7 @@ export const useGlobalState = () => {
     getStats,
     stats,
     movies,
+    total,
     fetchMovieList,
     isfetchingMovieList,
     searchDoubanMovies,

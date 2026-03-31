@@ -9,7 +9,7 @@ import { ref, computed, watch, onMounted } from "vue";
 import { useMoviesStore } from "@/stores/movies";
 import { useAuthStore } from "~/stores/auth";
 import { useSeo } from "~/utils/seo";
-const { fetchMovieList, getStats, stats, searchDoubanMovies } =
+const { fetchMovieList, getStats, stats, searchDoubanMovies, total } =
   useGlobalState();
 
 const authStore = useAuthStore();
@@ -85,11 +85,11 @@ async function handleMovieSelect(movie) {
     </SearchForm>
 
     <h1
-      :data-text="`What Sam Watched in Nuxt.js ${moviesStore.total} movies`"
+      :data-text="`What Sam Watched in Nuxt.js ${total} movies`"
       id="home-title"
       class="relative text-3xl text-center text-black-500 font-bold my-5"
     >
-      What Sam Watched in Nuxt.js {{ moviesStore.total }} movies
+      What Sam Watched in Nuxt.js {{ total }} movies
     </h1>
 
     <section v-if="authStore.isAuthenticated" class="flex items-center mb-1.5">

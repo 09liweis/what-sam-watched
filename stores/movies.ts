@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import type { Movie, MoviesResponse, StatsResponse } from "../types/movie";
+import type { Movie, MoviesResponse } from "../types/movie";
 import { API_ENDPOINT, API_UPSERT, API_MOVIE_ENDPOINT } from "~/constants/api";
 
 const emptyMovieList: Movie[] = [];
@@ -11,7 +11,6 @@ interface QUERY_PARAMS {
 export const useMoviesStore = defineStore("movies", {
   state: () => ({
     movieList: emptyMovieList,
-    total: 0,
     limit: 50,
     page: "1",
     pages: emptyPages,
@@ -64,7 +63,6 @@ export const useMoviesStore = defineStore("movies", {
         }
         this.setMovieList(moviesResp.movies);
         if (moviesResp.total) {
-          this.total = moviesResp.total;
           this.pages = moviesResp.pages;
         }
       } catch (error) {
