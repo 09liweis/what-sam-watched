@@ -4,9 +4,11 @@ import {
   API_STATS,
   API_UPSERT,
   API_MOVIE_ENDPOINT,
-  API_QUIZ,
 } from "~/constants/api";
 import type { Movie, MoviesResponse, StatsResponse } from "../types/movie";
+interface QUERY_PARAMS {
+  [key: string]: boolean | number | string;
+}
 
 // composables/useGlobalState.ts
 export const useGlobalState = () => {
@@ -18,7 +20,7 @@ export const useGlobalState = () => {
 
   const movies = useState<Movie[]>("movies", () => []);
   const total = useState<number>("total", () => 0);
-  const curPage = useState<number>("curPage", () => 1);
+  const curPage = useState<string>("curPage", () => "1");
   const pages = useState<number[]>("pages", () => []);
   const isfetchingMovieList = useState<boolean>(
     "isFetchingMovieList",
@@ -26,19 +28,25 @@ export const useGlobalState = () => {
   );
 
   const getMoviesAPIUrl = (name: string): string => {
+    const {
+      query: { page },
+    } = useRoute();
+    if (page) {
+      curPage.value = page.toString() || "";
+    }
     let result = `${API_ENDPOINT}${name}?imgserver=img9`;
-    // const queryParams: QUERY_PARAMS = {
-    //   page: this.page,
-    //   limit: this.limit,
-    //   lang: this.curLang,
-    //   genre: this.curGenre,
-    //   country: this.curCountry,
-    // };
-    // for (const query in queryParams) {
-    //   if (queryParams[query]) {
-    //     result += `&${query}=${queryParams[query]}`;
-    //   }
-    // }
+    const queryParams: QUERY_PARAMS = {
+      page: curPage.value,
+      limit: 50,
+      // lang: this.curLang,
+      // genre: this.curGenre,
+      // country: this.curCountry,
+    };
+    for (const query in queryParams) {
+      if (queryParams[query]) {
+        result += `&${query}=${queryParams[query]}`;
+      }
+    }
     return result;
   };
 
