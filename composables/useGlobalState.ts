@@ -2,10 +2,12 @@
 export const useGlobalState = () => {
   const movies = useState<Movie[]>('movies', () => [])
 
-  const setMovies = (val: Movie[]) => movies.value = val
+  const fetchMovieList = async () => {
+    console.log('movieList');
+  }
 
   return {
     movies,
-    setMovies
+    fetchMovieList
   }
 }
