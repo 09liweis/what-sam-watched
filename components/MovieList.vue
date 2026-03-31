@@ -4,11 +4,12 @@ import MovieCards from '@/components/movie/MovieCards.vue';
 import Loading from '@/components/Loading.vue';
 
 const moviesStore = useMoviesStore();
+const {isfetchingMovieList} = useGlobalState();
 </script>
 
 <template>
   <Loading 
-    v-if="moviesStore.isfetchingMovieList" 
+    v-if="isfetchingMovieList" 
     type="skeleton"
     :count="15"
   />
