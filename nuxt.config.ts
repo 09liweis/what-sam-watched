@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
-  modules: ['@pinia/nuxt','@nuxt/image'],
+  modules: ['@pinia/nuxt'],
 
   // server: {
   //   host: '0.0.0.0',
