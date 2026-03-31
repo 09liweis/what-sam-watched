@@ -1,16 +1,17 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useMoviesStore } from '@/stores/movies';
+import {
+  API_QUIZ,
+} from "~/constants/api";
 import QuizCard from '~/components/quiz/QuizCard.vue';
 
-const moviesStore = useMoviesStore();
 const currentQuiz = ref(null);
 const selectedAnswer = ref(null);
 const isCorrect = ref(null);
 const loading = ref(false);
 
 const generateNewQuiz = async () => {
-  currentQuiz.value = await moviesStore.getMovieQuiz();
+  currentQuiz.value = await await $fetch(API_QUIZ);
   selectedAnswer.value = null;
   isCorrect.value = null;
 };

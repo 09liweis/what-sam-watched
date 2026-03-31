@@ -6,7 +6,6 @@ import {
   API_STATS,
   API_UPSERT,
   API_MOVIE_ENDPOINT,
-  API_QUIZ,
 } from "~/constants/api";
 
 const emptyMovieList: Movie[] = [];
@@ -32,9 +31,6 @@ export const useMoviesStore = defineStore("movies", {
     showVideo: false,
   }),
   actions: {
-    async getMovieQuiz() {
-      return await $fetch(API_QUIZ);
-    },
     async getStats() {
       const response: StatsResponse = await $fetch(API_STATS);
       this.stats = response.details;
