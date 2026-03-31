@@ -10,14 +10,17 @@ import type { Movie, MoviesResponse, StatsResponse } from "../types/movie";
 
 // composables/useGlobalState.ts
 export const useGlobalState = () => {
-  const stats = useState<StatsResponse>('stats',()=>{});
+  const stats = useState<StatsResponse>("stats", () => {});
   const getStats = async () => {
     const response: StatsResponse = await $fetch(API_STATS);
     stats.value = response.details;
   };
 
-  const movies = useState<Movie[]>('movies', () => []);
-  const isfetchingMovieList = useState<boolean>('isFetchingMovieList', ()=>true);
+  const movies = useState<Movie[]>("movies", () => []);
+  const isfetchingMovieList = useState<boolean>(
+    "isFetchingMovieList",
+    () => true
+  );
 
   const getMoviesAPIUrl = (name: string): string => {
     let result = `${API_ENDPOINT}${name}?imgserver=img9`;
@@ -36,12 +39,10 @@ export const useGlobalState = () => {
     return result;
   };
 
-  const fetchMovieList = async (name='') => {
+  const fetchMovieList = async (name = "") => {
     isfetchingMovieList.value = true;
     try {
-      const moviesResp: MoviesResponse = await $fetch(
-        getMoviesAPIUrl(name)
-      );
+      const moviesResp: MoviesResponse = await $fetch(getMoviesAPIUrl(name));
       if (moviesResp.err) {
         movies.value = [];
         return;
@@ -52,13 +53,22 @@ export const useGlobalState = () => {
     } finally {
       isfetchingMovieList.value = false;
     }
-  }
+  };
+
+  const searchDoubanMovies = async (title: string) => {
+    const { movies, err }: MoviesResponse = await $fetch(
+      `${API_SEARCH}${title}`
+    );
+    if (err) return [];
+    return movies;
+  };
 
   return {
     getStats,
     stats,
     movies,
     fetchMovieList,
-    isfetchingMovieList
-  }
-}
+    isfetchingMovieList,
+    searchDoubanMovies,
+  };
+};

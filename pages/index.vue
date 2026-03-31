@@ -9,7 +9,8 @@ import { ref, computed, watch, onMounted } from "vue";
 import { useMoviesStore } from "@/stores/movies";
 import { useAuthStore } from "~/stores/auth";
 import { useSeo } from "~/utils/seo";
-const {fetchMovieList, getStats, stats} = useGlobalState();
+const { fetchMovieList, getStats, stats, searchDoubanMovies } =
+  useGlobalState();
 
 const authStore = useAuthStore();
 const moviesStore = useMoviesStore();
@@ -18,8 +19,9 @@ await getStats();
 const route = useRoute();
 // apply default homepage SEO
 useSeo({
-  title: 'What Sam Watched',
-  description: 'Browse the movies Sam has watched and keep track of his film journey.',
+  title: "What Sam Watched",
+  description:
+    "Browse the movies Sam has watched and keep track of his film journey.",
 });
 
 watch(
@@ -40,7 +42,7 @@ let searchMovieTitle = ref("");
 const searchResults = ref([]);
 
 async function handleSearch(query) {
-  searchResults.value = await moviesStore.searchDoubanMovies(query);
+  searchResults.value = await searchDoubanMovies(query);
 }
 
 async function handleMovieSelect(movie) {

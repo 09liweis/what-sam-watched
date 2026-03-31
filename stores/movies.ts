@@ -1,11 +1,6 @@
 import { defineStore } from "pinia";
 import type { Movie, MoviesResponse, StatsResponse } from "../types/movie";
-import {
-  API_ENDPOINT,
-  API_SEARCH,
-  API_UPSERT,
-  API_MOVIE_ENDPOINT,
-} from "~/constants/api";
+import { API_ENDPOINT, API_UPSERT, API_MOVIE_ENDPOINT } from "~/constants/api";
 
 const emptyMovieList: Movie[] = [];
 const emptyPages: number[] = [];
@@ -72,19 +67,10 @@ export const useMoviesStore = defineStore("movies", {
           this.total = moviesResp.total;
           this.pages = moviesResp.pages;
         }
-        
       } catch (error) {
-        
       } finally {
         this.isfetchingMovieList = false;
       }
-      
-    },
-    async searchDoubanMovies(title: string) {
-      const { movies, err }: MoviesResponse = await $fetch(
-        `${API_SEARCH}${title}`
-      );
-      return movies;
     },
     async upsertMovie(movie: Movie) {
       await $fetch(API_UPSERT, {
