@@ -28,7 +28,7 @@ defineProps({
     </div>
     
     <div v-if="showPoster" class="flex justify-center">
-      <NuxtImg 
+      <img 
         :src="poster" 
         class="rounded-lg shadow-md max-h-[400px] object-cover blur"
         loading="lazy"
