@@ -1,7 +1,6 @@
 <script setup>
-import { useMoviesStore } from "@/stores/movies";
 import LinkButton from "@/components/LinkButton";
-const moviesStore = useMoviesStore();
+const { pages, curPage } = useGlobalState();
 
 const getClass = (curPage, page) => {
   return `menu-item ${curPage == page ? "active" : ""}`;
@@ -10,8 +9,8 @@ const getClass = (curPage, page) => {
 <template>
   <section class="flex flex-wrap items-center justify-center gap-2 mb-2">
     <LinkButton
-      v-for="page in moviesStore.pages"
-      :class="getClass(moviesStore.page, page)"
+      v-for="page in pages"
+      :class="getClass(curPage, page)"
       :to="{ query: { page } }"
       :text="page"
     />
