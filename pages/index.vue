@@ -9,11 +9,11 @@ import { ref, computed, watch, onMounted } from "vue";
 import { useMoviesStore } from "@/stores/movies";
 import { useAuthStore } from "~/stores/auth";
 import { useSeo } from "~/utils/seo";
-const {fetchMovieList} = useGlobalState();
+const {fetchMovieList, getStats, stats} = useGlobalState();
 
 const authStore = useAuthStore();
 const moviesStore = useMoviesStore();
-moviesStore.getStats();
+await getStats();
 
 const route = useRoute();
 // apply default homepage SEO
@@ -65,7 +65,7 @@ async function handleMovieSelect(movie) {
     />
     <Stats
       v-if="showFilter"
-      :stats="moviesStore.stats"
+      :stats="stats"
       :curCountry="moviesStore.curCountry"
       :curLang="moviesStore.curLang"
       :curGenre="moviesStore.curGenre"

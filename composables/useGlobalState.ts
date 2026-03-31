@@ -6,9 +6,16 @@ import {
   API_MOVIE_ENDPOINT,
   API_QUIZ,
 } from "~/constants/api";
+import type { Movie, MoviesResponse, StatsResponse } from "../types/movie";
 
 // composables/useGlobalState.ts
 export const useGlobalState = () => {
+  const stats = useState<StatsResponse>('stats',()=>{});
+  const getStats = async () => {
+    const response: StatsResponse = await $fetch(API_STATS);
+    stats.value = response.details;
+  };
+
   const movies = useState<Movie[]>('movies', () => []);
   const isfetchingMovieList = useState<boolean>('isFetchingMovieList', ()=>true);
 
@@ -48,6 +55,8 @@ export const useGlobalState = () => {
   }
 
   return {
+    getStats,
+    stats,
     movies,
     fetchMovieList,
     isfetchingMovieList

@@ -3,7 +3,6 @@ import type { Movie, MoviesResponse, StatsResponse } from "../types/movie";
 import {
   API_ENDPOINT,
   API_SEARCH,
-  API_STATS,
   API_UPSERT,
   API_MOVIE_ENDPOINT,
 } from "~/constants/api";
@@ -31,10 +30,6 @@ export const useMoviesStore = defineStore("movies", {
     showVideo: false,
   }),
   actions: {
-    async getStats() {
-      const response: StatsResponse = await $fetch(API_STATS);
-      this.stats = response.details;
-    },
     setQueryParams() {
       const { query } = useRoute();
       const lang = query.lang?.toString() || "";
