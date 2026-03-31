@@ -49,7 +49,7 @@ async function handleMovieSelect(movie) {
   try {
     await moviesStore.upsertMovie(movie);
     loading.value = false;
-    moviesStore.fetchMovies();
+    fetchMovieList();
     searchResults.value = [];
   } catch (error) {
     alert(error);
