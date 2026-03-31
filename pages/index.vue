@@ -9,6 +9,7 @@ import { ref, computed, watch, onMounted } from "vue";
 import { useMoviesStore } from "@/stores/movies";
 import { useAuthStore } from "~/stores/auth";
 import { useSeo } from "~/utils/seo";
+const {fetchMovieList} = useGlobalState();
 
 const authStore = useAuthStore();
 const moviesStore = useMoviesStore();
@@ -24,12 +25,12 @@ useSeo({
 watch(
   () => route.query,
   () => {
-    moviesStore.fetchMovies();
+    fetchMovieList();
   }
 );
 
 onMounted(() => {
-  moviesStore.fetchMovies();
+  fetchMovieList();
 });
 
 let loading = ref(false);
