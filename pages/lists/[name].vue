@@ -8,7 +8,6 @@
   import { onMounted, ref, watch } from 'vue';
   import { useMoviesStore } from '@/stores/movies';
   import { useSeo } from '~/utils/seo';
-  const runtimeConfig = useRuntimeConfig();
   
   const route = useRoute();
   const moviesStore = useMoviesStore();
