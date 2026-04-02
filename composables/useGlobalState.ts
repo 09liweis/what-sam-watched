@@ -78,6 +78,18 @@ export const useGlobalState = () => {
     return movies;
   };
 
+  const upsertMovie = async (movie: Movie) => {
+    await $fetch(API_UPSERT, {
+      method: "POST",
+      body: movie,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+      },
+    });
+  }
+
   return {
     getStats,
     stats,
@@ -88,5 +100,6 @@ export const useGlobalState = () => {
     fetchMovieList,
     isfetchingMovieList,
     searchDoubanMovies,
+    upsertMovie
   };
 };

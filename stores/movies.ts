@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import type { Movie, MoviesResponse } from "../types/movie";
-import { API_ENDPOINT, API_UPSERT, API_MOVIE_ENDPOINT } from "~/constants/api";
+import { API_ENDPOINT, API_MOVIE_ENDPOINT } from "~/constants/api";
 
 const emptyMovieList: Movie[] = [];
 const emptyPages: number[] = [];
@@ -69,17 +69,6 @@ export const useMoviesStore = defineStore("movies", {
       } finally {
         this.isfetchingMovieList = false;
       }
-    },
-    async upsertMovie(movie: Movie) {
-      await $fetch(API_UPSERT, {
-        method: "POST",
-        body: movie,
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
-        },
-      });
     },
     async deleteMovie(movieId: string) {
       try {

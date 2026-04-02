@@ -6,13 +6,11 @@
 <script setup>
   import MovieList from '~/components/MovieList';
   import { onMounted, ref, watch } from 'vue';
-  import { useMoviesStore } from '@/stores/movies';
   import { useSeo } from '~/utils/seo';
 
   const {fetchMovieList} = useGlobalState();
   
   const route = useRoute();
-  const moviesStore = useMoviesStore();
   
   // set SEO based on list name
   useSeo({
