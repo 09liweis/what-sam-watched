@@ -2,10 +2,9 @@
 import Rating from "@/components/Rating";
 import MovieEpisodeBtn from "@/components/movie/MovieEpisodeBtn";
 import MoviePoster from "@/components/movie/MoviePoster";
-import { useMoviesStore } from "@/stores/movies";
 import { useAuthStore } from "~/stores/auth";
 
-const {upsertMovie} = useGlobalState();
+const {upsertMovie, deleteMovie, updateEpisode} = useGlobalState();
 
 defineProps({
   movie: {
@@ -15,7 +14,6 @@ defineProps({
 });
 
 const authStore = useAuthStore();
-const moviesStore = useMoviesStore();
 
 const getMovieUrl = (movie) => {
   if (movie.douban_id) {
@@ -56,7 +54,7 @@ const getMovieUrl = (movie) => {
 
       <button
         v-if="movie._id && authStore.isAuthenticated"
-        @click="moviesStore.deleteMovie(movie._id)"
+        @click="deleteMovie(movie._id)"
         class="absolute bottom-2 left-2 text-red-600 bg-red-50 hover:bg-red-100 px-2 py-1 rounded-md transition-colors duration-200 text-sm font-medium"
       >
         Delete
@@ -99,7 +97,7 @@ const getMovieUrl = (movie) => {
       <MovieEpisodeBtn
         v-if="movie._id && authStore.isAuthenticated"
         :movie="movie"
-        :updateEpisode="moviesStore.updateEpisode"
+        :updateEpisode="updateEpisode"
       />
     </div>
   </article>

@@ -90,6 +90,28 @@ export const useGlobalState = () => {
     });
   }
 
+  const deleteMovie = async(movieId: string) => {
+    try {
+      await $fetch(`${API_MOVIE_ENDPOINT}${movieId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+        },
+      });
+      // Refresh the movie list after deletion
+      fetchMovieList();
+    } catch (error) {
+      console.error("Failed to delete movie:", error);
+    }
+  }
+
+  const updateEpisode = async(v: Movie) => {
+    const response = await $fetch(`${API_MOVIE_ENDPOINT}${v.douban_id}`, {
+      method: "PUT",
+    });
+    fetchMovieList();
+  }
+
   return {
     getStats,
     stats,
@@ -100,6 +122,8 @@ export const useGlobalState = () => {
     fetchMovieList,
     isfetchingMovieList,
     searchDoubanMovies,
-    upsertMovie
+    upsertMovie,
+    deleteMovie,
+    updateEpisode
   };
 };

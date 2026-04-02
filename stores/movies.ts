@@ -70,28 +70,8 @@ export const useMoviesStore = defineStore("movies", {
         this.isfetchingMovieList = false;
       }
     },
-    async deleteMovie(movieId: string) {
-      try {
-        await $fetch(`${API_MOVIE_ENDPOINT}${movieId}`, {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
-          },
-        });
-        // Refresh the movie list after deletion
-        await this.fetchMovies();
-      } catch (error) {
-        console.error("Failed to delete movie:", error);
-      }
-    },
     setMovieList(movieList: Movie[]) {
       this.movieList = movieList;
-    },
-    async updateEpisode(v: Movie) {
-      const response = await $fetch(`${API_MOVIE_ENDPOINT}${v.douban_id}`, {
-        method: "PUT",
-      });
-      this.fetchMovies();
     },
   },
 });
