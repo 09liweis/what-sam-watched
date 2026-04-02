@@ -1,7 +1,5 @@
 <script setup>
-import { useMoviesStore } from "@/stores/movies";
 import MovieCard from "@/components/movie/MovieCard.vue";
-const moviesStore = useMoviesStore();
 const {movies} = useGlobalState();
 </script>
 

@@ -50,26 +50,6 @@ export const useMoviesStore = defineStore("movies", {
       }
       return result;
     },
-    async fetchMovies(name = "") {
-      this.setQueryParams();
-      this.isfetchingMovieList = true;
-      try {
-        const moviesResp: MoviesResponse = await $fetch(
-          this.getMoviesAPIUrl(name)
-        );
-        if (moviesResp.err) {
-          this.setMovieList([]);
-          return;
-        }
-        this.setMovieList(moviesResp.movies);
-        if (moviesResp.total) {
-          this.pages = moviesResp.pages;
-        }
-      } catch (error) {
-      } finally {
-        this.isfetchingMovieList = false;
-      }
-    },
     setMovieList(movieList: Movie[]) {
       this.movieList = movieList;
     },

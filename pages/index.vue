@@ -9,7 +9,7 @@ import { ref, computed, watch, onMounted } from "vue";
 import { useMoviesStore } from "@/stores/movies";
 import { useAuthStore } from "~/stores/auth";
 import { useSeo } from "~/utils/seo";
-const { fetchMovieList, getStats, stats, searchDoubanMovies, total } =
+const { fetchMovieList, upsertMovie, getStats, stats, searchDoubanMovies, total } =
   useGlobalState();
 
 const authStore = useAuthStore();
@@ -49,7 +49,7 @@ async function handleMovieSelect(movie) {
   showSearchForm.value = false;
   loading.value = true;
   try {
-    await moviesStore.upsertMovie(movie);
+    await upsertMovie(movie);
     loading.value = false;
     fetchMovieList();
     searchResults.value = [];
