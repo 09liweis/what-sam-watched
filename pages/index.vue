@@ -6,14 +6,12 @@ import Pagination from "~/components/Pagination.vue";
 import SearchForm from "~/components/search/SearchForm.vue";
 import SearchResults from "~/components/search/SearchResults.vue";
 import { ref, computed, watch, onMounted } from "vue";
-import { useMoviesStore } from "@/stores/movies";
 import { useAuthStore } from "~/stores/auth";
 import { useSeo } from "~/utils/seo";
-const { fetchMovieList, upsertMovie, getStats, stats, searchDoubanMovies, total } =
+const { fetchMovieList, upsertMovie, getStats, stats, searchDoubanMovies, total, curCountry, curLang, curGenre } =
   useGlobalState();
 
 const authStore = useAuthStore();
-const moviesStore = useMoviesStore();
 await getStats();
 
 const route = useRoute();
@@ -68,9 +66,9 @@ async function handleMovieSelect(movie) {
     <Stats
       v-if="showFilter"
       :stats="stats"
-      :curCountry="moviesStore.curCountry"
-      :curLang="moviesStore.curLang"
-      :curGenre="moviesStore.curGenre"
+      :curCountry="curCountry"
+      :curLang="curLang"
+      :curGenre="curGenre"
     />
 
     <SearchForm

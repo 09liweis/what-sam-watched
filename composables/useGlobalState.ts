@@ -26,21 +26,33 @@ export const useGlobalState = () => {
     "isFetchingMovieList",
     () => true
   );
+  const curCountry = useState<string>('curCountry',()=>"");
+  const curLang = useState<string>('curLang',()=>"");
+  const curGenre = useState<string>('curGenre',()=>"");
 
   const getMoviesAPIUrl = (name: string): string => {
     const {
-      query: { page },
+      query: { page,country,genre,lang },
     } = useRoute();
     if (page) {
       curPage.value = page.toString() || "";
+    }
+    if (lang) {
+      curLang.value = lang.toString() || "";
+    }
+    if (country) {
+      curCountry.value = country.toString() || "";
+    }
+    if (genre) {
+      curGenre.value = genre.toString() || "";
     }
     let result = `${API_ENDPOINT}${name}?imgserver=img9`;
     const queryParams: QUERY_PARAMS = {
       page: curPage.value,
       limit: 50,
-      // lang: this.curLang,
-      // genre: this.curGenre,
-      // country: this.curCountry,
+      lang: curLang.value,
+      genre: curGenre.value,
+      country: curCountry.value,
     };
     for (const query in queryParams) {
       if (queryParams[query]) {
@@ -124,6 +136,9 @@ export const useGlobalState = () => {
     searchDoubanMovies,
     upsertMovie,
     deleteMovie,
-    updateEpisode
+    updateEpisode,
+    curCountry,
+    curLang,
+    curGenre
   };
 };
