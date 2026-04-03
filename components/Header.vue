@@ -1,13 +1,12 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { useAuthStore } from '@/stores/auth';
 import { SAM, ROUTES, getSubroutes } from '@/constants/route';
 import LinkButton from '@/components/LinkButton';
 import LoginPopup from '@/components/auth/LoginPopup.vue';
 
 const route = useRoute();
-const authStore = useAuthStore();
+const {login, checkToken, isAuthenticated, logout} = useUserState();
 
 const showLoginPopup = ref(false);
 const isHeaderVisible = ref(true);
@@ -29,7 +28,7 @@ const getRouteStyleClass = (routeName, routeId) => {
 };
 
 const handleLogin = (userData) => {
-  authStore.login(userData);
+  login(userData);
   showLoginPopup.value = false;
 };
 
@@ -47,7 +46,7 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
-  authStore.checkToken();
+  checkToken();
   window.addEventListener('scroll', handleScroll, { passive: true });
 });
 
@@ -82,7 +81,7 @@ watch(
       </div>
 
       <button
-        v-if="!authStore.isAuthenticated"
+        v-if="!isAuthenticated"
         @click="showLoginPopup = true"
         class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       >
@@ -90,7 +89,7 @@ watch(
       </button>
       <button
         v-else
-        @click="authStore.logout()"
+        @click="logout()"
         class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900"
       >
         Sign Out
