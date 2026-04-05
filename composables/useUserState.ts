@@ -50,6 +50,7 @@ export const useUserState = () => {
   const logout = () => {
       user.value = null;
       isAuthenticated.value = false;
+      localStorage.setItem('token','');
     }
 
   return {
