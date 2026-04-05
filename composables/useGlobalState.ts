@@ -97,11 +97,15 @@ export const useGlobalState = () => {
   };
 
   const upsertMovie = async (movie: Movie) => {
-    await $fetch(API_UPSERT, {
-      method: "POST",
-      body: movie,
-      headers: HEADERS
-    });
+    try {
+      await $fetch(API_UPSERT, {
+        method: "POST",
+        body: movie,
+        headers: HEADERS
+      });
+    } catch (error) {
+      alert(error);
+    }
   }
 
   const deleteMovie = async(movieId: string) => {
