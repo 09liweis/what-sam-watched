@@ -10,6 +10,12 @@ interface QUERY_PARAMS {
   [key: string]: boolean | number | string;
 }
 
+const HEADERS = {
+  Accept: "application/json",
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${localStorage.getItem("token") || ""}`
+}
+
 // composables/useGlobalState.ts
 export const useGlobalState = () => {
   const stats = useState<StatsResponse>("stats", () => {});
@@ -94,11 +100,7 @@ export const useGlobalState = () => {
     await $fetch(API_UPSERT, {
       method: "POST",
       body: movie,
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
-      },
+      headers: HEADERS
     });
   }
 
@@ -106,9 +108,7 @@ export const useGlobalState = () => {
     try {
       await $fetch(`${API_MOVIE_ENDPOINT}${movieId}`, {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
-        },
+        headers: HEADERS
       });
       // Refresh the movie list after deletion
       fetchMovieList();
