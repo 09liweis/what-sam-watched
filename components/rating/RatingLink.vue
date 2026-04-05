@@ -8,14 +8,12 @@
         variant === 'douban' ? 'bg-green-50 hover:bg-green-100' : 'bg-yellow-50 hover:bg-yellow-100'
       ]"
     >
-      <RatingIcon :color="variant === 'douban' ? 'text-green-500' : 'text-yellow-500'" />
       <span class="font-medium text-sm text-gray-700">{{ title }}:</span>
       <RatingScore :score="rating" />
     </a>
   </template>
   
   <script setup>
-  import RatingIcon from './RatingIcon.vue';
   import RatingScore from './RatingScore.vue';
   
   defineProps({
