@@ -20,11 +20,9 @@ export const useUserState = () => {
 
 
   const checkToken = async() => {
-    const response:UserResponse = await $fetch(API_USER_DETAIL,{
-      method:'POST',
-      headers: {
-      'Authorization': `Bear ${localStorage.getItem('token')}`
-      }
+    const response:UserResponse = await sendRequest({
+      url: API_USER_DETAIL,
+      method:'POST'
     });
     if (response?.user) {
         isAuthenticated.value = true;
