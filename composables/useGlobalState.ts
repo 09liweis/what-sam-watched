@@ -65,7 +65,7 @@ export const useGlobalState = () => {
   const fetchMovieList = async (name = "") => {
     isfetchingMovieList.value = true;
     try {
-      const moviesResp: MoviesResponse = await $fetch(getMoviesAPIUrl(name));
+      const moviesResp: MoviesResponse = await sendRequest({url:getMoviesAPIUrl(name)});
       if (moviesResp.err) {
         movies.value = [];
         return;
