@@ -33,13 +33,14 @@ export const useUserState = () => {
 
   const login = async(user: User) => {
     try {
-      const response:LoginResponse = await $fetch(API_USER_LOGIN,{
+      const response:LoginResponse = await sendRequest({
+        url: API_USER_LOGIN,
         method: 'POST',
         body:{
           eml: user.email,
           pwd: user.password
         }
-      })
+      });
       localStorage.setItem('token',response.token);
       isAuthenticated.value = true;
     } catch (error) {
