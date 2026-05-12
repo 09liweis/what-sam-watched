@@ -1,12 +1,12 @@
 <script setup>
-import { ref, watch, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
-import { SAM, ROUTES, getSubroutes } from '@/constants/route';
-import LinkButton from '@/components/LinkButton';
-import LoginPopup from '@/components/auth/LoginPopup.vue';
+import { ref, watch, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import { SAM, ROUTES, getSubroutes } from "@/constants/route";
+import LinkButton from "@/components/LinkButton";
+import LoginPopup from "@/components/auth/LoginPopup.vue";
 
 const route = useRoute();
-const {login, checkToken, isAuthenticated, logout} = useUserState();
+const { login, checkToken, isAuthenticated, logout } = useUserState();
 
 const showLoginPopup = ref(false);
 const isHeaderVisible = ref(true);
@@ -24,7 +24,7 @@ let routeName = ref(getRouteName(route));
 let subRouteName = ref(getSubRouteName(route));
 
 const getRouteStyleClass = (routeName, routeId) => {
-  return `menu-item ${routeName == routeId ? 'active' : ''}`;
+  return `menu-item ${routeName == routeId ? "active" : ""}`;
 };
 
 const handleLogin = (userData) => {
@@ -36,7 +36,10 @@ const handleScroll = () => {
   const currentScrollPosition = window.scrollY;
 
   // Show header when scrolling up or at the top
-  if (currentScrollPosition < lastScrollPosition || currentScrollPosition < 50) {
+  if (
+    currentScrollPosition < lastScrollPosition ||
+    currentScrollPosition < 50
+  ) {
     isHeaderVisible.value = true;
   } else {
     isHeaderVisible.value = false;
@@ -47,7 +50,7 @@ const handleScroll = () => {
 
 onMounted(() => {
   checkToken();
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener("scroll", handleScroll, { passive: true });
 });
 
 watch(
@@ -90,13 +93,16 @@ watch(
       <button
         v-else
         @click="logout()"
-        class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900"
+        class="px-4 py-2 text-sm bg-red-800 font-medium text-white duration-300 hover:scale-105 rounded"
       >
         Sign Out
       </button>
     </nav>
 
-    <section v-if="getSubroutes(routeName)" class="flex flex-wrap justify-center gap-2 mt-2">
+    <section
+      v-if="getSubroutes(routeName)"
+      class="flex flex-wrap justify-center gap-2 mt-2"
+    >
       <LinkButton
         v-for="(route, id) in getSubroutes(routeName)"
         :class="getRouteStyleClass(subRouteName, id)"
