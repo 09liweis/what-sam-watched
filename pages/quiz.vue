@@ -4,6 +4,21 @@ import {
   API_QUIZ,
 } from "~/constants/api";
 import QuizCard from '~/components/quiz/QuizCard.vue';
+import { useSeo } from '~/utils/seo';
+
+// Set SEO for quiz page
+useSeo({
+  title: 'Movie Quiz | What Sam Watched',
+  description: 'Test your movie knowledge with our interactive quiz. Guess movie titles from their descriptions and see how many you can get right!',
+  keywords: 'movie quiz, film quiz, movie trivia, guess the movie',
+  jsonLd: {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalWebsite',
+    name: 'Movie Quiz',
+    description: 'Test your movie knowledge with our interactive quiz.',
+    url: 'https://movies.samliweisen.dev/quiz',
+  },
+});
 
 const currentQuiz = ref(null);
 const selectedAnswer = ref(null);

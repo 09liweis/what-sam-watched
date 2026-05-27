@@ -1,5 +1,5 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
-import { SITE_URL } from './constants/seo';
+import { SITE_URL, SEO_DEFAULTS } from './constants/seo';
 
 export default defineNuxtConfig({
   postcss: {
@@ -43,23 +43,31 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
       link: [
-        { rel: "icon", type: "image/png", href: "/favicon.ico" }
+        { rel: "icon", type: "image/png", href: "/favicon.ico" },
+        { rel: "canonical", href: process.env.PUBLIC_URL || SITE_URL }
       ],
       charset: 'utf-8',
-      viewport: 'width=device-width, initial-scale=1',
-      title: 'What Sam Watched',
+      viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
+      title: SEO_DEFAULTS.title,
       meta: [
-        { name: 'description', content: 'My amazing movie dashboard.' },
+        { name: 'description', content: SEO_DEFAULTS.description },
+        { name: 'keywords', content: SEO_DEFAULTS.keywords },
+        { name: 'author', content: 'Sam Liweisen' },
+        { name: 'theme-color', content: '#4f46e5' },
         { name: 'robots', content: 'index,follow' },
+        { name: 'language', content: 'English' },
         { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: 'What Sam Watched' },
-        { property: 'og:description', content: 'A dashboard of movies Sam has watched.' },
+        { property: 'og:title', content: SEO_DEFAULTS.title },
+        { property: 'og:description', content: SEO_DEFAULTS.description },
         { property: 'og:url', content: process.env.PUBLIC_URL || SITE_URL },
-        { property: 'og:image', content: '/og-image.png' },
+        { property: 'og:image', content: `${process.env.PUBLIC_URL || SITE_URL}/og-image.png` },
+        { property: 'og:site_name', content: SEO_DEFAULTS.site_name },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'What Sam Watched' },
-        { name: 'twitter:description', content: 'A dashboard of movies Sam has watched.' },
-        { name: 'twitter:image', content: '/og-image.png' }
+        { name: 'twitter:title', content: SEO_DEFAULTS.title },
+        { name: 'twitter:description', content: SEO_DEFAULTS.description },
+        { name: 'twitter:image', content: `${process.env.PUBLIC_URL || SITE_URL}/og-image.png` }
       ],
       script: [
         {
@@ -67,9 +75,13 @@ export default defineNuxtConfig({
           children: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebSite',
-            name: 'What Sam Watched',
+            name: SEO_DEFAULTS.site_name,
             url: process.env.PUBLIC_URL || SITE_URL,
-            description: 'A dashboard of movies Sam has watched.'
+            description: SEO_DEFAULTS.description,
+            author: {
+              '@type': 'Person',
+              name: 'Sam Liweisen'
+            }
           })
         }
       ]

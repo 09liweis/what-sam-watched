@@ -3,7 +3,7 @@
     <MovieList />
   </main>
 </template>
-<script setup>
+<script setup lang="ts">
   import MovieList from '~/components/MovieList';
   import { onMounted, ref, watch } from 'vue';
   import { useSeo } from '~/utils/seo';
@@ -11,11 +11,20 @@
   const {fetchMovieList} = useGlobalState();
   
   const route = useRoute();
+  const listName = (route.params.name as string) || '';
   
   // set SEO based on list name
   useSeo({
-    title: `Movies in ${route.params.name}`,
-    description: `Explore the ${route.params.name} collection of movies Sam has watched.`,
+    title: `${listName} Movies | What Sam Watched`,
+    description: `Explore the ${listName} collection of movies watched by Sam. Browse ratings, details, and discover films in this curated list.`,
+    keywords: `movies, ${listName}, film collection, movie ratings, ${listName} films`,
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: `${listName} Movies`,
+      description: `Explore the ${listName} collection of movies watched by Sam.`,
+      url: route.fullPath,
+    },
   });
   
   let loading = ref(false);

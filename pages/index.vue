@@ -16,9 +16,10 @@ await getStats();
 const route = useRoute();
 // apply default homepage SEO
 useSeo({
-  title: "What Sam Watched",
+  title: "What Sam Watched - Movie Dashboard",
   description:
-    "Browse the movies Sam has watched and keep track of his film journey.",
+    "Explore a curated collection of movies watched by Sam. Browse by country, genre, and language. Discover ratings, reviews, and participate in movie quizzes.",
+  keywords: "movies, film dashboard, movie ratings, film reviews, movie tracker",
 });
 
 watch(
