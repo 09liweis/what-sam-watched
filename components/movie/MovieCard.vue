@@ -3,8 +3,8 @@ import Rating from "@/components/Rating";
 import MovieEpisodeBtn from "@/components/movie/MovieEpisodeBtn";
 import MoviePoster from "@/components/movie/MoviePoster";
 
-const {upsertMovie, deleteMovie, updateEpisode} = useGlobalState();
-const {isAuthenticated} = useUserState();
+const { upsertMovie, deleteMovie, updateEpisode } = useGlobalState();
+const { isAuthenticated } = useUserState();
 
 defineProps({
   movie: {
@@ -12,7 +12,6 @@ defineProps({
     required: true,
   },
 });
-
 
 const getMovieUrl = (movie) => {
   if (movie.douban_id) {
@@ -74,19 +73,21 @@ const getMovieUrl = (movie) => {
       {{ movie.title }}
     </h3>
 
-    <div class="mt-2 space-y-1">
-      <Rating
-        v-if="movie.douban_id"
-        :rating="movie.douban_rating"
-        :movieLink="movie.origin_url"
-        :title="'Douban'"
-      />
-      <Rating
-        v-if="movie.imdb_id"
-        :rating="movie.imdb_rating"
-        :movieLink="movie.imdb_url"
-        :title="'IMDB'"
-      />
+    <div class="mt-2 space-y-2">
+      <div class="flex gap-2">
+        <Rating
+          v-if="movie.douban_id"
+          :rating="movie.douban_rating"
+          :movieLink="movie.origin_url"
+          :title="'Douban'"
+        />
+        <Rating
+          v-if="movie.imdb_id"
+          :rating="movie.imdb_rating"
+          :movieLink="movie.imdb_url"
+          :title="'IMDB'"
+        />
+      </div>
       <p v-if="movie.currentGross" class="text-sm text-gray-600">
         Current: <span class="font-mtsi" v-html="movie.currentGross"></span>
       </p>
