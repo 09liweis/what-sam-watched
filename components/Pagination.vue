@@ -12,7 +12,7 @@ const getClass = (curPage, page) => {
       v-for="page in pages"
       :class="getClass(curPage, page)"
       :to="{ query: { page } }"
-      :text="page"
+      :text="page.toString()"
     />
   </section>
 </template>
