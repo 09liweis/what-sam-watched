@@ -53,7 +53,7 @@ const getMovieUrl = (movie) => {
       <button
         v-if="movie._id && isAuthenticated"
         @click="deleteMovie(movie._id)"
-        class="absolute bottom-2 left-2 text-red-600 bg-red-50 hover:bg-red-100 px-2 py-1 rounded-md transition-colors duration-200 text-sm font-medium"
+        class="absolute bottom-2 left-2 text-red-600 bg-red-50 hover:bg-red-100 px-2 py-1 rounded transition-colors duration-200 text-sm font-medium"
       >
         Delete
       </button>
