@@ -43,7 +43,10 @@ const getMovieUrl = (movie) => {
           className="aspect-[2/3] transition-transform duration-300 group-hover:scale-105"
         />
       </NuxtLink>
-      <span v-if="movie.release || movie.year" class="movie-card-year">
+      <span
+        v-if="movie.release || movie.year"
+        class="absolute top-2 left-2 bg-white text-sky-700 px-2 py-0.5 rounded"
+      >
         {{ movie.release || movie.year }}
       </span>
 

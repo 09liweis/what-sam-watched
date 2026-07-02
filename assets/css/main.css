@@ -87,10 +87,6 @@
   @apply ml-1 text-xs text-gray-500;
 }
 
-.movie-card-year {
-  @apply absolute top-2 left-2 bg-white text-sky-600 px-1 py-0.5 rounded;
-}
-
 .movie-card {
   @apply w-full relative transition duration-200;
 }
