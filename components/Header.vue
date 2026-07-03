@@ -70,7 +70,7 @@ watch(
 
 <template>
   <header
-    class="pt-2 pb-4 sticky top-0 bg-white z-10 transition-transform duration-300"
+    class="pt-2 pb-2 sticky top-0 bg-white z-10 transition-transform duration-300"
     :class="{ '-translate-y-full': !isHeaderVisible }"
   >
     <nav class="flex flex-wrap justify-center items-center px-4 gap-2">
