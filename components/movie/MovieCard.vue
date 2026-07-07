@@ -88,9 +88,6 @@ const getMovieUrl = (movie) => {
           :title="'IMDB'"
         />
       </div>
-      <p v-if="movie.currentGross" class="text-sm text-gray-600">
-        Current: <span class="font-mtsi" v-html="movie.currentGross"></span>
-      </p>
       <p v-if="movie.totalGross" class="text-sm text-gray-600">
         Total: {{ movie.totalGross }}
       </p>
