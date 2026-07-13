@@ -2,16 +2,16 @@
 defineProps({
   color: {
     type: String,
-    default: 'text-white'
+    default: "text-white",
   },
   type: {
     type: String,
-    default: 'spinner' // 'spinner' or 'skeleton'
+    default: "spinner", // 'spinner' or 'skeleton'
   },
   count: {
     type: Number,
-    default: 1
-  }
+    default: 1,
+  },
 });
 </script>
 
@@ -39,18 +39,19 @@ defineProps({
     </svg>
   </template>
 
-  <div v-else-if="type === 'skeleton'" class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-    <div 
-      v-for="n in count" 
-      :key="n"
-      class="animate-pulse"
-    >
+  <div
+    v-else-if="type === 'skeleton'"
+    class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+  >
+    <div v-for="n in count" :key="n" class="animate-pulse">
       <!-- Poster -->
-      <div class="relative overflow-hidden rounded-lg shadow-lg bg-gray-200 aspect-[2/3]"></div>
-      
+      <div
+        class="relative overflow-hidden rounded-lg shadow-lg bg-gray-200 aspect-[2/3]"
+      ></div>
+
       <!-- Title -->
       <div class="mt-2 h-6 bg-gray-200 rounded w-3/4"></div>
-      
+
       <!-- Ratings -->
       <div class="mt-2 space-y-2">
         <div class="h-4 bg-gray-200 rounded w-1/2"></div>
@@ -66,11 +67,12 @@ defineProps({
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
-    opacity: .5;
+    opacity: 0.5;
   }
 }
 </style>
