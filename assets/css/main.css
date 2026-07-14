@@ -74,7 +74,3 @@
     animation: none;
   }
 }
-
-.movie-nav-menu {
-  @apply cursor-pointer capitalize mr-3 border p-1 rounded hover:text-red-800 hover:border-red-800 transition duration-150;
-}
