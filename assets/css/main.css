@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .menu-item {
-  @apply border py-1 px-2 transition duration-200 rounded text-center min-w-7;
+  @apply border-2 py-1 px-2 transition duration-300 rounded text-center min-w-7;
 }
 
 .menu-item.active,
