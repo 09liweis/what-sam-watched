@@ -41,7 +41,7 @@ export const ROUTES: ROUTES_TYPE = {
       },
     },
   },
-  maoyan: { to: getListsUrl("maoyan"), nm: "Maoyan" },
+  // maoyan: { to: getListsUrl("maoyan"), nm: "Maoyan" },
   cineplex: { to: getListsUrl("cineplex"), nm: "Canada Cineplex" },
   hongkong: {
     to: getListsUrl("hongkong?nm=showing"),
