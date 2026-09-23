@@ -117,7 +117,7 @@ export const useGlobalState = () => {
         }
       });
       // Refresh the movie list after deletion
-      fetchMovieList();
+      await fetchMovieList();
     } catch (error) {
       console.error("Failed to delete movie:", error);
     }
