@@ -13,6 +13,10 @@ interface UserResponse {
   user?: any;
 }
 
+function setToken(token:string) {
+  localStorage.setItem('token', token);
+}
+
 export const useUserState = () => {
 
   const user = useState<User|null>("user", () => null);
@@ -39,7 +43,7 @@ export const useUserState = () => {
           pwd: user.password
         }
       });
-      localStorage.setItem('token',response.token);
+      setToken(response.token);
       isAuthenticated.value = true;
     } catch (error) {
       console.error(error);
@@ -49,7 +53,7 @@ export const useUserState = () => {
   const logout = () => {
       user.value = null;
       isAuthenticated.value = false;
-      localStorage.setItem('token','');
+      setToken('');
     }
 
   return {
