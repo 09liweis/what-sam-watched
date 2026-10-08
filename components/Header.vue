@@ -36,14 +36,7 @@ const handleScroll = () => {
   const currentScrollPosition = window.scrollY;
 
   // Show header when scrolling up or at the top
-  if (
-    currentScrollPosition < lastScrollPosition ||
-    currentScrollPosition < 50
-  ) {
-    isHeaderVisible.value = true;
-  } else {
-    isHeaderVisible.value = false;
-  }
+  isHeaderVisible.value = currentScrollPosition < lastScrollPosition || currentScrollPosition < 50;
 
   lastScrollPosition = currentScrollPosition;
 };
