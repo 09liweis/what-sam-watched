@@ -88,7 +88,7 @@ const getMovieUrl = (movie) => {
           :title="'IMDB'"
         />
       </div>
-      <p v-if="movie.totalGross" class="text-sm text-gray-600">
+      <p v-if="movie.totalGross" class="text-sm text-gray-500">
         Total: {{ movie.totalGross }}
       </p>
       <MovieEpisodeBtn
