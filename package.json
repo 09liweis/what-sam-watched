@@ -1,6 +1,9 @@
 {
   "name": "what-sam-watched",
   "version": "13.21.11",
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "private": true,
   "scripts": {
     "build": "nuxt build",
