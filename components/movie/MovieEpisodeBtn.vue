@@ -2,7 +2,6 @@
 export default {
   props: ['movie', 'updateEpisode'],
   setup(props) {
-    // setup() receives props as the first argument.
   }
 }
 </script>
