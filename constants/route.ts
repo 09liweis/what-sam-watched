@@ -17,7 +17,7 @@ const getListsUrl = (path: string) => {
 };
 
 const getDoubanListsUrl = (path: string) => {
-  return getListsUrl(`douban${path}`);
+  return getListsUrl(`douban?nm=${path}`);
 };
 
 const getIMDBListsUrl = (path: string) => {
@@ -28,15 +28,15 @@ export const ROUTES: ROUTES_TYPE = {
   sam: { to: "/", nm: "Sam" },
   quiz: { to: "/quiz", nm: "Quiz" },
   douban: {
-    to: getDoubanListsUrl("?nm=in_theatre"),
+    to: getDoubanListsUrl("in_theatre"),
     nm: "Douban",
     subRoutes: {
-      in_theatre: { to: getDoubanListsUrl("?nm=in_theatre"), nm: "In theatre" },
-      comming: { to: getDoubanListsUrl("?nm=comming"), nm: "In comming" },
-      popular: { to: getDoubanListsUrl("?nm=popular"), nm: "Popular" },
-      chart: { to: getDoubanListsUrl("?nm=chart"), nm: "Chart" },
+      in_theatre: { to: getDoubanListsUrl("in_theatre"), nm: "In theatre" },
+      comming: { to: getDoubanListsUrl("comming"), nm: "In comming" },
+      popular: { to: getDoubanListsUrl("popular"), nm: "Popular" },
+      chart: { to: getDoubanListsUrl("chart"), nm: "Chart" },
       alltime_boxoffice: {
-        to: getDoubanListsUrl("?nm=alltime_boxoffice"),
+        to: getDoubanListsUrl("alltime_boxoffice"),
         nm: "All Boxoffice",
       },
     },
