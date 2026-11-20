@@ -46,7 +46,7 @@ export const useUserState = () => {
       setToken(response.token);
       isAuthenticated.value = true;
     } catch (error) {
-      console.error(error);
+      alert(error);
     }
   }
 

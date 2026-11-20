@@ -76,7 +76,7 @@ export const useGlobalState = () => {
         pages.value = moviesResp.pages;
       }
     } catch (error) {
-      console.error(error);
+      alert(error);
     } finally {
       isfetchingMovieList.value = false;
     }
@@ -119,7 +119,7 @@ export const useGlobalState = () => {
       // Refresh the movie list after deletion
       await fetchMovieList();
     } catch (error) {
-      console.error("Failed to delete movie:", error);
+      alert("Failed to delete movie:", error);
     }
   }
 
