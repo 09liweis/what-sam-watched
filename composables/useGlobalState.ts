@@ -67,6 +67,7 @@ export const useGlobalState = () => {
     try {
       const moviesResp: MoviesResponse = await sendRequest({url:getMoviesAPIUrl(name)});
       if (moviesResp.err) {
+        alert(moviesResp.err);
         movies.value = [];
         return;
       }
